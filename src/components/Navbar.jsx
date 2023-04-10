@@ -2,7 +2,7 @@ import React from 'react'
 
 const Navbar = () => {
   return (
-    <nav>hola</nav>
+    <nav>hola.</nav>
   )
 }
 
