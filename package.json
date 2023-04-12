@@ -1,5 +1,5 @@
 {
-  "name": "surveyjob-frontend",
+  "name": "renzo",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,15 +9,9 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "bootstrap": "^5.2.3",
-    "font-awesome": "^4.7.0",
-    "numeral": "^2.0.6",
     "react": "^18.2.0",
-    "react-bootstrap": "^2.7.2",
     "react-dom": "^18.2.0",
-    "react-hook-form": "^7.43.9",
-    "react-router": "^6.10.0",
-    "react-router-dom": "^6.10.0"
+    "styled-components": "^5.3.9"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
