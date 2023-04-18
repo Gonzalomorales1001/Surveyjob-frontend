@@ -1,5 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
+import { BsTwitter,BsFacebook,BsInstagram } from 'react-icons/Bs';
+//import { BsFacebook } from 'react-icons/Bs';
+
 
 const FooterContainer = styled.footer`
   background-color: #e8f4f8;
@@ -23,13 +26,13 @@ const Footer = () => {
     <FooterContainer>
       <SocialLinks>
         <SocialLink href="https://twitter.com/">
-          <i className="fab fa-twitter"></i>
+        <BsTwitter />
         </SocialLink>
         <SocialLink href="https://www.facebook.com/">
-          <i className="fab fa-facebook"></i>
+        <BsFacebook/>
         </SocialLink>
         <SocialLink href="https://www.instagram.com/">
-          <i className="fab fa-instagram"></i>
+          <BsInstagram/>
         </SocialLink>
       </SocialLinks>
     </FooterContainer>
