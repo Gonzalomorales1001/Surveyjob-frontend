@@ -22,9 +22,11 @@ const LeftColumn = styled.div`
 const RightColumn = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   flex: 1;
   padding: 2rem;
+  padding-top: 16rem;
+  background-color: rgb(51, 71, 86)
 `;
 
 // Estilos del formulario
@@ -60,13 +62,15 @@ const Button = styled.button`
 const Img = styled.img`
     width: 100%;
     height: 100%;
+    object-fit: cover;
+    
 `;
 
 const Title = styled.h1`
   font-family: 'Montserrat', sans-serif;
   font-size: 3rem;
   font-weight: 700;
-  color: #333;
+  color: #fff;
 `;
 
 const FlexContainer = styled.div`
