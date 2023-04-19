@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import Logo from '../../images/logosinfondo.webp'
+import Logo from '../../images/logoParaFondoNaranja.webp'
 
 const Nav = styled.nav`
   background-color: rgb(240, 165, 0);
