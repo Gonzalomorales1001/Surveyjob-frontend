@@ -1,5 +1,6 @@
 import React from "react";
-import logo from "../assets/logo.2.png";
+import logo from "../../assets/logo.2.png";
+import "../footer/Footer.css"
 
 const Footer = () => {
   return (
@@ -92,7 +93,7 @@ const Footer = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
-                      class="bi bi-facebook siguenos"
+                      className="bi bi-facebook siguenos"
                       viewBox="0 0 16 16"
                       title="facebook"
                     >
@@ -106,7 +107,7 @@ const Footer = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
-                      class="bi bi-whatsapp siguenos"
+                      className="bi bi-whatsapp siguenos"
                       viewBox="0 0 16 16"
                       title="whatsapp"
                     >
@@ -120,7 +121,7 @@ const Footer = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
-                      class="bi bi-instagram siguenos"
+                      className="bi bi-instagram siguenos"
                       viewBox="0 0 16 16"
                       title="instagram"
                     >
@@ -134,7 +135,7 @@ const Footer = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
-                      class="bi bi-github siguenos"
+                      className="bi bi-github siguenos"
                       viewBox="0 0 16 16"
                       title="Github"
                     >
@@ -148,7 +149,7 @@ const Footer = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
-                      class="bi bi-twitter siguenos"
+                      className="bi bi-twitter siguenos"
                       viewBox="0 0 16 16"
                       title="twitter"
                     >
@@ -162,7 +163,7 @@ const Footer = () => {
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
                       fill="currentColor"
-                      class="bi bi-telegram siguenos"
+                      className="bi bi-telegram siguenos"
                       viewBox="0 0 16 16"
                       title="Telegram"
                     >
