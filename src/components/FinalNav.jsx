@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, NavLink } from "react-router-dom";
 import logo from "../assets/logo.2.png";
-const Navbar = () => {
+const FinalNav = () => {
   return (
     <>
       <nav className="d-flex row  ">
@@ -39,7 +39,7 @@ const Navbar = () => {
               Planes
             </NavLink>
           </li>
-        {user.rol === "ADMIN" &&( //ver si funciona dependiendo del nombre del admin en BD
+          {user.rol === "ADMIN" &&( //ver si funciona dependiendo del nombre del admin en BD
           <li className="nav-item">
           <NavLink className="nav-link p-2" to="/admin">
             Admin
@@ -62,4 +62,4 @@ const Navbar = () => {
   );
 };
 
-export default Navbar;
+export default FinalNav;
