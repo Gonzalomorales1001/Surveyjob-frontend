@@ -40,7 +40,6 @@ const FinalTablaEncuestas = ({ encuestas = [] }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         borrarEncuesta(id).then((resultado) => {
-          // console.log(resultado)
           MySwal.fire("", `${resultado.msg}`, "success");
         });
       } else if (result.isDenied) {
@@ -56,22 +55,40 @@ const FinalTablaEncuestas = ({ encuestas = [] }) => {
           <tr>
             <th scope="col">Nombre</th>
             <th scope="col">Categoría</th>
-            <th scope="col">Precio</th>
-            <th scope="col">Destacado</th>
+            <th scope="col">Preguntas</th>
+            <th scope="col">Estado</th>
             <th></th>
           </tr>
         </thead>
         <tbody>
           {encuestas.map((encuesta) => (
             <tr key={encuesta._id}>
-              <th>{encuesta.nombre}</th>
-              <td>{encuesta.categoria.nombre}</td>
-              <td>{encuesta.precio}</td>
+              <th>{encuesta.title}</th>
+              <td>{encuesta.categoria.title}</td>
+              <td>{encuesta.preguntas}</td>
               <td>
-                {encuesta.destacado ? (
-                  <i className="fa fa-star" aria-hidden="true"></i>
+                {encuesta.estado ? ( 
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor check" //editar con estilos este tamaño
+                    class="bi bi-file-earmark-check-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zm1.354 4.354-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 9.793l2.646-2.647a.5.5 0 0 1 .708.708z" />
+                  </svg>
                 ) : (
-                  <i className="fa fa-star-o" aria-hidden="true"></i>
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    width="16"
+                    height="16"
+                    fill="currentColor check" //editar con estilos este tamaño
+                    class="bi bi-file-earmark-excel-fill"
+                    viewBox="0 0 16 16"
+                  >
+                    <path d="M9.293 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.707A1 1 0 0 0 13.707 4L10 .293A1 1 0 0 0 9.293 0zM9.5 3.5v-2l3 3h-2a1 1 0 0 1-1-1zM5.884 6.68 8 9.219l2.116-2.54a.5.5 0 1 1 .768.641L8.651 10l2.233 2.68a.5.5 0 0 1-.768.64L8 10.781l-2.116 2.54a.5.5 0 0 1-.768-.641L7.349 10 5.116 7.32a.5.5 0 1 1 .768-.64z" />
+                  </svg>
                 )}
               </td>
               <td>
@@ -84,7 +101,9 @@ const FinalTablaEncuestas = ({ encuestas = [] }) => {
                   </button>
                   <button
                     className="btn btn-danger btn-sm"
-                    onClick={() => inactivarEncuesta(encuesta.nombre, encuesta._id)}
+                    onClick={() =>
+                      inactivarEncuesta(encuesta.nombre, encuesta._id)
+                    }
                   >
                     <i className="fa fa-trash" aria-hidden="true"></i>
                   </button>

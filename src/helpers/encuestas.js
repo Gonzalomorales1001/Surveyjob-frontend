@@ -1,6 +1,6 @@
 const url = "";
 const token= JSON.parse(localStorage.getItem("token"));
-const limite = 6;
+const limite = 5;
 //ver los elementos del metodo GET
 export const getEncuestas = async (pagina=0)=>{
     try {

@@ -8,7 +8,7 @@ import withReactContent from "sweetalert2-react-content";
 import Modal from "react-bootstrap/Modal";
 
 const ModalEdit = ({ show, handleClose, cid }) => {
-  const MySwal = withReactContent(Swal);
+  const MySwal = withReactContent(Swal); //viene de sweetalert2
 
   const [encuesta, setEncuesta] = useState(null);
   const [categorias, setCategorias] = useState(null);
@@ -31,7 +31,6 @@ const ModalEdit = ({ show, handleClose, cid }) => {
   };
 
   const handleChange = (e) => {
-    //Manejar el evento change del formulario y guardar los datos en el estado
     let valueCheck = false;
     if (e.target.name === "destacado") {
       if (e.target.checked) {
@@ -78,20 +77,13 @@ const ModalEdit = ({ show, handleClose, cid }) => {
                 name="nombre"
                 onChange={handleChange}
               />
-              <label className="fw-bold">descripción</label>
-              <textarea
-                className="form-control"
-                value={encuesta.descripcion}
-                onChange={handleChange}
-                name="descripcion"
-              ></textarea>
-              <label className="fw-bold">Precio</label>
-              <input
+              <label className="fw-bold">Preguntas</label>
+              <input //no es editable la cantidad de preguntas
                 type="number"
                 className="form-control"
-                value={encuesta.precio}
+                value={encuesta.preguntas}
                 onChange={handleChange}
-                name="precio"
+                name="preguntas"
               />
               <div className="my-2">
                 <p>
@@ -120,11 +112,11 @@ const ModalEdit = ({ show, handleClose, cid }) => {
                   className="form-check-input"
                   type="checkbox"
                   role="switch"
-                  checked={encuesta.destacado}
+                  checked={encuesta.estado}
                   onChange={handleChange}
-                  name="destacado"
+                  name="estado"
                 />
-                <label className="form-check-label fw-bold">Destacado</label>
+                <label className="form-check-label fw-bold">Estado</label>
               </div>
               <div className="d-grid mt-2">
                 <button className="btn btn-warning">Actualizar</button>
