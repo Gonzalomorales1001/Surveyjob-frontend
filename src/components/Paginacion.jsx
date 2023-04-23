@@ -23,8 +23,8 @@ const Paginacion = ({total, pagina, setPagina}) => {
       <nav aria-label="Page navigation example">
         <ul className="pagination">
 
-          <li class="page-item">
-            <a class="page-link" href="#"onClick={backPage} aria-label="Previous">
+          <li className="page-item">
+            <a className="page-link" href="#"onClick={backPage} aria-label="Previous">
               <span aria-hidden="true">&laquo;</span>
             </a>
           </li>
@@ -37,8 +37,8 @@ const Paginacion = ({total, pagina, setPagina}) => {
 
 
 
-          <li class="page-item">
-            <a class="page-link" href="#"onClick={nextPage} aria-label="Next">
+          <li className="page-item">
+            <a className="page-link" href="#"onClick={nextPage} aria-label="Next">
               <span aria-hidden="true">&raquo;</span>
             </a>
           </li>
