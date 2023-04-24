@@ -1,6 +1,8 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
+import  Login from './pages/login'
+
+import './index.css'
 import './App.css'
 import RoutsApp from "./routes/RoutsApp";
 // import FinalNav from './components/FinalNav'
@@ -10,10 +12,9 @@ function App() {
   const [count, setCount] = useState(0)
 
   return (
-    <BrowserRouter>
+    
     <RoutsApp/>    
-    </BrowserRouter>
+    
   )
 }
-
 export default App
