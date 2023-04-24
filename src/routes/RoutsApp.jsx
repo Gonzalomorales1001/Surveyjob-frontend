@@ -1,7 +1,7 @@
 import React from "react";
 import { Routes, Route } from "react-router-dom";
 import NavBar from "../components/Navbar";
-import Footer from "../components/Footer/Footer";
+import Footer from "../components/footer/Footer";
 import Error404 from "../components/Error404";
 // import Home from "../pages/Home"; //importara cristian
 // import Login from "../components/login";
