@@ -4,7 +4,7 @@ import NavBar from "../components/Navbar";
 import Footer from "../components/footer/Footer";
 import Error404 from "../components/Error404";
 // import Home from "../pages/Home"; //importara cristian
-// import Login from "../components/login";
+import Login from "../pages/Login";
 import FinalAdmin from "../components/FinalAdmin";
 
 const RoutesApp = () => { // agregar estado si esta conectado  entre {}
@@ -14,7 +14,7 @@ const RoutesApp = () => { // agregar estado si esta conectado  entre {}
       <Routes>
       <Route path="/" element={<FinalAdmin/>} />
         {/* <Route path="/" element={<Home/>} /> */}
-
+        <Route path="/login" element={<Login/>} />
        <Route path="/*" element={<Error404/>} />
       </Routes>
       <Footer/>
