@@ -4,18 +4,17 @@ import  Login from './pages/login'
 
 import './index.css'
 import './App.css'
-import Navbar from './components/Navbar'
-import Footer from "./components/footer/Footer";
-import { Routes, Route } from 'react-router-dom';
-
+import RoutsApp from "./routes/RoutsApp";
+// import FinalNav from './components/FinalNav'
+import FinalAdmin from "./components/FinalAdmin"
+import { BrowserRouter, Routes } from 'react-router-dom';
 function App() {
-  return (<>
-    <Navbar/>
-    <Routes>
-        <Route exact path="/" component="hola" />
-      </Routes>
-      <Footer/>
-  </>
+  const [count, setCount] = useState(0)
+
+  return (
+    
+    <RoutsApp/>    
+    
   )
 }
 export default App
