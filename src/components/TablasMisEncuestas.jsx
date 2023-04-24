@@ -11,9 +11,8 @@ const encuestasFiltradas = encuestas.filter(encuesta=>encuesta.id=== // ver
  )
   return (
 
-    <>
-
-    </>
+  console.log("hola mundo")
+  
   )
 }
 

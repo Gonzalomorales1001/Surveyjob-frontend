@@ -10,13 +10,13 @@ const ModalUser = ({ show, handleClose, Uid }) => {
 //   const [categorias, setCategorias] = useState(null);
 
   useEffect(() => {
-    traerDatosDeEncuesta();
-    traerCategorias();
+    traerDatosDeUsuario();
+    // traerCategorias();
   }, []);
 
-  const traerDatosDeEncuesta = async () => {
+  const traerDatosDeUsuario = async () => {
     //petición a la API de usuario por id
-    const { usuario } = await getEncuestaById(cid);
+    const { usuario } = await getUsuariosById(cid);
     setUsuario(usuario);
   };
 
@@ -44,8 +44,8 @@ const ModalUser = ({ show, handleClose, Uid }) => {
     e.preventDefault();
 
     //Ejecutar funcion para actualizar el usuario con los datos del estado
-    await actualizarEncuesta(cid, usuario);
-    MySwal.fire("Encuesta actualizado", "", "success");
+    await actualizarUsuarios(uid, usuario);
+    Swal.fire("Usuario actualizado", "", "success");
     //cerrar el modal luego de editar
     handleClose();
   };
@@ -54,7 +54,7 @@ const ModalUser = ({ show, handleClose, Uid }) => {
     <>
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Editar Encuesta</Modal.Title>
+          <Modal.Title>Editar usuario</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           {usuario ? (
