@@ -73,8 +73,8 @@ const FinalAdmin = () => {
   };
 
   return (
-    <div className="bg-dark">
-      <div className="container bg-light min-vh-100">
+    <div className="bg-dark ">
+      <div className="container  bg-light min-vw-100 min-vh-100">
         <div className="row  py-5">
           <div className="col text-center ">
             <h1>
