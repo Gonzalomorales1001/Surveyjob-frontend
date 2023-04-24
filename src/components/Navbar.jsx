@@ -10,7 +10,7 @@ console.log(user)
 const Navbar = () => {
   return (
     <>
-      <nav className="d-flex row  ">
+      <nav className="">
         <div className="navbar navbar-expand-lg bg-light d-flex justify-content-around">
           <div className="container ">
             <a className="navbar-brand" href="#">
