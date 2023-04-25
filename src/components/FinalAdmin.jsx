@@ -4,7 +4,8 @@ import { crearEncuesta } from "../helpers/encuestas";
 // import FinalTableEncuestas from "../components/FinalTableEncuestas";
 import { getEncuestas, getEncuestasById } from "../helpers/encuestas"; //traer encuestas al padre
 // import Paginacion from "./Paginacion";
-
+import getUsuarios from "../helpers/usuarios";
+import TablaUser from "../components/TablaUser";
 //Librería sweet alert
 import Swal from "sweetalert2";
 // import withReactContent from "sweetalert2-react-content";
@@ -114,6 +115,7 @@ const FinalAdmin = () => {
                 {/* Componente de la tabla que carga los encuestas  */}
 
                 <FinalTableEncuestas encuestas={encuestas} />
+                <TablaUser/>
                 <Paginacion
                   pagina={pagina}
                   setPagina={setPagina}

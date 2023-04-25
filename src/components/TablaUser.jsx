@@ -6,7 +6,7 @@ import {
   getUsuarios
 } from "../helpers/usuarios";
 import Swal from "sweetalert2";
-import ModalEdit from "./ModalEdit";
+// import ModalEdit from "./ModalEdit";
 
 const TablaUser = ({ encuestas = [] }) => {
   //Manejo del modal--------------------
@@ -115,7 +115,7 @@ setUsuarios(users);
           ))}
         </tbody>
       </table>
-      {show && <ModalEdit show={show} handleClose={handleClose} uid={uid} />}
+      {/* {show && <ModalEdit show={show} handleClose={handleClose} uid={uid} />} */}
     </>
   );
 };

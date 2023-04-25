@@ -87,11 +87,13 @@ const Formulario = () => {
   // Estado local para el usuario y la contraseña
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-
+  
   // Manejador del envío del formulario
   const handleSubmit = async(event) => {
     event.preventDefault();
-    authLogin({email:email, password:password});
+    const respuesta=await authLogin({email, password});
+    console.log(respuesta)
+
     // console.log('Username:', username);
     console.log('Password:', password);
     // Aquí podríamos enviar la información del usuario y la contraseña a un servidor para verificarla

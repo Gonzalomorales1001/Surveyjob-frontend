@@ -7,11 +7,10 @@ export const authLogin = async (datos)=>{
     try {
         const resp= await fetch(url,{
         method: "POST",
-        body:datos,
+        body: JSON.stringify(datos),
         headers:{
-            "Content-type":"applitacion/json; charset=UTF-8"
+            "Content-Type":"application/json; charset=UTF-8"
         },
-
         });
         const data = await resp.json();
         return data;
