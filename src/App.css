@@ -2,3 +2,7 @@
 .logo{
     height: 6vh;
 }
+
+.bg-survey{
+    background-color: rgba(0, 0, 0, 0.4);
+}

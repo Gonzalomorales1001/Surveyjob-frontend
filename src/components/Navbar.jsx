@@ -6,7 +6,6 @@ const user = {
   rol: "ADMIN",
   
 };
-console.log(user)
 const Navbar = () => {
   return (
     <>
