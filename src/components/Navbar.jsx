@@ -12,7 +12,7 @@ const Navbar = () => {
     <>
       <nav className="">
         <div className="navbar navbar-expand-lg bg-light d-flex justify-content-around">
-          <div className="container ">
+          <div className="container">
             <a className="navbar-brand" href="#">
               <img src={logo} alt="SUVERYJOB" className="logo" />
             </a>
