@@ -85,30 +85,31 @@ const FlexContainer = styled.div`
 const Formulario = () => {
   const navigate = useNavigate();
   // Estado local para el usuario y la contraseña
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
   // Manejador del envío del formulario
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    console.log('Username:', username);
+    authLogin({email:email, password:password});
+    // console.log('Username:', username);
     console.log('Password:', password);
     // Aquí podríamos enviar la información del usuario y la contraseña a un servidor para verificarla
   };
 
   return (
     <Container>
-      <LeftColumn>
+      <LeftColumn className='d-none d-lg-block'>
         <Img src={imagen} alt="Placeholder" />
       </LeftColumn>
-      <RightColumn>
+      <RightColumn className="vw-100">
         <Form onSubmit={handleSubmit}>
             <Title>Empieza tu encuesta aquí </Title>
           <Input
-            type="text"
-            placeholder="Usuario"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
           <Input
             type="password"
