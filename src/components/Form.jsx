@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import imagen from '../../images/imagen.jpg'
-
+import {authLogin} from "../helpers/Api";
+import { useNavigate } from 'react-router';
 // Estilos del contenedor de la página
 const Container = styled.div`
   display: flex;
@@ -82,6 +83,7 @@ const FlexContainer = styled.div`
 `;
 
 const Formulario = () => {
+  const navigate = useNavigate();
   // Estado local para el usuario y la contraseña
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');

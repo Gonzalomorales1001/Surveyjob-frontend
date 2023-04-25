@@ -12,8 +12,8 @@ const RoutesApp = () => { // agregar estado si esta conectado  entre {}
     <> 
       <NavBar  /> 
       <Routes>
-      <Route path="/" element={<FinalAdmin/>} />
-        {/* <Route path="/" element={<Home/>} /> */}
+      {/* <Route path="/" element={<Home/>} /> */}
+        <Route path="/admin" element={<FinalAdmin/>} />
         <Route path="/login" element={<Login/>} />
        <Route path="/*" element={<Error404/>} />
       </Routes>
