@@ -9,19 +9,19 @@ import FinalAdmin from "../components/FinalAdmin";
 import HomeScreen from "../pages/HomeScreen";
 import SurveyScreen from "../pages/SurveyScreen";
 
-const RoutesApp = () => { // agregar estado si esta conectado  entre {}
+const RoutesApp = () => {
+  // agregar estado si esta conectado  entre {}
   return (
-    <> 
-      <NavBar  /> 
+    <>
+      <NavBar />
       <Routes>
-      <Route path="/" element={<HomeScreen/>} />
-        {/* <Route path="/" element={<Home/>} /> */}
-        <Route path="/login" element={<Login/>} />
-        <Route path="/admin" element={<FinalAdmin/>} />
-        <Route path='/survey/:surveyID' element={<SurveyScreen/>}/>
-       <Route path="/*" element={<Error404/>} />
+        <Route path="/" element={<HomeScreen />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/admin" element={<FinalAdmin />} />
+        <Route path="/survey/:surveyID" element={<SurveyScreen />} />
+        <Route path="*" element={<Error404 />} />
       </Routes>
-      <Footer/>
+      <Footer />
     </>
   );
 };

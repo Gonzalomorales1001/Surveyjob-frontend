@@ -1,11 +1,11 @@
 import { url } from "./URL";
 
 
-
 export const authLogin = async (datos)=>{
-
+    
     try {
-        const resp= await fetch(url,{
+        const resp= await fetch(`${url}/api/auten/login`
+        ,{
         method: "POST",
         body: JSON.stringify(datos),
         headers:{
@@ -13,9 +13,10 @@ export const authLogin = async (datos)=>{
         },
         });
         const data = await resp.json();
-        return data;
-    } catch (error) {
-        console.log(error)
+            return data
+        
+    } catch (e) {
+        console.log(e);
         return {msg: "No se pudo contectar con Backend"};
     }
 }

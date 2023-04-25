@@ -1,4 +1,5 @@
-const url = "";
+import { url } from "./URL";
+
 
 //traer usuarios
 export const getUsuarios = async () => {
@@ -6,9 +7,8 @@ export const getUsuarios = async () => {
         const resp = await fetch (url+"?limite"+limite+"&desde"+pagina)
         const data= await resp.json();
         return data;
-    } catch (error)  {
-        throw new Error ("No se pudo obtener Info")
-        
+    } catch (error) {
+        throw new Error ("No se pudo obtener Informacion")    
     }
 };
 

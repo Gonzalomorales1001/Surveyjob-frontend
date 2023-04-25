@@ -1,5 +1,9 @@
-const url = "";
-const token= JSON.parse(localStorage.getItem("token"));
+import { useState } from "react";
+import { url } from "./URL";
+
+const token = JSON.parse(localStorage.getItem("token")) ? JSON.parse(localStorage.getItem("token")) : ""
+
+
 const limite = 5;
 //ver los elementos del metodo GET
 export const getEncuestas = async (pagina=0)=>{

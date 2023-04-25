@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import imagen from '../../images/imagen.jpg'
 import {authLogin} from "../helpers/Api";
-import { useNavigate } from 'react-router';
+import { useNavigate, Link } from 'react-router-dom';
 // Estilos del contenedor de la página
 const Container = styled.div`
   display: flex;
@@ -82,21 +82,27 @@ const FlexContainer = styled.div`
     margin-top:40px;
 `;
 
-const Formulario = () => {
+const Formulario = ({loginUser}) => {
   const navigate = useNavigate();
   // Estado local para el usuario y la contraseña
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  
+
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   // Manejador del envío del formulario
   const handleSubmit = async(event) => {
     event.preventDefault();
-    const respuesta=await authLogin({email, password});
-    console.log(respuesta)
+    const respuesta={email:email , password:password};
 
-    // console.log('Username:', username);
-    console.log('Password:', password);
-    // Aquí podríamos enviar la información del usuario y la contraseña a un servidor para verificarla
+    const resp = await authLogin(respuesta)
+    if (resp?.token) {
+      localStorage.setItem("token", JSON.stringify(resp.token));
+      loginUser();
+
+    }
+    navigate("/");
   };
 
   return (
