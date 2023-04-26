@@ -1,83 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { crearEncuesta } from "../helpers/encuestas";
-//importar componente de tabla
-// import FinalTableEncuestas from "../components/FinalTableEncuestas";
-import { getEncuestas, getEncuestasById } from "../helpers/encuestas"; //traer encuestas al padre
-// import Paginacion from "./Paginacion";
-import {getUsuarios} from "../helpers/usuarios";
-// import TablaUser from "../components/TablaUser";
-//Librería sweet alert
-import Swal from "sweetalert2";
-// import withReactContent from "sweetalert2-react-content";
+import { getUsuarios } from "../helpers/usuarios";
 import ModalCreate from "./ModalCreate";
-import TablaUser from "./TablaUser";
+import CardUser from "./CardUser";
 
 const FinalAdmin = () => {
-    // const MySwal = withReactContent(Swal);
-  //Manejo del modal--------------------
-  // const [show, setShow] = useState("");
-  //manejar cierre de modal
-  // const handleClose = () => {
-  //   setShow(false);
-  // };
-  //Manejar apertura de modal
-  // const createSurvey = async() => {
-  //   // console.log("hola mundo")
-  //   // await crearEncuesta();
-  //   // Swal.fire("Encuesta creada correctamente", "","success")
-  //   // handleClose();
-  
-  //   setShow(true);
-    
-  // };
-  //crear encuesta------esto no servia acá
-  // const createsurvey = async () => {
-  //   MySwal.fire({
-  //     title: `Está seguro que quiere crear la encuesta ${nombre}?`,
-  //     showDenyButton: true,
-  //     showCancelButton: false,
-  //     confirmButtonText: "Si",
-  //     denyButtonText: `No`,
-  //   }).then((result) => {
-  //     if (result.isConfirmed) {
-  //       crearEncuesta().then((resultado) => {
-  //         MySwal.fire("", `${resultado.msg}`, "success");
-  //       });
-  //     } else if (result.isDenied) {
-  //       MySwal.fire("El encuesta no fue creada", "", "info");
-  //     }
-  //   });
-  // };
-  
 
-  //estado para guardar los encuestas
-  // const [encuestas, setEncuestas] = useState([]);
-  // const [totalEncuestas, setTotalEncuestas] = useState(0);
-  const [usuarios, setUsuarios] = useState([])
+  const [usuarios, setUsuarios] = useState([]);
   const [totalusuarios, setTotalUsuarios] = useState(0);
-  // paginacion
-  const limite = 4;
+  const limite = 3;
   const [pagina, setPagina] = useState(0);
 
   const traerUsuarios = async () => {
-    const {Users} = await getUsuarios(limite, pagina);
-    console.log(Users)
-    setUsuarios(Users)
-    // setUsuarios(total)
-  };
-  //cargar encuestas y actualizar
+    const { Users } = await getUsuarios(limite, pagina);
+    console.log(Users);
+    setUsuarios(Users);
+      };
   useEffect(() => {
-    // traerEncuestas();
-    traerUsuarios()
+        traerUsuarios();
   }, [pagina]);
 
-  // const traerEncuestas = async () => {
-  //   const { encuestas } = await getEncuestas(limite, pagina);
-  //   setEncuestas(encuestas);
-  //   setTotalEncuestas(total);
-  // };
 
-  return ( 
+  () => setPagina((prevPagina) => prevPagina + 1);
+  return (
     <div className="bg-dark ">
       <div className="container-fluid bg-light vw-100">
         <div className="row  py-5">
@@ -115,11 +60,10 @@ const FinalAdmin = () => {
         <div className="row">
           <div className="col-12 col-md-8 offset-md-2">
             {usuarios.length > 0 ? (
-              usuarios.map((usuario)=>(
+              usuarios.map((usuario) => (
                 // <p>{usuario.username}</p>
-                <TablaUser key={usuario.userID} usuario={usuario}/>
-                ))
-      
+                <CardUser key={usuario.userID} usuario={usuario} />
+              ))
             ) : (
               <div className="d-flex justify-content-center">
                 <div className="">
@@ -128,6 +72,40 @@ const FinalAdmin = () => {
               </div>
             )}
           </div>
+          <nav aria-label="...">
+            <ul class="pagination d-flex justify-content-end">
+              <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+              </li>
+              <li class="page-item" onClick={() => setPagina(0)}>
+                <a class="page-link" href="#">
+                  1
+                </a>
+              </li>
+              <li
+                class="page-item"
+                onClick={() => setPagina(2)}
+                aria-current="page"
+              >
+                <a class="page-link" href="#">
+                  2
+                </a>
+              </li>
+              <li class="page-item" onClick={() => setPagina(4)}>
+                <a class="page-link" href="#">
+                  3
+                </a>
+              </li>
+              <li
+                class={`page-item ${pagina === 2 ? "disable" : ""}`}
+                onClick={() => setPagina((prevPagina) => prevPagina + 3)}
+              >
+                <a class="page-link" href="#">
+                  Next
+                </a>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>

@@ -3,9 +3,9 @@ import { url } from "./URL";
 
 
 //traer usuarios
-export const getUsuarios = async (limite=4, pagina=1) => {
+export const getUsuarios = async (limite=3, pagina=1) => {
     try {
-        const resp = await fetch (url+"/api/users?limite="+limite+"&desde="+pagina)
+        const resp = await fetch (url+"/api/users?limit="+limite+"&since="+pagina)
         const data= await resp.json();
         return data;
     } catch (error) {
