@@ -1,14 +1,15 @@
 import { url } from "./URL";
 
 
+
 //traer usuarios
-export const getUsuarios = async () => {
+export const getUsuarios = async (limite=4, pagina=1) => {
     try {
-        const resp = await fetch (url+"?limite"+limite+"&desde"+pagina)
+        const resp = await fetch (url+"/api/users?limite="+limite+"&desde="+pagina)
         const data= await resp.json();
         return data;
     } catch (error) {
-        throw new Error ("No se pudo obtener Informacion")    
+        throw new Error ("No se pudo obtener Informacion");   
     }
 };
 

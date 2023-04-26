@@ -56,20 +56,20 @@ const FinalAdmin = () => {
   const [usuarios, setUsuarios] = useState([])
   const [totalusuarios, setTotalUsuarios] = useState(0);
   // paginacion
-  const limite = 6;
+  const limite = 4;
   const [pagina, setPagina] = useState(0);
 
   const traerUsuarios = async () => {
-    const { usuarios } = await getUsuarios();
-    console.log(usuarios)
-    setUsuarios(usuarios)
+    const {Users} = await getUsuarios(limite, pagina);
+    console.log(Users)
+    setUsuarios(Users)
     // setUsuarios(total)
   };
   //cargar encuestas y actualizar
   useEffect(() => {
     // traerEncuestas();
     traerUsuarios()
-  }, [usuarios]);
+  }, [pagina]);
 
   // const traerEncuestas = async () => {
   //   const { encuestas } = await getEncuestas(limite, pagina);
@@ -77,7 +77,7 @@ const FinalAdmin = () => {
   //   setTotalEncuestas(total);
   // };
 
-  return (
+  return ( 
     <div className="bg-dark ">
       <div className="container-fluid bg-light vw-100">
         <div className="row  py-5">
@@ -116,22 +116,10 @@ const FinalAdmin = () => {
           <div className="col-12 col-md-8 offset-md-2">
             {usuarios.length > 0 ? (
               usuarios.map((usuario)=>(
-                <TablaUser usuario={usuario}/>))
-            /* encuestas.length > 0 ? (
-            <>
-                //{/* Componente de la tabla que carga los encuestas
-                //{/* <FinalTableEncuestas encuestas={encuestas} /> 
-                <TablaUser username={username}
-                email={email}
-                img={img}
-                status={status}
-                /> 
-                {/* <Paginacion
-                  pagina={pagina}
-                  setPagina={setPagina}
-                  total={totalEncuestas}
-                /> 
-              </>*/
+                // <p>{usuario.username}</p>
+                <TablaUser key={usuario.userID} usuario={usuario}/>
+                ))
+      
             ) : (
               <div className="d-flex justify-content-center">
                 <div className="">
@@ -142,7 +130,6 @@ const FinalAdmin = () => {
           </div>
         </div>
       </div>
-      {/* {show && <ModalCreate show={show} handleClose={handleClose} />} */}
     </div>
   );
 };

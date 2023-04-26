@@ -3,12 +3,13 @@ import {
   borrarUsuario,
   actualizarUsuario,
   getUsuarioById,
-  getUsuarios
+  getUsuarios,
 } from "../helpers/usuarios";
 import Swal from "sweetalert2";
 // import ModalEdit from "./ModalEdit";
 
-const TablaUser = ({username, email, img, status}) => {
+const TablaUser = ({usuario}) => {
+const {username, email, userID, status} = usuario
   //Manejo del modal--------------------
   const [show, setShow] = useState(false);
   const [uid, setUid] = useState(null);
@@ -20,22 +21,22 @@ const TablaUser = ({username, email, img, status}) => {
   };
 
   //Manejar apertura de modal
-  const handleShow = (id) => {
-    setUid(id);
+  const handleShow = () => {
+    setUid(userID);
     setShow(true);
   };
 
   //borrrar usuario
-  const inactivarUsuario = async (nombre, id) => {
+  const inactivarUsuario = async () => {
     Swal.fire({
-      title: `Está seguro que quiere inactivar este usuario ${nombre}?`,
+      title: `Está seguro que quiere inactivar este usuario ${username}?`,
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: "Si",
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        borrarUsuario(id).then((resultado) => {
+        borrarUsuario(userID).then((resultado) => {
           Swal.fire("", `${resultado.msg}`, "success");
         });
       } else if (result.isDenied) {
@@ -43,31 +44,35 @@ const TablaUser = ({username, email, img, status}) => {
       }
     });
   };
-const [usuarios, setUsuarios] = useState([""])
+  // const [usuarios, setUsuarios] = useState([""])
 
-useEffect(() => {
-const users=getUsuarios();
-setUsuarios(users);
-},[])
+  // useEffect(() => {
+  // const users=getUsuarios();
+  // setUsuarios(users);
+  // },[])
   return (
     <>
-    <div className="card mb-3" style="max-width: 540px;">
-  <div className="row g-0">
-    <div className="col-md-4">
-      {/* <img src={imag....} className="img-fluid rounded-start" alt="..."/> */}
-    </div>
-    <div className="col-md-8">
-      <div className="card-body">
-        <h5 className="card-title">{user.nombre}</h5>
-        
-        <p className="card-text"><small className="text-body-secondary">Last updated 3 mins ago</small></p>
+    {/* <p>{username}</p> */}
+      <div className="card mb-3">
+        <div className="row g-0">
+          <div className="col-md-4">
+          
+          </div>
+          <div className="col-md-8">
+            <div className="card-body">
+              <h5 className="card-title">{username}</h5>
+
+              <p className="card-text">
+                <small className="text-body-secondary">
+                {email}
+                </small>
+              </p>
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-  </div>
-</div>
 
-
-
+      {/* 
       <table className="table">
         <thead>
           <tr>
@@ -129,7 +134,7 @@ setUsuarios(users);
           ))}
         </tbody>
       </table>
-      {/* {show && <ModalEdit show={show} handleClose={handleClose} uid={uid} />} */}
+      {show && <ModalEdit show={show} handleClose={handleClose} uid={uid} />} */}
     </>
   );
 };
