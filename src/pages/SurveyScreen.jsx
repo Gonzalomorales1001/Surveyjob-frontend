@@ -35,14 +35,17 @@ const SurveyScreen = () => {
     
 
   return (
-    <form className='container bg-survey'>
-    <h1 className='text-center'>Encuesta de {surveyOwner}</h1>
-    <hr />
-    <h3>{survey?.title} - {survey?.category.charAt(0).toUpperCase()+survey?.category.substring(1).toLowerCase()}</h3>
-    <div>
-      {survey?.questions.map((question,index)=><Question content={question.content} questionType={question.questionType} options={question.options} questionID={question._id} index={index} key={index+1}/>)}
-    <button className="btn btn-warning">Enviar mi respuesta</button>
-    </div>
+    <form className='container'>
+      <div>
+        <h1 className='text-center'>Encuesta de {surveyOwner}</h1>
+        <hr />
+        <h3>{survey?.title} - {survey?.category.charAt(0).toUpperCase()+survey?.category.substring(1).toLowerCase()}</h3>
+        <div>
+          {survey?.questions.map((question,index)=><Question content={question.content} questionType={question.questionType} options={question.options} questionID={question._id} index={index} key={index+1}/>)}
+        <button className="btn btn-warning">Enviar mi respuesta</button>
+        </div>
+
+      </div>
     </form>
 
   )

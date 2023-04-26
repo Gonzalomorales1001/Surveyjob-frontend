@@ -6,15 +6,15 @@ const user = {
   rol: "ADMIN",
   
 };
-const Navbar = () => {
+const Navbar = ({login}) => {
   return (
     <>
       <nav className="">
         <div className="navbar navbar-expand-lg bg-light d-flex justify-content-around">
           <div className="container">
-            <a className="navbar-brand" href="#">
+            <NavLink className="navbar-brand" to="/">
               <img src={logo} alt="SUVERYJOB" className="logo" />
-            </a>
+            </NavLink>
             <button
               className="navbar-toggler"
               type="button"
@@ -31,31 +31,31 @@ const Navbar = () => {
               id="navbarSupportedContent"
             >
               <ul className="navbar-nav mt-2 ms-auto">
-                <li className="nav-item">
-                  <NavLink className="nav-link " aria-current="page" to="/">
-                    Mis Encuestas
-                  </NavLink>
-                </li>
-                <li className="nav-item">
-                  <NavLink className="nav-link " to="/planes">
-                    Planes
-                  </NavLink>
-                </li>
-                {user.rol === "ADMIN" && ( //ver si funciona dependiendo del nombre del admin en BD
-                  <li className="nav-item">
+                {user.admin && ( //ver si funciona dependiendo del nombre del admin en BD
+                  <li className="nav-item text-danger-emphasis">
                     <NavLink className="nav-link p-2" to="/admin">
-                      Admin
+                      Administracion
                     </NavLink>
                   </li>
                 )}
-                <li className="nav-item ">
-                  <button
-                    // onClick={cambiarLogin}
-                    className="btn btn-outline p-2  "
-                  >
-                    Log out
-                  </button>
-                </li>
+                {login?(<li className="nav-item ">
+                <div className="btn-group dropdown-center">
+                    <button type="button" className="btn btn-warning dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      Nombre de usuario
+                    </button>
+                    <ul className="dropdown-menu">
+                      <li><NavLink className="dropdown-item" to="/profile">Mi perfil</NavLink></li>
+                      <li><hr className="dropdown-divider"/></li>
+                      <li><NavLink className="dropdown-item" to="/login">Cerrar Sesión</NavLink></li>
+                    </ul>
+                  </div>
+                </li>):(
+                  <li className="nav-item">
+                  <NavLink className="nav-link p-2" to="/login">
+                    Iniciar Sesión
+                  </NavLink>
+                  </li>
+                )}
               </ul>
             </div>
           </div>

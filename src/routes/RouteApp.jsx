@@ -13,15 +13,10 @@ const RoutesApp = () => {
   // agregar estado si esta conectado  entre {}
   return (
     <>
-      <NavBar />
       <Routes>
-        <Route path="/" element={<HomeScreen />} />
-        <Route path="/login" element={<Login />} />
         <Route path="/admin" element={<FinalAdmin />} />
-        <Route path="/survey/:surveyID" element={<SurveyScreen />} />
         <Route path="*" element={<Error404 />} />
       </Routes>
-      <Footer />
     </>
   );
 };

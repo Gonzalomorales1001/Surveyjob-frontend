@@ -6,6 +6,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import RoutesApp from './routes/RouteApp';
 import ProtectedRoutes from "./routes/ProtectRoutes";
 import Error404 from './components/Error404';
+import HomeScreen from './pages/HomeScreen';
+import SurveyScreen from './pages/SurveyScreen';
+import Navbar from './components/Navbar';
+import Footer from './components/footer/Footer';
+
 
 function App() {
     const [login, setLogin] = useState(false);
@@ -25,26 +30,20 @@ function App() {
     };
     return (
       <BrowserRouter>
+        <Navbar login={login} />
         <Routes>
-          <Route
-            path="/*"
-            element={
+          <Route path="/*" element={
               <ProtectedRoutes login={login}>
                 <RoutesApp logoutUser={logoutUser} user={user} />
               </ProtectedRoutes>
             }
           />
-          <Route
-            path="/login"
-            element={
-              <Login
-              loginUser={loginUser}
-              saveUser={saveUser}
-              />
-            }
-          />
-            <Route path="*" element={<Error404/>} />
+          <Route path="/login" element={<Login loginUser={loginUser} saveUser={saveUser}/>}/>
+          <Route path="/" element={<HomeScreen/>} />
+          <Route path="/survey/:surveyID" element={<SurveyScreen />} />
+          <Route path="*" element={<Error404/>} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     );     
 } 
