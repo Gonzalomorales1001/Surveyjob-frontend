@@ -1,5 +1,5 @@
 import React from 'react'
-import imgerror from "../assets/error404.jpeg";
+import imgerror from "../assets/error404.jpg";
 function Error404() {
   return (
     <>
