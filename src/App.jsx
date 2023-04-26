@@ -10,6 +10,7 @@ import HomeScreen from './pages/HomeScreen';
 import SurveyScreen from './pages/SurveyScreen';
 import Navbar from './components/Navbar';
 import Footer from './components/footer/Footer';
+import FinalAdmin from './components/FinalAdmin';
 
 
 function App() {
@@ -34,11 +35,13 @@ function App() {
         <Routes>
           <Route path="/*" element={
               <ProtectedRoutes login={login}>
-                <RoutesApp logoutUser={logoutUser} user={user} />
+                {/* <RoutesApp logoutUser={logoutUser} user={user} /> */}
+                
               </ProtectedRoutes>
             }
           />
           <Route path="/login" element={<Login loginUser={loginUser} saveUser={saveUser}/>}/>
+          <Route path="/admin" element={<FinalAdmin/>} />
           <Route path="/" element={<HomeScreen/>} />
           <Route path="/survey/:surveyID" element={<SurveyScreen />} />
           <Route path="*" element={<Error404/>} />
