@@ -20,7 +20,7 @@ const HomeScreen = () => {
     
   return (
     <>
-    <h1 className='text-center'>Lista de encuestas</h1>
+    <h1 className='text-center vw-100'>Lista de encuestas</h1>
     <hr />
     <div>  
         {allSurveys.map((survey,index)=>{

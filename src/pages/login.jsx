@@ -2,10 +2,10 @@ import React from 'react'
 import Formulario from '../components/Form'
 
 
-const Login = () => {
+const Login = ({loginUser}) => {
   return (
 <>      
-  <Formulario />
+  <Formulario loginUser={loginUser} />
 </>
   )
 }

@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import styled from 'styled-components';
 import imagen from '../../images/imagen.jpg'
-
+import {authLogin} from "../helpers/Api";
+import { useNavigate, Link } from 'react-router-dom';
 // Estilos del contenedor de la página
 const Container = styled.div`
   display: flex;
@@ -81,32 +82,42 @@ const FlexContainer = styled.div`
     margin-top:40px;
 `;
 
-const Formulario = () => {
+const Formulario = ({loginUser}) => {
+  const navigate = useNavigate();
   // Estado local para el usuario y la contraseña
-  const [username, setUsername] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
 
+  const [result, setResult] = useState(null);
+  const [loading, setLoading] = useState(false);
+
   // Manejador del envío del formulario
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
-    console.log('Username:', username);
-    console.log('Password:', password);
-    // Aquí podríamos enviar la información del usuario y la contraseña a un servidor para verificarla
+    const respuesta={email:email , password:password};
+
+    const resp = await authLogin(respuesta)
+    if (resp?.token) {
+      localStorage.setItem("token", JSON.stringify(resp.token));
+      loginUser();
+
+    }
+    navigate("/");
   };
 
   return (
     <Container>
-      <LeftColumn>
+      <LeftColumn className='d-none d-lg-block'>
         <Img src={imagen} alt="Placeholder" />
       </LeftColumn>
-      <RightColumn>
+      <RightColumn className="vw-100">
         <Form onSubmit={handleSubmit}>
             <Title>Empieza tu encuesta aquí </Title>
           <Input
-            type="text"
-            placeholder="Usuario"
-            value={username}
-            onChange={(event) => setUsername(event.target.value)}
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(event) => setEmail(event.target.value)}
           />
           <Input
             type="password"
