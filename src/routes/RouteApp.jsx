@@ -14,7 +14,7 @@ const RoutesApp = () => {
   return (
     <>
       <Routes>
-        <Route path="/admin" element={<FinalAdmin />} />
+        <Route path="/admin" element={<FinalAdmin/>} />
         <Route path="*" element={<Error404 />} />
       </Routes>
     </>
