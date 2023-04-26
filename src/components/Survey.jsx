@@ -12,7 +12,7 @@ const Survey = ({category,title,surveyID}) => {
               <h5 className="card-title">{title}</h5>
               {/* <p className="card-text">id:{surveyID}</p> */}
               <Link to={`/survey/${surveyID}`}>
-              <button href="#" className="btn btn-warning">Responde esta encuesta</button>
+              <button href="#" className="btn btn-warning w-100 mx-auto">Responde esta encuesta</button>
               </Link>
             </div>
         </div>
