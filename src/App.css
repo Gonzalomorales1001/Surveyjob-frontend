@@ -1,22 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 
+
 :root{
     --SurveyJob: #F0A500;
-    --SurveyJob-Alt: ##F5A623;
+    --SurveyJob-Alt: #F5A623;
 
     /*Light Theme Colors*/
-    --SurveyJob-LightBG: #8ca8a8;
-    --SurveyJob-LightEmphasis: #EAEAEA;
-    --SurveyJob-White: ##F2F2F2;
+    --SurveyJob-Light1: #EAEAEA;
+    --SurveyJob-Light2: #858585;
+    --SurveyJob-Light3: #CDCDCD;
 
     /*Dark Theme Colors*/
-    --SurveyJob-DarkBG: #082032;
-    --SurveyJob-DarkEmphasis: #334756;
-    --SurveyJob-Black: #000000
+    --SurveyJob-Dark1: #082032;
+    --SurveyJob-Dark2: #061928;
+    --SurveyJob-Dark3: #334756;
 }
 
-body{
+*{
     font-family: 'Outfit', sans-serif;
 }
 
@@ -25,3 +26,6 @@ input{
     font-weight: 200;
     font-style: italic;
 }
+
+.fw-100{font-weight: 100 !important;}
+.fw-200{font-weight: 200 !important;}

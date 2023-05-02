@@ -1,0 +1,19 @@
+.navbar{
+    font-weight: 300;
+}
+
+.navbar-light{
+    background-color: var(--SurveyJob-Light1);
+    color: var(--SurveyJob-Dark1);
+}
+
+.navbar-dark{
+    background-color: var(--SurveyJob-Dark1);
+    color: var(--SurveyJob-Light1);
+}
+
+.navbar--scrolled{background-color: rgba(240, 165, 0, 0.5) ;}
+
+.navbar-brand__logo{
+    width: 150px;
+}
