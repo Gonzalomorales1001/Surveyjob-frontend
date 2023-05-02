@@ -8,7 +8,7 @@ import 'bootstrap/dist/js/bootstrap.bundle'
 import 'font-awesome/css/font-awesome.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
-  // <React.StrictMode>
-    <App />,
-  {/* </React.StrictMode>, */}
+    <React.StrictMode>
+        <App />
+    </React.StrictMode>
 )
