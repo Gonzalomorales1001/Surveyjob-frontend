@@ -11,18 +11,21 @@ const Navbar = ({dark, ToggleDarkMode}) => {
     <header>
       <nav className={`navbar navbar-expand-lg bg-body-tertiary sticky-top ${dark?'navbar-dark':'navbar-light'}`}>
         <div className="container-fluid">
-          <a className="navbar-brand" href="#">
+          <a className="navbar-brand d-flex justify-content-center align-items-center" href="#">
             {dark
             ?<img src={DarkModeSurveyJobLogo} alt="Survey Job Logo" className='navbar-brand__logo'/>
             :<img src={LightModeSurveyJobLogo} alt="Survey Job Logo" className='navbar-brand__logo'/>}
           </a>
+          <input type="checkbox" id="toggle" className="toggle--checkbox" onChange={ToggleDarkMode}/>
+                <label htmlFor="toggle" className="toggle--label">
+                  <span className="toggle--label-background"></span>
+                </label>
           <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span className="navbar-toggler-icon"></span>
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto me-5">
-              <li className="form-check form-switch">
-                <input className="form-check-input form-check-input-sm" type="checkbox" role="switch" onChange={ToggleDarkMode}/>
+              <li className="nav-item">
               </li>
               <li className="nav-item">
                 <NavLink className="nav-link" aria-current="page" to="/">Inicio</NavLink>

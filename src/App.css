@@ -30,4 +30,10 @@ input{
 .fw-100{font-weight: 100 !important;}
 .fw-200{font-weight: 200 !important;}
 
+.surveyjob-bg-light{
+    background: white;
+}
 
+.surveyjob-bg-dark{
+    background: var(--SurveyJob-Dark2);
+}
