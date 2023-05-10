@@ -3,65 +3,72 @@ import { useNavigate } from "react-router";
 import Job from "../assets/job.png";
 import "../css/login.css"; //ver si hay que agregar export default
 
-const LoginScreen = () => {
+const LoginScreen = ({dark}) => {
   const navigate = useNavigate();
 
   return (
     <>
-      <div className="bodylog">
-        <div class="main">
+      <div className={`bodylog ${dark?'login__bg--dark':'login__bg--light'}`}>
+        <div className="main">
           <input type="checkbox" id="chk" aria-hidden="true" />
 
-          <div class="signup">
+          <div className={`signup ${dark?'signup__bg--dark':'signup__bg--light'}`}>
             <form>
-              <label for="chk" aria-hidden="true">
-                Registrate{" "}
+              <label htmlFor="chk" className="login__label" aria-hidden="true">
+                Regístrate{" "}
               </label>
-              <input
-                className="mt-1"
-                type="text"
-                name="txt"
-                placeholder="Usuario"
-                required=""
-              />
-              <input
-                className="mt-1"
-                type="email"
-                name="email"
-                placeholder="Email"
-                required=""
-              />
-              <input
-                className="mt-1"
-                type="password"
-                name="pswd"
-                placeholder="Contraseña"
-                required=""
-              />
-              <button className="mt-3 ">Registrate</button>
+              <div className="container">
+                <input
+                  className={`mt-1 login__input ${dark&&'login__input--dark'}`}
+                  type="text"
+                  name="txt"
+                  placeholder="Usuario"
+                  required=""
+                />
+                <input
+                  className={`mt-1 login__input ${dark&&'login__input--dark'}`}
+                  type="email"
+                  name="email"
+                  placeholder="Email"
+                  required=""
+                />
+                <input
+                  className={`mt-1 login__input ${dark&&'login__input--dark'}`}
+                  type="password"
+                  name="pswd"
+                  placeholder="Contraseña"
+                  required=""
+                />
+                <small className="login__password__small">Tu contraseña debe tener almenos 1 mayúscula, 1 minúscula, 1 número y almenos 1 símbolo.</small>
+              </div>
+              <button className={`mt-3 login__btn`}>Registrate</button>
             </form>
           </div>
 
-          <div class="login">
+          <div className={`login ${dark&&'login--dark'}`}>
             <form>
-              <label for="chk" aria-hidden="true">
+              <label htmlFor="chk" className="login__label" aria-hidden="true">
                 Iniciar sesión
               </label>
+              <div className="d-flex h-100 align-items-center flex-column pt-3">
               <input
-                className="mt-1"
+                className="mt-1 login__input"
                 type="email"
                 name="email"
                 placeholder="Email"
                 required=""
               />
               <input
-                className="mt-1"
+                className="mt-1 login__input"
                 type="password"
                 name="pswd"
                 placeholder="Contraseña"
                 required=""
               />
-              <button className="mt-3 ">Iniciar sesión</button>
+              <button className="mt-3 login__btn">Iniciar sesión</button>
+              <a href="" className="fs-xs text-warning text-decoration-none"> <small>Olvide mi contraseña</small> </a>
+
+              </div>
             </form>
           </div>
         </div>

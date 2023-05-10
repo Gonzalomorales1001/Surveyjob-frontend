@@ -5,6 +5,7 @@
 :root{
     --SurveyJob: #F0A500;
     --SurveyJob-Alt: #F5A623;
+    --SurveyJob-2: #bc8000;
 
     /*Light Theme Colors*/
     --SurveyJob-Light1: #EAEAEA;
@@ -12,6 +13,11 @@
     --SurveyJob-Light3: #CDCDCD;
 
     /*Dark Theme Colors*/
+    --SurveyJob-Black1: #222;
+    --SurveyJob-Black2: #121212;
+    --SurveyJob-Black3: #000;
+
+    /*Blue Colors*/
     --SurveyJob-Dark1: #082032;
     --SurveyJob-Dark2: #061928;
     --SurveyJob-Dark3: #334756;
@@ -24,7 +30,6 @@
 input{
     font-family: 'Prompt', sans-serif;
     font-weight: 200;
-    font-style: italic;
 }
 
 .fw-100{font-weight: 100 !important;}
