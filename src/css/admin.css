@@ -1,0 +1,66 @@
+.menuAdmin{
+    width: 220px;
+
+}
+#sidebar-menu {
+  /* background-color: #333333    ; */
+  height: 100%    ; /* Full height */
+  position: relative    ;
+  overflow: none    ; /* Enable scrolling if the sidenav has too much content */
+}
+
+#sidebar-menu .panel,
+#admin-apps > li,
+#admin-users > li {
+  margin-bottom: 10%;
+  border: 0    ;
+  border-radius: 12%    ;
+  /* border-color: #333333    ;
+  background: #333333    ; */
+}
+
+#nav > li.panel.panel-heading:hover,
+#nav > li.panel.panel-heading:active,
+#sidebar-menu > ul > li > a:hover,
+#sidebar-menu > ul > li > a:hover:active,
+#users-sub > li:hover,
+#users-sub > li:hover:active,
+#apps-sub > li:hover,
+#apps-sub > li:active {
+  background: #1b1919    ;
+  color: #b7b7b7;
+}
+
+#sidebar-menu a {
+  color: #373232    ;
+}
+/* 
+#sidebar-menu .nav:not(:first-child) > li > a {
+  padding: 5px 5px;
+} */
+
+#sidebar-menu .nav > li > a {
+  padding: 30px 30px;
+}
+
+#sidebar-menu #nav > .panel,
+#nav > .panel-collapse,
+#panel-users > li {
+  
+  border-top: 0px solid #333333;
+}
+
+#sidebar-menu a.selected {
+  font-weight: bold    ;
+  background-color: #333333    ;
+}
+
+#nav > li > a > span {
+  color: #b7b7b7    ;
+}
+
+#users-sub > li,
+#apps-sub > li {
+  margin-left: -50px    ;
+  padding-left: 50px    ;
+}
