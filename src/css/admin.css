@@ -27,8 +27,8 @@
 #users-sub > li:hover:active,
 #apps-sub > li:hover,
 #apps-sub > li:active {
-  background: #1b1919    ;
-  color: #b7b7b7;
+  background-color: var(--SurveyJob);    ;
+  color: #242020;
 }
 
 #sidebar-menu a {

@@ -11,8 +11,8 @@ const Footer = ({ dark, ToggleDarkMode }) => {
           dark ? "footer-dark" : "footer-light"
         }` }>
         <div class="container">
-          <div class="row">
-            <div class="col-sm-12 col-md-7 me-5">
+          <div class="">
+            <div class="col-sm-12 col-md-7">
               <h6>SurveyJob </h6>
               <p class="text-justify">
                 Es una empresa con fines de prestar servicios a partir
@@ -25,7 +25,7 @@ const Footer = ({ dark, ToggleDarkMode }) => {
                 de acuerdo con las regulaciones de protección de datos.
               </p>
             </div>
-            <div class="col-xs-6 col-md-4 ms-5">
+            <div class="col-xs-6 col-md-3 ">
               <h6>Compañía</h6>
               <ul class="footer-links">
                 <li>

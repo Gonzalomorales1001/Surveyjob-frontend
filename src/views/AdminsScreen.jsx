@@ -35,6 +35,7 @@ const AdminsScreen = () => {
           </div>
         </div>
         {/* hacer un ternario para que aparezca este mensaje o lo que pido encuestas o usuarios */}
+        
         <div className="mb-5 d-flex justify-content-center">
           {" "}
           <h1 classNameName="fw-200">
