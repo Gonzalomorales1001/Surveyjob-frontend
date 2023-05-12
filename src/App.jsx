@@ -40,7 +40,7 @@ function App() {
 
         <Route path='/survey/:surveyID' element={<SurveyScreen dark={dark} ToggleDarkMode={ToggleDarkMode}/>}/>
       </Routes>
-    <Footer/>
+    <Footer dark={dark} />
     </BrowserRouter>
     </>
   )
