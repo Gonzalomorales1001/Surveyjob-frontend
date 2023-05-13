@@ -2,8 +2,9 @@
   background-color: var(--SurveyJob-Black3);
   color: var(--SurveyJob-Light1);
 }
-
-
+footer {
+  bottom: 0;
+}
 .footer-light{
   background-color: var(--SurveyJob-Light1);
   color: var(--SurveyJob-Dark1);

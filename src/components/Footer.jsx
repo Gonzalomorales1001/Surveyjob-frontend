@@ -1,20 +1,18 @@
 import React from "react";
 import "../css/Footer.css";
-import DarkModeSurveyJobLogo from "../assets/LightLetterLogo.png";
-import LightModeSurveyJobLogo from "../assets/DarkLetterLogo.png";
 
-const Footer = ({ dark, ToggleDarkMode }) => {
+const Footer = ({ dark}) => {
   return (
     <>
       {/* <!-- Site footer --> */}
-      <footer class={`site-footer ${
+      <footer className={`site-footer  ${
           dark ? "footer-dark" : "footer-light"
         }` }>
-        <div class="container">
-          <div class="">
-            <div class="col-sm-12 col-md-7">
+        <div className="container">
+          <div className="">
+            <div className="col-sm-12 col-md-12">
               <h6>SurveyJob </h6>
-              <p class="text-justify">
+              <p className="text-justify">
                 Es una empresa con fines de prestar servicios a partir
                 de encuesta, para mejorar el rendimiento de distintos ámbitos.
                 Estamos comprometidos en brindarte una plataforma confiable y
@@ -25,9 +23,9 @@ const Footer = ({ dark, ToggleDarkMode }) => {
                 de acuerdo con las regulaciones de protección de datos.
               </p>
             </div>
-            <div class="col-xs-6 col-md-3 ">
+            <div className="col-xs-6 col-md-3 ">
               <h6>Compañía</h6>
-              <ul class="footer-links">
+              <ul className="footer-links">
                 <li>
                   <a href="http://scanfcode.com/about/">Sobre nosotros</a>
                 </li>
@@ -49,36 +47,36 @@ const Footer = ({ dark, ToggleDarkMode }) => {
           </div>
           <hr />
         </div>
-        <div class="container">
-          <div class="row">
-            <div class="col-md-8 col-sm-6 col-xs-12">
-              <p class="copyright-text">
+        <div className="container">
+          <div className="row">
+            <div className="col-md-8 col-sm-6 col-xs-12">
+              <p className="copyright-text">
                 Copyright &copy; 2023 Todos los derechos reservados por
                 <a href="#"> SurveyJob</a>.
               </p>
             </div>
 
-            <div class="col-md-4 col-sm-6 col-xs-12">
-              <ul class="social-icons">
+            <div className="col-md-4 col-sm-6 col-xs-12">
+              <ul className="social-icons">
                 {/* Agregar pagina de error */}
                 <li>
-                  <a class="facebook" href="#">
-                    <i class="fa fa-facebook"></i>
+                  <a className="facebook" href="#">
+                    <i className="fa fa-facebook"></i>
                   </a>
                 </li>
                 <li>
-                  <a class="twitter" href="#">
-                    <i class="fa fa-twitter"></i>
+                  <a className="twitter" href="#">
+                    <i className="fa fa-twitter"></i>
                   </a>
                 </li>
                 <li>
-                  <a class="dribbble" href="#">
-                    <i class="fa fa-dribbble"></i>
+                  <a className="dribbble" href="#">
+                    <i className="fa fa-dribbble"></i>
                   </a>
                 </li>
                 <li>
-                  <a class="linkedin" href="#">
-                    <i class="fa fa-linkedin"></i>
+                  <a className="linkedin" href="#">
+                    <i className="fa fa-linkedin"></i>
                   </a>
                 </li>
               </ul>

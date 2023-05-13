@@ -59,24 +59,7 @@ const AdminsScreen = () => {
                     aria-hidden="true"
                   ></span>
                 </a>
-                <ul id="panel-users" class="panel-collapse collapse">
-                  <li class="panel-body">
-                    <a
-                      href="#/dashboard-admin-users-accounts"
-                      class="panel-body"
-                    >
-                      Todos los usuarios{" "}
-                    </a>
-                  </li>
-                  <li class="panel-body">
-                    <a
-                      href="#/dashboard-admin-users-activities"
-                      class="panel-body"
-                    >
-                      Usuarios Activos{" "}
-                    </a>
-                  </li>
-                </ul>
+                
               </li>
 
               <li class="panel panel-group">
@@ -91,21 +74,6 @@ const AdminsScreen = () => {
                     aria-hidden="true"
                   ></span>
                 </a>
-                <ul id="panel-apps" class="panel-collapse collapse">
-                  <li class="panel-body">
-                    <a href="#/dashboard-admin-apps-devapps" class="panel-body">
-                      Todas las encuestas 
-                    </a>
-                  </li>
-                  <li class="panel-body">
-                    <a
-                      href="#/dashboard-admin-apps-activities"
-                      class="panel-body"
-                    >
-                      Encuestas Activas
-                    </a>
-                  </li>
-                </ul>
               </li>
               </ul>
           </div>
