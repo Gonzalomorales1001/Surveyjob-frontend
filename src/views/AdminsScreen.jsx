@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
-// import { crearEncuesta } from "../helpers/encuestas";
-// import { getUsuarios } from "../helpers/usuarios";
-// import CardUser from "./CardUser";
+import React, { useEffect, useState } from "react"; 
+// import { getSurveyByID } from "../helpers/SurveyRoute";
+// import { getUserByID } from "../helpers/UserRoute";
+// import CardUser from "./CardUser"; 
 import Job from "../assets/job.png";
-import "../css/admin.css"
+import "../css/admin.css";
 
 const AdminsScreen = () => {
   const [usuarios, setUsuarios] = useState([]);
@@ -35,47 +35,38 @@ const AdminsScreen = () => {
           </div>
         </div>
         {/* hacer un ternario para que aparezca este mensaje o lo que pido encuestas o usuarios */}
-        
+
         <div className="mb-5 d-flex justify-content-center">
           {" "}
-          <h1 classNameName="fw-200">
+          <h1 className="fw-200">
             Survey Job <img src={Job} width="35px" alt="Job letter" /> La
             gestión en tus manos
           </h1>
           <div></div>
         </div>
-        <div>
-          <div id="sidebar-menu" className="menuAdmin">
-            <ul id="nav" class="panel panel-default nav">
-              <li class="panel panel-group">
-                <a
-                  href="#panel-users"
-                  data-toggle="collapse"
-                  class="panel panel-heading"
-                >
-                  Usuarios
-                  <span
-                    class="pull-right glyphicon glyphicon-menu-down"
-                    aria-hidden="true"
-                  ></span>
-                </a>
-                
+        <div className="d-flex">
+          <div id="sidebar-menu" className="menuAdmin col-md-6">
+            <ul id="nav" className="panel panel-default nav">
+                {/* tiene un scroll la pagina es por la clase col - m - 11 que le puse a usuario y el loading */}
+              <li className="panel panel-group col-md-11">
+                <a className="panel panel-heading">Usuarios</a>
               </li>
 
-              <li class="panel panel-group">
-                <a
-                  href="#panel-apps"
-                  data-toggle="collapse"
-                  class="panel panel-heading"
-                >
-                  Encuestas
-                  <span
-                    class="pull-right glyphicon glyphicon-menu-down"
-                    aria-hidden="true"
-                  ></span>
-                </a>
+              <li className="panel panel-group col-md-11">
+                <a className="panel panel-heading"> Encuestas</a>
               </li>
-              </ul>
+            </ul>
+          </div>
+          <div className="row col-md-6">
+            <div>
+              {usuarios.length > 0 ? (
+                usuarios.map((usuario) => <CardUser usuario={usuario} />)
+              ) : (
+                <div className="spinner-border text-warning" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              )}
+            </div>
           </div>
         </div>
         {/* usar para traer usuarios 
