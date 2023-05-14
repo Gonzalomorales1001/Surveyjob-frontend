@@ -1,20 +1,20 @@
-import React, { useEffect, useState } from "react"; 
-// import { getSurveyByID } from "../helpers/SurveyRoute";
-// import { getUserByID } from "../helpers/UserRoute";
-// import CardUser from "./CardUser"; 
+import React, { useEffect, useState } from "react";
+import { getSurveys } from "../helpers/SurveyRoute";
+import { getUsers } from "../helpers/UserRoute";
+// import CardUser from "./CardUser";
 import Job from "../assets/job.png";
 import "../css/admin.css";
 
 const AdminsScreen = () => {
-  const [usuarios, setUsuarios] = useState([]);
+  const [users, setUsers] = useState([]);
   const [totalusuarios, setTotalUsuarios] = useState(0);
   const limite = 3;
   const [pagina, setPagina] = useState(0);
 
   const traerUsuarios = async () => {
-    const { Users } = await getUsuarios(limite, pagina);
+    const { Users } = await getUsers(limite, pagina);
     console.log(Users);
-    setUsuarios(Users);
+    setUsers(Users);
   };
   useEffect(() => {
     traerUsuarios();
@@ -34,7 +34,7 @@ const AdminsScreen = () => {
             </h1>
           </div>
         </div>
-        {/* hacer un ternario para que aparezca este mensaje o lo que pido encuestas o usuarios */}
+        {/* hacer un ternario para que aparezca este mensaje o lo que pido encuestas ousers */}
 
         <div className="mb-5 d-flex justify-content-center">
           {" "}
@@ -44,23 +44,21 @@ const AdminsScreen = () => {
           </h1>
           <div></div>
         </div>
-        <div className="d-flex">
-          <div id="sidebar-menu" className="menuAdmin col-md-6">
-            <ul id="nav" className="panel panel-default nav">
-                {/* tiene un scroll la pagina es por la clase col - m - 11 que le puse a usuario y el loading */}
-              <li className="panel panel-group col-md-11">
-                <a className="panel panel-heading">Usuarios</a>
-              </li>
-
-              <li className="panel panel-group col-md-11">
-                <a className="panel panel-heading"> Encuestas</a>
-              </li>
-            </ul>
+        <div className="d-flex"> 
+          <div id="sidebar-menu" className="menuAdmin row "> 
+            <button type="button" className="btn btn-get mb-2" onClick={()=>getUsers}>
+              Usuarios
+              {/* ver onClick que no estan llamando a las funciones */}
+            </button>
+            <button type="button" className="btn btn-get mb-2" onClick={()=>getSurveys}>
+              Encuestas
+            </button>
+            
           </div>
           <div className="row col-md-6">
             <div>
-              {usuarios.length > 0 ? (
-                usuarios.map((usuario) => <CardUser usuario={usuario} />)
+              {users.length > 0 ? (
+                users.map((users) => <CardUser users={users} />)
               ) : (
                 <div className="spinner-border text-warning" role="status">
                   <span className="visually-hidden">Loading...</span>
@@ -69,11 +67,11 @@ const AdminsScreen = () => {
             </div>
           </div>
         </div>
-        {/* usar para traer usuarios 
+        {/* usar para traerusers 
           <div className="row">
             <div className="col-12 col-md-8 offset-md-2 mb-5">
               {usuarios.length > 0 ? (
-                usuarios.map((usuario) => (
+               users.map((usuario) => (
                   // <p>{usuario.username}</p>
                   <CardUser key={usuario.userID} usuario={usuario} />
                 ))

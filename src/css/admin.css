@@ -19,16 +19,9 @@
   background: #333333    ; */
 }
 
-#nav > li.panel.panel-heading:hover,
-#nav > li.panel.panel-heading:active,
-#sidebar-menu > ul > li > a:hover,
-#sidebar-menu > ul > li > a:hover:active,
-#users-sub > li:hover,
-#users-sub > li:hover:active,
-#apps-sub > li:hover,
-#apps-sub > li:active {
-  background-color: var(--SurveyJob);    ;
-  color: #242020;
+.btn-get:hover{
+  background-color: var(--SurveyJob) !important   ;
+  color: #242020!important;
 }
 
 #sidebar-menu a {
@@ -63,4 +56,8 @@
 #apps-sub > li {
   margin-left: -50px    ;
   padding-left: 50px    ;
+}
+
+.btnGet{
+  width: 20px;
 }
