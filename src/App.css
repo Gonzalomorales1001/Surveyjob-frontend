@@ -62,3 +62,36 @@ textarea{
     background-attachment: fixed;
     background-size: cover;
 }
+
+.loading-screen{
+    height: 50vh;
+}
+
+/* Bootstrap Breakpoints */
+
+/*Small (sm)*/
+@media (min-width:576px) {
+    
+}
+
+/*Medium (md)*/
+@media (min-width:768px) {
+    
+}
+
+/*Large (lg)*/
+@media (min-width:992px) {
+    .loading-screen{
+        height: 100vh;
+    }
+}
+
+/*Extra-Large (xl)*/
+@media (min-width:1200px) {
+    
+}
+
+/*Extra extra-large (xxl)*/
+@media (min-width:1400px) {
+    
+}

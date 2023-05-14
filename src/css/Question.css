@@ -4,10 +4,10 @@
 
 .card {
     border: 0;
-    box-shadow: 0px 0px 10px 0px rgba(109, 109, 109, 0.1);
-    -webkit-box-shadow: 0px 0px 10px 0px rgba(109, 109, 109, 0.1);
-    -moz-box-shadow: 0px 0px 10px 0px rgba(109, 109, 109, 0.1);
-    -ms-box-shadow: 0px 0px 10px 0px rgba(109, 109, 109, 0.1);
+    box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+    -ms-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 .card {
     position: relative;
@@ -29,10 +29,10 @@
 
 .card--dark{
   border: 0;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  -webkit-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  -moz-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
-  -ms-box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  -webkit-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  -moz-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
+  -ms-box-shadow: 0 19px 38px rgba(0,0,0,0.30), 0 15px 12px rgba(0,0,0,0.22);
 }
 
 .card .card-header.no-border {

@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import { getSurveyByID } from '../helpers/SurveyRoute';
-import { getUserByID } from '../helpers/UserRoute';
+import { getSurveyByID } from '../helpers/SurveyAPI';
+import { getUserByID } from '../helpers/UserAPI';
 import { useParams } from 'react-router';
 import '../css/Question.css'
 import Question from '../components/Question';
 import SpeechBubble from '../components/SpeechBubble';
+import { InfiniteLoader } from '../components/InfiniteLoader';
+import Serverless from '../assets/serverless.svg'
 
 const SurveyScreen = ({dark}) => {
 
@@ -16,7 +18,11 @@ const SurveyScreen = ({dark}) => {
   const getSurveyData=async()=>{
     await getSurveyByID(surveyID)
     .then(r=>setSurveyData(r?.surveyFoundByID))
-    .catch(err=>setErr(true));
+    .catch(err=>{
+      setErr(true)
+      console.log('Error al obtener informacion de la encuesta')
+      return console.log(`detail: ${err}`)
+    });
   }
 
   useEffect(() => {
@@ -28,7 +34,11 @@ const SurveyScreen = ({dark}) => {
       const userID=surveyData.owner;
       getUserByID(userID)
       .then(r=>setUserData(r?.userFoundByID))
-      .catch(err=>console.log(err));
+      .catch(err=>{
+        setErr(true)
+        console.log('Error al obtener informacion del usuario')
+        return console.log(`detail: ${err}`)
+      });
     }else{
       console.log('Loading user data');
     }
@@ -40,7 +50,8 @@ const SurveyScreen = ({dark}) => {
       <div className="container">
         {userData?(
           <>
-            <h3 className='text-center'>Encuesta de {userData?.username}</h3>
+            <h3>Encuesta de {userData?.username}</h3>
+            <h1 className='text-center my-3'>{surveyData.title}</h1>
             {surveyData.questions.map((question,index)=><Question 
             content={question.content} 
             questionType={question.questionType}
@@ -57,9 +68,22 @@ const SurveyScreen = ({dark}) => {
             </div>
           </>
         ):err?(
-          <h1>Hubo un error al cargar la información</h1>
+          <div className='row align-items-center justify-content-center py-4 loading-screen'>
+            <img src={Serverless} alt="serverless" className='col-12 col-lg-6 w-50' />
+            <div className='col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column'>
+              <h1 className='text-center text-secondary'>No ha sido posible cargar la información!</h1>
+              <h3 className='text-center text-secondary'>Error 500: Internal Server Error</h3>
+              <p className='text-center text-secondary'>Por favor, ponte en contacto con algún administrador</p>
+            </div>
+          </div>
         ):(
-          <h1>Cargando...</h1>
+          <div className='container d-flex justify-content-center align-items-start pt-5 loading-screen'>
+            <div>
+              <h1 className='text-center'>Cargando...</h1>
+              <p className='text-center mb-5'>Cargando información de la encuesta. Por favor, espere unos instantes</p>
+              <InfiniteLoader dark={dark}/>
+            </div>
+          </div>
         )}
       </div>
     </main>

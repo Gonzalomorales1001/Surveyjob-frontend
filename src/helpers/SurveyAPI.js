@@ -1,4 +1,4 @@
-import { URL } from "../helpers/URL";
+import { URL } from "./URL";
 
 export const getSurveyByID = async (surveyID) => {
 const response = await fetch(`${URL}/surveys/${surveyID}`);

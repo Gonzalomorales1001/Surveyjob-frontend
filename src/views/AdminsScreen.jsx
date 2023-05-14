@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { getSurveys } from "../helpers/SurveyRoute";
-import { getUsers } from "../helpers/UserRoute";
+import { getSurveys } from "../helpers/SurveyAPI";
+import { getUsers } from "../helpers/UserAPI";
 // import CardUser from "./CardUser";
 import Job from "../assets/job.png";
 import "../css/admin.css";
