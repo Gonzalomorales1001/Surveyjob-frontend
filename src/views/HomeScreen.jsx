@@ -3,8 +3,8 @@ import SpeechBubble from '../components/SpeechBubble'
 
 const HomeScreen = () => {
   return (
-    <>HomeScreen</>
+    <>HomeScreem</>
   )
 }
 
-export default HomeScreen
+export default HomeScreen;
