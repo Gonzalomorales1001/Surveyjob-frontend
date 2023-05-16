@@ -114,9 +114,8 @@ const AdminsScreen = ({ dark, usersx, company, survey }) => {
               Encuestas
             </button>
             </div>*/}
-        </div>
+          {/* <div className="row d-flex align-items-center"> */}
 
-        <div className="row d-flex align-items-center">
           {/* usar para traerusers  */}
           <div className="col-12 col-md-8 offset-md-2 mb-5">
             {users.length > 0 ? (
