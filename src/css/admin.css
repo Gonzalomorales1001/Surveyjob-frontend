@@ -4,7 +4,7 @@
 }
 .secAdmin-dark{
   background-color: var(--SurveyJob-Black3);
-  color: var(--SurveyJob-Light1);
+  color: var(--SurveyJob-Light1) ;
 };
 .secAdmin-light{
   background-color: var(--SurveyJob-Light1);
