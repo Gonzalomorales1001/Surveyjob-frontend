@@ -3,12 +3,27 @@ import '../css/Question.css'
 
 const Question = ({content,questionType,options,questionID,questionNumber,surveyCategory,dark}) => {
 
+    const questionTypeInfo=(type)=>{
+        switch(type){
+            case "TEXT":
+                return 'Escribe tu respuesta (Máximo 250 caracteres)'
+            break
+            case "SELECT":
+            case "RADIO":
+                return 'Elige una opción'
+            break
+            case "CHECKBOX":
+                return 'Selecciona una o más opciones'
+            break
+    }
+}
+
     const questionTypeRender=(type)=>{
         switch(type){
             case "TEXT":
                 return (
                     <div className='col'>
-                        <textarea name={`textarea-${questionID}`} id={`textarea-${questionID}`} className={`form-control question__text ${dark&&'question__text--dark'}`}></textarea>
+                        <textarea name={`textarea-${questionID}`} id={`textarea-${questionID}`} maxLength={250} className={`form-control question__text ${dark&&'question__text--dark'}`}></textarea>
                     </div>
                 )
             break
@@ -49,6 +64,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                                 </div>
                                 <div className="widget-49-meeting-info">
                                     <span className={`widget-49-pro-title fs-2 ${dark&&'text-light'}`}>{content}</span>
+                                    <span className="widget-49-meeting-time">{questionTypeInfo(questionType)}</span>
                                 </div>
                             </div>
                             <br />

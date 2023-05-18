@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import Navbar from './components/Navbar'
-import { Router } from 'react-router'
+import { Router, json } from 'react-router'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
 import HomeScreen from './views/HomeScreen'
 import PageNotFoundScreen from './views/PageNotFoundScreen'
@@ -16,10 +16,11 @@ import ContactScreen from './views/ContactScreen'
 
 function App() {
   const [login, setLogin] = useState(false)
-  const [dark, setDark] = useState(false)
+  const [dark, setDark] = useState(JSON.parse(localStorage.getItem('DarkMode')))
 
   const ToggleDarkMode=()=>{
     setDark(!dark)
+    localStorage.setItem('DarkMode',JSON.stringify(!dark))
   }
 
   return (
