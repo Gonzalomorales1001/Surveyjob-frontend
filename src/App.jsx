@@ -37,6 +37,7 @@ function App() {
         <Route path='/login' element={<LoginScreen dark={dark} ToggleDarkMode={ToggleDarkMode}/>}/>
         <Route path='/contact' element={<ContactScreen/>}/>
         <Route path='/admin' element={<AdminsScreen dark={dark}/>} /> 
+        <Route path='/*' element={<PageNotFoundScreen/>}/>
         {/* sacar esto de admin */}
 
         <Route path='/survey/:surveyID' element={<SurveyScreen dark={dark} ToggleDarkMode={ToggleDarkMode}/>}/>

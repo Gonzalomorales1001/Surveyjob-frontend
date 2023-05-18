@@ -14,7 +14,6 @@ const RoutesApp = () => {
         <Route path='/admin' element={<AdminsScreen/>}/>
         <Route path='/user' element={<UserScreen/>}/>
         <Route path='/survey' element={<SurveyScreen/>}/>
-        <Route path='*' element={<PageNotFoundScreen/>}/>
     </Routes>
   )
 }
