@@ -15,7 +15,7 @@ import ProtectedRoutes from './routes/ProtectedRoutes'
 import ContactScreen from './views/ContactScreen'
 
 function App() {
-  const [login, setLogin] = useState(false)
+  const [login, setLogin] = useState(true)
   const [dark, setDark] = useState(JSON.parse(localStorage.getItem('DarkMode')))
 
   const ToggleDarkMode=()=>{
