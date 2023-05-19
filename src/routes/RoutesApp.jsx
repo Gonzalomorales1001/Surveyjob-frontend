@@ -19,7 +19,6 @@ const RoutesApp = () => {
         </Route>
         <Route path='/user' element={<UserScreen/>}/>
         <Route path='/survey' element={<SurveyScreen/>}/>
-        <Route path='*' element={<PageNotFoundScreen/>}/>
     </Routes>
   )
 }
