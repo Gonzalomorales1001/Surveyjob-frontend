@@ -6,9 +6,9 @@ const data = await response.json();
 return data;
 };
 
-export const getUsers = async (limite = 3, pagina = 1) => {
+export const getUsers = async (limite = 4, pagina = 0) => {
 try {
-    const resp = await fetch(URL + "/api/users?limit=" + limite + "&since=" + pagina
+    const resp = await fetch(URL + "/users?limit=" + limite + "&since=" + pagina
     );
     const data = await resp.json();
     return data;
@@ -55,7 +55,7 @@ try {
 
 export const deleteUser = async (id) => {
 try {
-    const resp = await fetch(URL + "/" + id, {
+    const resp = await fetch(URL + "/:" + id, {
     method: "DELET",
     headers: {
         "Content-type": "application/json; charter UTF-8",

@@ -6,13 +6,13 @@ const data = await response.json();
 return data;
 };
 //ver si es necesario usar /surveys/ todos los metodos
-export const getSurveys = async (pagina = 0) => {
+export const getSurveys = async (limite=1 , pagina = 0) => {
 try {
-    const resp = await fetch(URL + "?limite" + limite + "&desde" + pagina);
+    const resp = await fetch(URL + "/surveys?limit" + limite + "&since" + pagina);
     const data = await resp.json();
     return data;
 } catch (error) {
-    throw new Error("No se pudo obtener Info");
+    throw new Error("No se pudo obtener encuesta");
 }
 };
 export const addSurvey = async (datos) => {
@@ -29,7 +29,7 @@ try {
     return data;
 } catch (error) {
     console.log(error);
-    return "No se conecto con el backend";
+    return "No se pudo agregar su encuesta";
 }
 };
 export const updataSurvey = async (id, datos) => {
@@ -46,7 +46,7 @@ try {
     return data;
 } catch (error) {
     console.log(error);
-    return "No se conecto con el backend";
+    return "No se pudo actualizar encuesta";
 }
 };
 export const deleteSurvey = async (id) => {
@@ -62,6 +62,6 @@ try {
     return data;
 } catch (error) {
     console.log(error);
-    return "No se conecto con el backend";
+    return "No se pudo eliminar encuesta";
 }
 };

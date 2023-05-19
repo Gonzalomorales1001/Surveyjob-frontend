@@ -7,11 +7,16 @@ import Footer from '../components/Footer'
 import AdminsScreen from '../views/AdminsScreen'
 import UserScreen from '../views/UserScreen'
 import SurveyScreen from '../views/SurveyScreen'
+import ListasUsuarios from '../views/ListasUsuarios'
+import ListaEncuestas from '../views/ListaEncuestas'
 
 const RoutesApp = () => {
   return (
     <Routes>
-        <Route path='/admin' element={<AdminsScreen/>}/>
+        <Route path='/admin' element={<AdminsScreen/>}>
+          <Route path='/userslist' element={<ListasUsuarios/>}/>
+          <Route path='/surveylist' element={<ListaEncuestas/>}/>
+        </Route>
         <Route path='/user' element={<UserScreen/>}/>
         <Route path='/survey' element={<SurveyScreen/>}/>
         <Route path='*' element={<PageNotFoundScreen/>}/>

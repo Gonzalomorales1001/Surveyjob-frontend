@@ -9,8 +9,19 @@
 .btn-sm{
     height: 30px;
 }
-.card{
+/* .card{
     border-radius: 6px;
     /* min-width: 62vw !important ;
-    max-width: 62vw !important ; */
+    max-width: 62vw !important ; 
+}
+ */
+.card-light{
+    background-color: var(--SurveyJob-Light1);
+    color: var(--SurveyJob-Dark1);
+}
+
+.card-dark{
+    background-color: var(--SurveyJob-Black3);
+    color: var(--SurveyJob-Light1);
+    
 }
