@@ -13,6 +13,8 @@ import SurveyScreen from './views/SurveyScreen'
 import RoutesApp from './routes/RoutesApp'
 import ProtectedRoutes from './routes/ProtectedRoutes'
 import ContactScreen from './views/ContactScreen'
+import ListasUsuarios from './views/ListasUsuarios'
+import ListasEncuestas from './views/ListaEncuestas'
 
 function App() {
   const [login, setLogin] = useState(true)
@@ -51,7 +53,7 @@ function App() {
           <Route index element={<ListasUsuarios dark={dark}/>} />
             {" "}
             <Route path="/admin/userslist" element={<ListasUsuarios dark={dark}/>} />
-            <Route path="/admin/surveylist" element={<ListaEncuestas dark={dark} />} />
+            <Route path="/admin/surveylist" element={<ListasEncuestas dark={dark} />} />
           </Route>
           <Route path='/*' element={<PageNotFoundScreen/>}/>
         {/* sacar esto de admin */}
