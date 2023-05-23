@@ -16,7 +16,7 @@ const SurveyScreen = ({dark}) => {
   const [userData, setUserData] = useState(null)
   const [err, setErr] = useState(false)
 
-  const [answerArray, setAnswerArray] = useState([])
+  const [answerArray, setAnswerArray] = useState([]);
 
   const getSurveyData=async()=>{
     await getSurveyByID(surveyID)
