@@ -4,18 +4,34 @@ import { AnswerContext } from '../views/SurveyScreen'
 import '../css/Question.css'
 
 const Question = ({content,questionType,options,questionID,questionNumber,surveyCategory,dark}) => {
-    const {answerAray,setAnswerArray} = useContext(AnswerContext)
+    const {answerArray,setAnswerArray} = useContext(AnswerContext);
 
-    const [customSubmitData, setCustomSubmitData] = useState()
-    const {register,handleSubmit,watch,formState:{errors}} = useForm()
-  
-      const customSubmit=(data)=>{
-        console.log(data)
-        setCustomSubmitData(data)
-  
-        return alert('Your info has been sent successfully :)')
-      }
-  
+    const [userAnswer, setUserAnswer] = useState({
+        question:content,
+        questionID:questionID,
+        answer:{}
+    })
+
+    const handleSubmit=(e)=>{
+        const id=questionID
+        e.preventDefault()
+        setUserAnswer({
+            ...userAnswer,
+            answer:{
+                [e.target.name]:e.target.value
+            }
+        })
+
+        // if(id===userAnswer.questionID){
+        //     const ansIndex=answerArray.findIndex((answer)=>answer.questionID===id)
+        //     console.log(ansIndex)
+        //     setAnswerArray(answerArray[ansIndex])
+        // }else{
+        //     setAnswerArray([...answerArray,userAnswer])
+        // }
+        
+        setAnswerArray([...answerArray,userAnswer])
+    }
 
     const questionTypeInfo=(type)=>{
         switch(type){
@@ -29,8 +45,8 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
             case "CHECKBOX":
                 return 'Selecciona una o más opciones'
             break
-    }
-}
+        }
+    };
 
     const questionTypeRender=(type)=>{
         switch(type){
@@ -42,6 +58,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                         id={`textarea-${questionID}`} 
                         maxLength={250} 
                         className={`form-control question__text ${dark&&'question__text--dark'}`}
+                        onChange={handleSubmit}
                         >
                         </textarea>
                     </div>
@@ -52,7 +69,15 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                 return options.map((option,index)=>{
                     return (
                             <div className="col-12 question__radio mb-2" key={questionID+index}>
-                                <input type="radio" className="btn-check" id={`btn-check-outlined-${questionID}-radio-${index+1}`} name="options-outlined" autoComplete="off"/>
+                                <input 
+                                type="radio" 
+                                className="btn-check" 
+                                id={`btn-check-outlined-${questionID}-radio-${index+1}`} 
+                                name={`radio-${questionID}`} 
+                                autoComplete="off"
+                                onChange={handleSubmit}
+                                value={option}
+                                />
                                 <label className={`btn ${dark?'btn-outline-light':'btn-outline-dark'} w-100 rounded-pill`} htmlFor={`btn-check-outlined-${questionID}-radio-${index+1}`}>{option}</label><br/>
                             </div>
                     )
@@ -62,14 +87,21 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                 return options.map((option,index)=>{
                         return (
                             <div className="col-12 col-md-6 col-lg-4 question__check mb-2" key={questionID+index}>
-                                <input type="checkbox" className="btn-check" id={`btn-check-outlined-${questionID}-check-${index+1}`} autoComplete="off"/>
+                                <input 
+                                type="checkbox" 
+                                className="btn-check" 
+                                id={`btn-check-outlined-${questionID}-check-${index+1}`} 
+                                name={`check-${questionID}`}
+                                autoComplete="off"
+                                onChange={handleSubmit}
+                                />
                                 <label className={`btn ${dark?'btn-outline-light':'btn-outline-dark'} w-100 rounded-1 px-4 py-2 text-start`} htmlFor={`btn-check-outlined-${questionID}-check-${index+1}`}>{option}</label><br/>
                             </div>
                         )
                     })
             break
         }
-    }
+    };
 
   return (
         <form className={`card card-margin w-100 ${dark&&'card--dark text-light'}`}>
@@ -95,15 +127,3 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
 }
 
 export default Question
-
-
-
-
-                            {/* <ol className="widget-49-meeting-points">
-                                <li className="widget-49-meeting-item"><span>Expand module is removed</span></li>
-                                <li className="widget-49-meeting-item"><span>Data migration is in scope</span></li>
-                                <li className="widget-49-meeting-item"><span>Session timeout increase to 30 minutes</span></li>
-                            </ol> */}
-                            {/* <div className="widget-49-meeting-action">
-                                <a href="#" className="btn btn-sm btn-flash-border-primary">View All</a>
-                            </div> */}
