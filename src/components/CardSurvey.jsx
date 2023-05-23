@@ -1,22 +1,21 @@
 import React from "react";
 import survey2 from "../assets/survey.png";
 import "../css/Card.css";
-// import deleteUser from "../helpers/UserAPI/deleteUser"; // importar funciones de borrar y editar usuarios
 import Swal from "sweetalert2"; // este es el modal de sweeralert
+import { deleteSurvey } from "../helpers/SurveyAPI";
 
 const CardSurvey = ({survey, dark }) => {
   const { title, category, surveyID, status } = survey;
-  const inactivarUsuario = async () => {
+  const inactivarUsuario = async (surveyID) => {
     Swal.fire({
-      // este es el modal de sweeralert
-      title: `Está seguro que quiere inactivar este usuario ${title}?`,
+      title: `Está seguro que quiere inactivar este encuesta ${title}?`,
       showDenyButton: true,
       showCancelButton: false,
       confirmButtonText: "Si",
       denyButtonText: `No`,
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteUser(surveyID).then((resultado) => {
+        deleteSurvey(surveyID).then((resultado) => {
           // agregar funciones
           Swal.fire("El usuario fue borrado", `${resultado.msg}`, "success"); //ver respuesta
         });
@@ -27,7 +26,7 @@ const CardSurvey = ({survey, dark }) => {
   };
   return (
     <>
-       <div className="row justify-content-center">
+       <div className={`row justify-content-center ${dark ?"card-dark" : "card-light" }`}>
         <div className="card col-sm-8 my-2">
           <div className="d-flex me-2 mt-2 ">
             <div className="row ">

@@ -3,12 +3,12 @@
 
 }
 .secAdmin-dark{
-  background-color: var(--SurveyJob-Black3);
-  color: var(--SurveyJob-Light1) ;
+    background-color: var(--SurveyJob-Black3);
+    color: var(--SurveyJob-Light1);
 };
 .secAdmin-light{
   background-color: var(--SurveyJob-Light1);
-  color: var(--SurveyJob-Dark1) ;
+  color: var(--SurveyJob-Dark1);
 };
 #sidebar-menu {
   /* background-color: #333333    ; */
