@@ -17,14 +17,13 @@ try {
 }
 };
 
-export const addUser = async (datos) => {
+export const register = async (datos) => {
 try {
-    const resp = await fetch(URL, {
+    const resp = await fetch(`${URL}/users`, {
     method: "POST",
     body: JSON.stringify(datos),
     headers: {
         "Content-type": "application/json; charset=UTF-8",
-        "x-token": token,
     },
     });
     const data = await resp.json();

@@ -6,6 +6,7 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import '@sweetalert2/themes/bulma/bulma.css'
 import {login} from '../helpers/AuthAPI'
+import {register} from '../helpers/UserAPI'
 
 const LoginScreen = ({dark}) => {
   const navigate = useNavigate();
@@ -35,21 +36,67 @@ const LoginScreen = ({dark}) => {
     })
   }
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 1000,
+    timerProgressBar: true,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
+  const loginUser=async(loginRequestData)=>{
+    const loginResp=await login(loginRequestData)
+    if(loginResp?.token){
+      localStorage.setItem('x-token',JSON.stringify(loginResp.token))
+      Toast.fire({
+        icon: 'success',
+        title: loginResp.msg,
+        text: 'Iniciando sesión...'
+      })
+      setTimeout(() => {
+        navigate('/')
+      }, 1000);
+    }else{
+      Swal.fire({
+        icon: 'error',
+        title: loginResp.msg,
+      })
+    }
+  }
+
   const loginSubmit=async(e)=>{
     e.preventDefault()
     const loginRequestData={
       email:loginData.loginEmail,
       password:loginData.loginPassword
     }
-    const loginResp=await login(loginRequestData)
-    if(loginResp?.token){
-      localStorage.setItem('x-token',JSON.stringify(loginResp.token))
-      navigate('/')
+
+    loginUser(loginRequestData)
+  }
+
+  const registerSubmit=async(e)=>{
+    e.preventDefault()
+    const registerRequestData={
+      username:registerData.registerUsername,
+      email:registerData.registerEmail,
+      password:registerData.registerPassword,
+    }
+    const registerResp=await register(registerRequestData)
+    if(registerResp?.newUser){
+      const loginRequestData={
+        email:registerData.registerEmail,
+        password:registerData.registerPassword
+      }
+      loginUser(loginRequestData)
     }else{
+      console.log(registerResp)
       Swal.fire({
-        icon: 'warning',
-        title: loginResp.msg,
-        // text: 'Something went wrong!',
+        icon: 'error',
+        text: registerResp.errors[0].msg
       })
     }
   }
@@ -93,7 +140,7 @@ const LoginScreen = ({dark}) => {
           </div>
 
           <div className={`login ${dark&&'login--dark'}`}>
-          <form>
+          <form onSubmit={registerSubmit}>
               <label htmlFor="chk" className="login__label" aria-hidden="true">
                 Regístrate{" "}
               </label>
