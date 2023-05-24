@@ -13,6 +13,7 @@
     "@emotion/styled": "^11.10.8",
     "@fontsource/roboto": "^4.5.8",
     "@mui/material": "^5.12.2",
+    "@sweetalert2/themes": "^5.0.15",
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
     "numeral": "^2.0.6",

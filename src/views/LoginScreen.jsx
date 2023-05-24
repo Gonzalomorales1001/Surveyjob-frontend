@@ -1,8 +1,10 @@
 import React, { useState } from "react";
-import { useNavigate } from "react-router";
+import { Navigate, useNavigate } from "react-router";
 import Job from "../assets/job.png";
 import "../css/login.css"; //ver si hay que agregar export default
 import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import '@sweetalert2/themes/bulma/bulma.css'
 import {login} from '../helpers/AuthAPI'
 
 const LoginScreen = ({dark}) => {
@@ -42,8 +44,13 @@ const LoginScreen = ({dark}) => {
     const loginResp=await login(loginRequestData)
     if(loginResp?.token){
       localStorage.setItem('x-token',JSON.stringify(loginResp.token))
+      navigate('/')
     }else{
-      console.log(loginResp)
+      Swal.fire({
+        icon: 'warning',
+        title: loginResp.msg,
+        // text: 'Something went wrong!',
+      })
     }
   }
 
