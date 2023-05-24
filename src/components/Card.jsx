@@ -1,10 +1,10 @@
 import React from "react";
 import avatar from "../assets/avatar.png";
 import "../css/Card.css";
-// import deleteUser from "../helpers/UserAPI/deleteUser"; // importar funciones de borrar y editar usuarios
 import Swal from "sweetalert2"; // este es el modal de sweeralert
+import { deleteUser } from "../helpers/UserAPI";
 
-const Card = ({ user }) => {
+const Card = ({ user, dark }) => {
   const { username, email, userID, status } = user; //datos a usar de los usuarios
   const inactivarUsuario = async () => {
     Swal.fire({
@@ -27,9 +27,9 @@ const Card = ({ user }) => {
   };
   return (
     <>
-      <div className="row justify-content-center">
-        <div className="card col-sm-6 my-2">
-          <div className="d-flex  gap-3 me-2 mt-2">
+       <div className={`row justify-content-center ${dark ?"card-dark" : "card-light" }`}>
+        <div className="card col-sm-8 my-2">
+          <div className="d-flex me-2 mt-2 ">
             <div className="row ">
               <div className="d-flex mx-2 col-md-4 ">
                 <img className="avatar" src={avatar} alt="avatar" />
@@ -60,7 +60,7 @@ const Card = ({ user }) => {
               <i className="fa fa-pencil" aria-hidden="true"></i>
             </button>
             <button
-              className="btn btn-danger btn-sm mt-3 justify-content-end"
+              className="btn btn-danger btn-sm ms-2 mt-3 justify-content-end"
               onClick={() => inactivarUsuario(username, userID)} // agregar funciones
             >
               <i className="fa fa-trash" aria-hidden="true"></i>
