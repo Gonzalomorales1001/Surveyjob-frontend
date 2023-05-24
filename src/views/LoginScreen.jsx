@@ -3,6 +3,7 @@ import { useNavigate } from "react-router";
 import Job from "../assets/job.png";
 import "../css/login.css"; //ver si hay que agregar export default
 import { useForm } from "react-hook-form";
+import {login} from '../helpers/AuthAPI'
 
 const LoginScreen = ({dark}) => {
   const navigate = useNavigate();
@@ -32,8 +33,18 @@ const LoginScreen = ({dark}) => {
     })
   }
 
-  const handleForms=(e)=>{
+  const loginSubmit=async(e)=>{
     e.preventDefault()
+    const loginRequestData={
+      email:loginData.loginEmail,
+      password:loginData.loginPassword
+    }
+    const loginResp=await login(loginRequestData)
+    if(loginResp?.token){
+      localStorage.setItem('x-token',JSON.stringify(loginResp.token))
+    }else{
+      console.log(loginResp)
+    }
   }
 
   return (
@@ -43,7 +54,7 @@ const LoginScreen = ({dark}) => {
           <input type="checkbox" id="chk" aria-hidden="true" />
 
           <div className={`signup ${dark?'signup__bg--dark':'signup__bg--light'}`}>
-            <form>
+            <form onSubmit={loginSubmit}>
               <label htmlFor="chk" className="login__label" aria-hidden="true">
                 Iniciar sesión
               </label>

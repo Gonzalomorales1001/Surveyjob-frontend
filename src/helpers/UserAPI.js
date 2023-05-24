@@ -23,7 +23,7 @@ try {
     method: "POST",
     body: JSON.stringify(datos),
     headers: {
-        "Content-type": "application/json; charter UTF-8",
+        "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
     },
     });
@@ -41,7 +41,7 @@ try {
     method: "PUT",
     body: JSON.stringify(datos),
     headers: {
-        "Content-type": "application/json; charter UTF-8",
+        "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
     },
     });
@@ -58,7 +58,7 @@ try {
     const resp = await fetch(URL + "/:" + id, {
     method: "DELET",
     headers: {
-        "Content-type": "application/json; charter UTF-8",
+        "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
     },
     });
