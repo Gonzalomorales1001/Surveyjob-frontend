@@ -6,11 +6,13 @@ import { getUserByID } from '../helpers/UserAPI';
 import { Navigate, useParams } from 'react-router';
 import { InfiniteLoader } from '../components/InfiniteLoader';
 import Error500 from '../assets/Error500.svg'
+import {DarkModeContext} from '../App'
 import '../css/Question.css'
 
 export const AnswerContext=createContext(null)
 
-const SurveyScreen = ({dark}) => {
+const SurveyScreen = () => {
+  const {dark}=useContext(DarkModeContext)
   const {surveyID}=useParams();
   const [surveyData, setSurveyData] = useState(null);
   const [userData, setUserData] = useState(null)

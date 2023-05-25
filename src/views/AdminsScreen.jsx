@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { getSurveys } from "../helpers/SurveyAPI";
 import { getUsers } from "../helpers/UserAPI";
 import Job from "../assets/job.png";
 import "../css/admin.css";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
+import { UserContext, DarkModeContext } from "../App";
 
-const AdminsScreen = ({ dark }) => {
-
+const AdminsScreen = () => {
+  const {dark}=useContext(DarkModeContext)
   const [users, setUsers] = useState([]);
   const [surveys, setSurveys] = useState([]);
   const [totalEncuestas, setTotalEncuestas] = useState(0);

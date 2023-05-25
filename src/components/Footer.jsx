@@ -1,7 +1,11 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../css/Footer.css";
+import { DarkModeContext } from "../App";
 
-const Footer = ({ dark}) => {
+const Footer = () => {
+
+  const {dark}=useContext(DarkModeContext)
+
   return (
     <>      
       <footer className={`site-footer  ${

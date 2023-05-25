@@ -1,13 +1,14 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { UserContext } from "../App";
+import { UserContext,DarkModeContext } from "../App";
 import "../css/navbar.css";
 import DarkModeSurveyJobLogo from "../assets/LightLetterLogo.png";
 import LightModeSurveyJobLogo from "../assets/DarkLetterLogo.png";
 
-const Navbar = ({ dark, ToggleDarkMode }) => {
+const Navbar = ({ToggleDarkMode}) => {
 
   const {userData,saveUserData}=useContext(UserContext)
+  const {dark}=useContext(DarkModeContext)
 
   const logout=()=>{
     saveUserData(null)

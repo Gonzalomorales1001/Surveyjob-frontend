@@ -7,10 +7,11 @@ import Swal from "sweetalert2";
 import '@sweetalert2/themes/bulma/bulma.css'
 import {login} from '../helpers/AuthAPI'
 import {register} from '../helpers/UserAPI'
-import { UserContext } from "../App";
+import { UserContext, DarkModeContext } from "../App";
 
-const LoginScreen = ({dark}) => {
+const LoginScreen = () => {
   const {userData,saveUserData}=useContext(UserContext)
+  const {dark}=useContext(DarkModeContext)
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({

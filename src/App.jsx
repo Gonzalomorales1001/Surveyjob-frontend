@@ -19,9 +19,10 @@ import AdminOnlyRoutes from './routes/AdminOnlyRoutes'
 import AdminRoutes from './routes/AdminRoutes'
 
 export const UserContext=createContext(null)
+export const DarkModeContext=createContext(null)
 
 function App() {
-  const [login, setLogin] = useState(true)
+  const [login, setLogin] = useState(false)
   const [dark, setDark] = useState(JSON.parse(localStorage.getItem('DarkMode')))
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
@@ -39,20 +40,22 @@ function App() {
     <>
       <BrowserRouter>
         <UserContext.Provider value={{userData, saveUserData}}>
-          <Navbar dark={dark} ToggleDarkMode={ToggleDarkMode} userData={userData}/>
-          <Routes>
-            <Route path="/*" element={
-                <ProtectedRoutes userData={userData}>
-                  <RoutesApp />
-                </ProtectedRoutes>
-              }/>
-            <Route path="/" element={<HomeScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />}/>
-            <Route path="/login" element={<LoginScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />}/>
-            <Route path="/contact" element={<ContactScreen />} />
-            <Route path='/*' element={<PageNotFoundScreen/>}/>
-            <Route path="/survey/:surveyID" element={<SurveyScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />}/>
-          </Routes>
-          <Footer dark={dark} />
+          <DarkModeContext.Provider value={{dark}}>
+            <Navbar ToggleDarkMode={ToggleDarkMode} userData={userData}/>
+            <Routes>
+              <Route path="/*" element={
+                  <ProtectedRoutes userData={userData}>
+                    <RoutesApp />
+                  </ProtectedRoutes>
+                }/>
+              <Route path="/" element={<HomeScreen ToggleDarkMode={ToggleDarkMode} />}/>
+              <Route path="/login" element={<LoginScreen/>}/>
+              <Route path="/contact" element={<ContactScreen />} />
+              <Route path='/*' element={<PageNotFoundScreen/>}/>
+              <Route path="/survey/:surveyID" element={<SurveyScreen/>}/>
+            </Routes>
+            <Footer dark={dark} />
+          </DarkModeContext.Provider>
         </UserContext.Provider>
       </BrowserRouter>
     </>
