@@ -15,6 +15,8 @@ import ProtectedRoutes from './routes/ProtectedRoutes'
 import ContactScreen from './views/ContactScreen'
 import ListasUsuarios from './views/ListasUsuarios'
 import ListasEncuestas from './views/ListaEncuestas'
+import AdminOnlyRoutes from './routes/AdminOnlyRoutes'
+import AdminRoutes from './routes/AdminRoutes'
 
 export const UserContext=createContext(null)
 
@@ -39,40 +41,16 @@ function App() {
         <UserContext.Provider value={{userData, saveUserData}}>
           <Navbar dark={dark} ToggleDarkMode={ToggleDarkMode} userData={userData}/>
           <Routes>
-            <Route
-              path="/*"
-              element={
+            <Route path="/*" element={
                 <ProtectedRoutes userData={userData}>
                   <RoutesApp />
                 </ProtectedRoutes>
-              }
-              />
-            <Route
-              path="/"
-              element={<HomeScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />}
-              />
-            <Route
-              path="/login"
-              element={
-                <LoginScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />
-              }
-              />
+              }/>
+            <Route path="/" element={<HomeScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />}/>
+            <Route path="/login" element={<LoginScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />}/>
             <Route path="/contact" element={<ContactScreen />} />
-            <Route path="/admin" element={<AdminsScreen dark={dark} />}>
-            <Route index element={<ListasUsuarios dark={dark}/>} />
-              {" "}
-              <Route path="/admin/userslist" element={<ListasUsuarios dark={dark}/>} />
-              <Route path="/admin/surveylist" element={<ListasEncuestas dark={dark} />} />
-            </Route>
             <Route path='/*' element={<PageNotFoundScreen/>}/>
-          {/* sacar esto de admin */}
-
-            <Route
-              path="/survey/:surveyID"
-              element={
-                <SurveyScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />
-              }
-              />
+            <Route path="/survey/:surveyID" element={<SurveyScreen dark={dark} ToggleDarkMode={ToggleDarkMode} />}/>
           </Routes>
           <Footer dark={dark} />
         </UserContext.Provider>

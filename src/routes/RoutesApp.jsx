@@ -9,17 +9,18 @@ import UserScreen from '../views/UserScreen'
 import SurveyScreen from '../views/SurveyScreen'
 import ListasUsuarios from '../views/ListasUsuarios'
 import ListaEncuestas from '../views/ListaEncuestas'
+import AdminOnlyRoutes from './AdminOnlyRoutes'
+import AdminRoutes from './AdminRoutes'
 
 const RoutesApp = () => {
   return (
     <Routes>
-        <Route path='/admin' element={<AdminsScreen/>}>
-          <Route path='/userslist' element={<ListasUsuarios/>}/>
-          <Route path='/surveylist' element={<ListaEncuestas/>}/>
-        </Route>
-        <Route path='/user/:id' element={<UserScreen/>}/>
-        <Route path='/user' element={<UserScreen/>}/>
-        <Route path='/survey' element={<SurveyScreen/>}/>
+      <Route path='/admin/*' element={
+        <AdminOnlyRoutes>
+          <AdminRoutes/>
+        </AdminOnlyRoutes>
+      }/>
+      <Route path='/user/:id' element={<UserScreen/>}/>
     </Routes>
   )
 }
