@@ -17,6 +17,7 @@ const RoutesApp = () => {
           <Route path='/userslist' element={<ListasUsuarios/>}/>
           <Route path='/surveylist' element={<ListaEncuestas/>}/>
         </Route>
+        <Route path='/user/:id' element={<UserScreen/>}/>
         <Route path='/user' element={<UserScreen/>}/>
         <Route path='/survey' element={<SurveyScreen/>}/>
     </Routes>

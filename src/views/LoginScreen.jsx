@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import Job from "../assets/job.png";
 import "../css/login.css"; //ver si hay que agregar export default
@@ -7,8 +7,10 @@ import Swal from "sweetalert2";
 import '@sweetalert2/themes/bulma/bulma.css'
 import {login} from '../helpers/AuthAPI'
 import {register} from '../helpers/UserAPI'
+import { UserContext } from "../App";
 
 const LoginScreen = ({dark}) => {
+  const {userData,saveUserData}=useContext(UserContext)
   const navigate = useNavigate();
 
   const [loginData, setLoginData] = useState({
@@ -52,6 +54,7 @@ const LoginScreen = ({dark}) => {
     const loginResp=await login(loginRequestData)
     if(loginResp?.token){
       localStorage.setItem('x-token',JSON.stringify(loginResp.token))
+      saveUserData(loginResp.user)
       Toast.fire({
         icon: 'success',
         title: loginResp.msg,
@@ -74,7 +77,6 @@ const LoginScreen = ({dark}) => {
       email:loginData.loginEmail,
       password:loginData.loginPassword
     }
-
     loginUser(loginRequestData)
   }
 
@@ -86,7 +88,9 @@ const LoginScreen = ({dark}) => {
       password:registerData.registerPassword,
     }
     const registerResp=await register(registerRequestData)
+    
     if(registerResp?.newUser){
+      alert('Usuario registrado con éxito')
       const loginRequestData={
         email:registerData.registerEmail,
         password:registerData.registerPassword

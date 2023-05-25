@@ -16,12 +16,12 @@ import ContactScreen from './views/ContactScreen'
 import ListasUsuarios from './views/ListasUsuarios'
 import ListasEncuestas from './views/ListaEncuestas'
 
-export const userContext=createContext(null)
+export const UserContext=createContext(null)
 
 function App() {
   const [login, setLogin] = useState(true)
   const [dark, setDark] = useState(JSON.parse(localStorage.getItem('DarkMode')))
-  const [userData, setUserData] = useState({})
+  const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
   const ToggleDarkMode=()=>{
     setDark(!dark)
@@ -30,19 +30,19 @@ function App() {
 
   const saveUserData=(userData)=>{
     setUserData(userData)
-    localStorage.setItem('UserData',JSON.stringify(userData))
+    localStorage.setItem('userData',JSON.stringify(userData))
   }
 
   return (
     <>
       <BrowserRouter>
-        <userContext.Provider value={{userData, saveUserData}}>
-          <Navbar dark={dark} ToggleDarkMode={ToggleDarkMode} login={login} />
+        <UserContext.Provider value={{userData, saveUserData}}>
+          <Navbar dark={dark} ToggleDarkMode={ToggleDarkMode} userData={userData}/>
           <Routes>
             <Route
               path="/*"
               element={
-                <ProtectedRoutes login={login}>
+                <ProtectedRoutes userData={userData}>
                   <RoutesApp />
                 </ProtectedRoutes>
               }
@@ -75,7 +75,7 @@ function App() {
               />
           </Routes>
           <Footer dark={dark} />
-        </userContext.Provider>
+        </UserContext.Provider>
       </BrowserRouter>
     </>
   );
