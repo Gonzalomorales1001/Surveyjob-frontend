@@ -1,11 +1,19 @@
-import React from "react";
+import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-
+import { UserContext,DarkModeContext } from "../App";
 import "../css/navbar.css";
 import DarkModeSurveyJobLogo from "../assets/LightLetterLogo.png";
 import LightModeSurveyJobLogo from "../assets/DarkLetterLogo.png";
 
-const Navbar = ({ dark, ToggleDarkMode }) => {
+const Navbar = ({ToggleDarkMode}) => {
+
+  const {userData,saveUserData}=useContext(UserContext)
+  const {dark}=useContext(DarkModeContext)
+
+  const logout=()=>{
+    saveUserData(null)
+    localStorage.removeItem('userData')
+  }
   return (
     <header>
       <nav
@@ -37,6 +45,7 @@ const Navbar = ({ dark, ToggleDarkMode }) => {
             id="toggle"
             className="toggle--checkbox"
             onChange={ToggleDarkMode}
+            checked={dark}
           />
           <label htmlFor="toggle" className="toggle--label">
             <span className="toggle--label-background"></span>
@@ -54,7 +63,13 @@ const Navbar = ({ dark, ToggleDarkMode }) => {
           </button>
           <div className="collapse navbar-collapse" id="navbarNav">
             <ul className="navbar-nav ms-auto me-5">
-              <li className="nav-item"></li>
+            {userData?.admin&&(
+              <li className="nav-item">
+                <NavLink className="nav-link text-danger" to="/admin">
+                  Admin
+                </NavLink>
+              </li>
+              )}
               <li className="nav-item">
                 <NavLink className="nav-link" aria-current="page" to="/">
                   Inicio
@@ -65,16 +80,23 @@ const Navbar = ({ dark, ToggleDarkMode }) => {
                   Contacto
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/login">
-                  Iniciar Sesión
-                </NavLink>
-              </li>
-              <li className="nav-item">
-                <NavLink className="nav-link text-danger" to="/admin">
-                  Admin
-                </NavLink>
-              </li>
+              {userData?.username?(
+                <li className="nav-item dropdown">
+                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                    {userData.username}
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li><Link className="dropdown-item" to={`/user/${userData.userID}`}>Mi perfil</Link></li>
+                    <li><Link className="dropdown-item" to='/login' onClick={logout}>Cerrar Sesión</Link></li>
+                  </ul>
+                </li>
+              ):(
+                <li className="nav-item">
+                  <NavLink className="nav-link" to="/login">
+                    Iniciar Sesión
+                  </NavLink>
+                </li>
+              )}
             </ul>
           </div>
         </div>

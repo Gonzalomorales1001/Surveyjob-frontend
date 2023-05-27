@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useContext } from "react";
 import "../css/Footer.css";
+import { DarkModeContext } from "../App";
 
-const Footer = ({ dark}) => {
+const Footer = () => {
+
+  const {dark}=useContext(DarkModeContext)
+
   return (
-    <>
-      {/* <!-- Site footer --> */}
+    <>      
       <footer className={`site-footer  ${
           dark ? "footer-dark" : "footer-light"
         }` }>
@@ -55,7 +58,6 @@ const Footer = ({ dark}) => {
                 <a href="#"> SurveyJob</a>.
               </p>
             </div>
-
             <div className="col-md-4 col-sm-6 col-xs-12">
               <ul className="social-icons">
                 {/* Agregar pagina de error */}
