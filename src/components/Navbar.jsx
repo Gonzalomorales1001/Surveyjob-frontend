@@ -22,9 +22,9 @@ const Navbar = ({ToggleDarkMode}) => {
         }`}
       >
         <div className="container-fluid">
-          <a
+          <Link
             className="navbar-brand d-flex justify-content-center align-items-center"
-            href="#"
+            to='/'
           >
             {dark ? (
               <img
@@ -39,7 +39,7 @@ const Navbar = ({ToggleDarkMode}) => {
                 className="navbar-brand__logo"
               />
             )}
-          </a>
+          </Link>
           <input
             type="checkbox"
             id="toggle"

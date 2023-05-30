@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from 'react'
-import { useParams } from 'react-router'
+import { useNavigate, useParams } from 'react-router'
 import { DarkModeContext } from '../App'
 import Swal from 'sweetalert2'
 import { resetPassword } from '../helpers/AuthAPI'
@@ -10,6 +10,7 @@ import Error500 from '../assets/Error500.svg'
 const ChangePasswordScreen = () => {
     const {dark}=useContext(DarkModeContext)
     const {id}=useParams()
+    const navigate = useNavigate();
 
     const [userData, setUserData] = useState(null)
     const [err, setErr] = useState(false)
@@ -72,7 +73,18 @@ const ChangePasswordScreen = () => {
 
       const resetPasswordResponse=await resetPassword(id,createNewPasswordData)
 
-      console.log(resetPasswordResponse)
+      if(resetPasswordResponse.errors){
+        Swal.fire({
+          icon:'warning',
+          title:resetPasswordResponse.errors[0].msg,
+        })
+      }else{
+        Swal.fire({
+          icon:'info',
+          title:resetPasswordResponse.msg,
+        })
+        navigate('/login')
+      }
     }
   return (
     <main className={`px-0 p-sm-5 p-md-5 d-flex align-items-center justify-content-center ${dark?'surveyscreen-bg-dark text-light':'surveyscreen-bg-light'}`}>
