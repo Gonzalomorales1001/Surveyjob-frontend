@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { createContext, useEffect, useState, useContext } from 'react';
 import Question from '../components/Question';
 import SpeechBubble from '../components/SpeechBubble';
 import { addAnswer, getSurveyByID } from '../helpers/SurveyAPI';
@@ -52,7 +52,7 @@ const SurveyScreen = () => {
     }
   }, [surveyData]);
   
-
+  
   return (
     <main className={`${dark?'surveyscreen-bg-dark text-light':'surveyscreen-bg-light'}`}>
       <div className="container">
