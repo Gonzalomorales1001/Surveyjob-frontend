@@ -52,7 +52,11 @@ const SurveyScreen = () => {
     }
   }, [surveyData]);
   
-  
+  const sendAnswer=async(e)=>{
+    e.preventDefault();
+    console.log(answerArray)
+  }
+
   return (
     <main className={`${dark?'surveyscreen-bg-dark text-light':'surveyscreen-bg-light'}`}>
       <div className="container">
@@ -73,7 +77,7 @@ const SurveyScreen = () => {
               </div>)}
             <hr />
             <div className="d-flex flex-column flex-lg-row">
-              <button className={`${dark?'btn btn-light':'btn btn-dark'} rounded-pill my-3 flex-shrink-0`} onClick={()=>console.log('respuestas')}>Enviar Respuestas</button>
+              <button className={`${dark?'btn btn-light':'btn btn-dark'} rounded-pill my-3 flex-shrink-0`} onClick={sendAnswer}>Enviar Respuestas</button>
               <SpeechBubble color={`${dark?'rgba(255,255,255,0.1)':'#00000080'}`} textLight={true} body={'Recuerda que una vez enviadas tus respuestas, ¡Ya no se podran volver a editar!'}/>
             </div>
           </AnswerContext.Provider>

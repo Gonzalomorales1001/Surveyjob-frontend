@@ -1,7 +1,6 @@
-import React, { useContext, useState } from 'react'
-import { useForm, useFormState } from 'react-hook-form'
-import { AnswerContext } from '../views/SurveyScreen'
-import '../css/Question.css'
+import React, { useContext, useState } from 'react';
+import { AnswerContext } from '../views/SurveyScreen';
+import '../css/Question.css';
 
 const Question = ({content,questionType,options,questionID,questionNumber,surveyCategory,dark}) => {
     const {answerArray,setAnswerArray} = useContext(AnswerContext);
@@ -9,29 +8,37 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
     const [userAnswer, setUserAnswer] = useState({
         question:content,
         questionID:questionID,
-        answer:{}
-    })
+        answer:[]
+    });
 
-    const handleSubmit=(e)=>{
-        const id=questionID
-        e.preventDefault()
-        setUserAnswer({
-            ...userAnswer,
-            answer:{
-                [e.target.name]:e.target.value
-            }
-        })
+    const handleSubmit=(e,check)=>{
+        const id=questionID;
+        check&&console.log('check')
+        if (check) {
+            setUserAnswer({
+                ...userAnswer,
+                answer:{
+                    [e.target.name]:[e.target.value]
+                }
+            })
+        } else {
+            setUserAnswer({
+                ...userAnswer,
+                answer:{
+                    [e.target.name]:e.target.value
+                }
+            });
+        }
 
-        // if(id===userAnswer.questionID){
-        //     const ansIndex=answerArray.findIndex((answer)=>answer.questionID===id)
-        //     console.log(ansIndex)
-        //     setAnswerArray(answerArray[ansIndex])
-        // }else{
-        //     setAnswerArray([...answerArray,userAnswer])
-        // }
-        
-        setAnswerArray([...answerArray,userAnswer])
-    }
+        const ansIndex=answerArray.findIndex((answer)=>answer.questionID===id);
+        if (ansIndex>=0) {
+            const updatedAnswerArray=[...answerArray];
+            updatedAnswerArray[ansIndex]=userAnswer;
+            setAnswerArray(updatedAnswerArray);
+        } else {
+            setAnswerArray([...answerArray,userAnswer]);
+        }
+    };
 
     const questionTypeInfo=(type)=>{
         switch(type){
@@ -58,7 +65,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                         id={`textarea-${questionID}`} 
                         maxLength={250} 
                         className={`form-control question__text ${dark&&'question__text--dark'}`}
-                        onChange={handleSubmit}
+                        onChange={(e)=>handleSubmit(e)}
                         >
                         </textarea>
                     </div>
@@ -75,7 +82,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                                 id={`btn-check-outlined-${questionID}-radio-${index+1}`} 
                                 name={`radio-${questionID}`} 
                                 autoComplete="off"
-                                onChange={handleSubmit}
+                                onChange={(e)=>handleSubmit(e)}
                                 value={option}
                                 />
                                 <label className={`btn ${dark?'btn-outline-light':'btn-outline-dark'} w-100 rounded-pill`} htmlFor={`btn-check-outlined-${questionID}-radio-${index+1}`}>{option}</label><br/>
@@ -93,7 +100,8 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                                 id={`btn-check-outlined-${questionID}-check-${index+1}`} 
                                 name={`check-${questionID}`}
                                 autoComplete="off"
-                                onChange={handleSubmit}
+                                onChange={(e)=>handleSubmit(e,true)}
+                                value={option}
                                 />
                                 <label className={`btn ${dark?'btn-outline-light':'btn-outline-dark'} w-100 rounded-1 px-4 py-2 text-start`} htmlFor={`btn-check-outlined-${questionID}-check-${index+1}`}>{option}</label><br/>
                             </div>
