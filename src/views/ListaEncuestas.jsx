@@ -3,6 +3,7 @@ import "../css/Card.css";
 import { getSurveys } from "../helpers/SurveyAPI";
 import "../css/admin.css";
 import CardSurvey from "../components/CardSurvey";
+import { InfiniteLoader } from "../components/InfiniteLoader";
 
 const ListasEncuestas = ({dark}) => {
   const [surveys, setSurveys] = useState([]);
@@ -30,9 +31,11 @@ const ListasEncuestas = ({dark}) => {
           ))
         ) : (
           <div className="d-flex justify-content-center">
-            <div className="spinner-border text-warning  " role="status">
+            <div className="d-flex justify-content-center">
+            <InfiniteLoader dark={dark}/>
               <span className="visually-hidden">Loading...</span>
-            </div>
+            
+          </div>
           </div>
         )}
       </div>
