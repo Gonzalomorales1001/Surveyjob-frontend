@@ -1,91 +1,95 @@
 import { URL } from "./URL";
-const token = window.localStorage.getItem("x-token") //importar / traer datos de token de local storage
-console.log(token)
+// const token = window.localStorage.getItem("x-token"); //importar / traer datos de token de local storage
+// console.log(token);
 export const getSurveyByID = async (surveyID) => {
-const response = await fetch(`${URL}/surveys/${surveyID}`);
-const data = await response.json();
-return data;
+  const response = await fetch(`${URL}/surveys/${surveyID}`);
+  const data = await response.json();
+  return data;
 };
 
 //ver si es necesario usar /surveys/ todos los metodos
-export const getSurveys = async (limite=1 , pagina = 0) => {
-try {
-    const resp = await fetch(URL + "/surveys?limit" + limite + "&since" + pagina);
+export const getSurveys = async (limite = 1, pagina = 0) => {
+  try {
+    const resp = await fetch(
+      URL + "/surveys?limit" + limite + "&since" + pagina
+    );
     const data = await resp.json();
     return data;
-} catch (error) {
+  } catch (error) {
     throw new Error("No se pudo obtener encuesta");
-}
+  }
 };
 
 export const addSurvey = async (datos) => {
-try {
+  try {
     const resp = await fetch(URL, {
-    method: "POST",
-    body: JSON.stringify(datos),
-    headers: {
+      method: "POST",
+      body: JSON.stringify(datos),
+      headers: {
         "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
-    },
+      },
     });
     const data = await resp.json();
     return data;
-} catch (error) {
+  } catch (error) {
     console.log(error);
     return "No se pudo agregar su encuesta";
-}
+  }
 };
 
 export const updateSurvey = async (id, datos) => {
-try {
+  try {
     const resp = await fetch(URL + "/" + id, {
-    method: "PUT",
-    body: JSON.stringify(datos),
-    headers: {
+      method: "PUT",
+      body: JSON.stringify(datos),
+      headers: {
         "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
-    },
+      },
     });
     const data = await resp.json();
     return data;
-} catch (error) {
+  } catch (error) {
     console.log(error);
     return "No se pudo actualizar encuesta";
-}
+  }
 };
 
-export const addAnswer=async(surveyID,content)=>{
-    try {
-        const resp = await fetch(`${URL}/surveys/answer/${surveyID}`, {
-        method: "PUT",
-        body: JSON.stringify(content),
-        headers: {
-            "Content-type": "application/json; charset=UTF-8",
-        },
-        });
-        const data = await resp.json();
-        return data;
-    } catch (error) {
-        console.log(error);
-        return "No se conecto con el backend";
-    }
-}
+export const addAnswer = async (surveyID, content) => {
+  try {
+    const resp = await fetch(`${URL}/surveys/answer/${surveyID}`, {
+      method: "PUT",
+      body: JSON.stringify(content),
+      headers: {
+        "Content-type": "application/json; charset=UTF-8",
+      },
+    });
+    const data = await resp.json();
+    return data;
+  } catch (error) {
+    console.log(error);
+    return "No se conecto con el backend";
+  }
+};
 
 export const deleteSurvey = async (surveyID) => {
-console.log(surveyID)
-    try {
+  console.log(surveyID);
+  try {
+    const token = JSON.parse(localStorage.getItem('x-token'));
+    console.log(token)
     const resp = await fetch(URL + "/surveys/" + surveyID, {
-    method: "DELETE",
-    headers: {
+      method: "DELETE",
+      headers: {
         "Content-type": "application/json; charset=UTF-8",
-        "x-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OGRjMGEzZGJlYjk0YzE2MjA0NzUiLCJpYXQiOjE2ODU1NjU1NTEsImV4cCI6MTY4NTU3NjM1MX0.HLsW-ysljqz3yV5ydkYw-7w3G9qqOOjBZdp_avkYWTU",
-    },
+        "x-token":`${token}`,
+      },
     });
-    return resp
+    return resp;
     // const data = await resp.json();
     // return data;
-} catch (error) {
+  } catch (error) {
     console.log(error);
     return "No se pudo eliminar encuesta";
-}
+  }
 };

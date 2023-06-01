@@ -1,5 +1,6 @@
 import { URL } from "./URL";
-const token = window.localStorage.getItem("x-token")
+// const token = window.localStorage.getItem("x-token")
+const token = JSON.parse(localStorage.getItem('x-token'));
 export const getUserByID = async (userID) => {
 const response = await fetch(`${URL}/users/${userID}`);
 const data = await response.json();
