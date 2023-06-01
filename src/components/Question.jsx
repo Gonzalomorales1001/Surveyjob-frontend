@@ -3,43 +3,48 @@ import { AnswerContext } from '../views/SurveyScreen';
 import '../css/Question.css';
 
 const Question = ({content,questionType,options,questionID,questionNumber,surveyCategory,dark}) => {
-    const {answerArray,setAnswerArray} = useContext(AnswerContext);
+    const {surveyElements} = useContext(AnswerContext);
+    const {answerArray,setAnswerArray}=surveyElements
 
     const [userAnswer, setUserAnswer] = useState({
         question:content,
         questionID:questionID,
         answer:[]
     });
-
     const handleSubmit=(e,check)=>{
-        const id=questionID;
-        check&&console.log('check')
         if (check) {
+            const checkArray=userAnswer.answer.slice(0)
+            checkArray.push(e.target.value)
             setUserAnswer({
                 ...userAnswer,
-                answer:{
-                    [e.target.name]:[e.target.value]
-                }
-            })
+                answer:checkArray
+            });
         } else {
             setUserAnswer({
                 ...userAnswer,
-                answer:{
-                    [e.target.name]:e.target.value
-                }
+                answer:[
+                    e.target.value
+                ]
             });
         }
 
-        const ansIndex=answerArray.findIndex((answer)=>answer.questionID===id);
+        // setUserAnswer({
+        //     ...userAnswer,
+        //     answer:[
+        //         e.target.value
+        //     ]
+        // });
+
+        const ansIndex=answerArray.findIndex((answer)=>answer.questionID===questionID);
         if (ansIndex>=0) {
             const updatedAnswerArray=[...answerArray];
             updatedAnswerArray[ansIndex]=userAnswer;
             setAnswerArray(updatedAnswerArray);
         } else {
             setAnswerArray([...answerArray,userAnswer]);
-        }
+        } 
     };
-
+    
     const questionTypeInfo=(type)=>{
         switch(type){
             case "TEXT":

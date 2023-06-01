@@ -19,6 +19,10 @@ const SurveyScreen = () => {
   const [err, setErr] = useState(false)
 
   const [answerArray, setAnswerArray] = useState([]);
+  const surveyElements={
+    answerArray,
+    setAnswerArray,
+  }
 
   const getSurveyData=async()=>{
     await getSurveyByID(surveyID)
@@ -57,11 +61,16 @@ const SurveyScreen = () => {
     console.log(answerArray)
   }
 
+  // useEffect(() => {
+  //   console.log(surveyElements.answerArray)
+  // }, [surveyElements.answerArray])
+  
+
   return (
     <main className={`${dark?'surveyscreen-bg-dark text-light':'surveyscreen-bg-light'}`}>
       <div className="container">
         {userData?(
-          <AnswerContext.Provider value={{answerArray,setAnswerArray}}>
+          <AnswerContext.Provider value={{surveyElements}}>
             <h3>Encuesta de {userData?.username}</h3>
             <h1 className='text-center my-3'>{surveyData.title}</h1>
               {surveyData.questions.map((question,index)=>
