@@ -72,16 +72,18 @@ export const addAnswer=async(surveyID,content)=>{
 }
 
 export const deleteSurvey = async (surveyID) => {
-try {
-    const resp = await fetch(URL + "/" + surveyID, {
+console.log(surveyID)
+    try {
+    const resp = await fetch(URL + "/surveys/" + surveyID, {
     method: "DELETE",
     headers: {
         "Content-type": "application/json; charset=UTF-8",
-        "x-token": token,
+        "x-token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1aWQiOiI2NDQ2OGRjMGEzZGJlYjk0YzE2MjA0NzUiLCJpYXQiOjE2ODU1NjU1NTEsImV4cCI6MTY4NTU3NjM1MX0.HLsW-ysljqz3yV5ydkYw-7w3G9qqOOjBZdp_avkYWTU",
     },
     });
-    const data = await resp.json();
-    return data;
+    return resp
+    // const data = await resp.json();
+    // return data;
 } catch (error) {
     console.log(error);
     return "No se pudo eliminar encuesta";

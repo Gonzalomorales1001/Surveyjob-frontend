@@ -75,11 +75,6 @@ const Navbar = ({ToggleDarkMode}) => {
                   Inicio
                 </NavLink>
               </li>
-              <li className="nav-item">
-                <NavLink className="nav-link" to="/contact">
-                  Contacto
-                </NavLink>
-              </li>
               {userData?.username?(
                 <li className="nav-item dropdown">
                   <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
