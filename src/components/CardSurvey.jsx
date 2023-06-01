@@ -17,10 +17,10 @@ const CardSurvey = ({survey, dark }) => {
       if (result.isConfirmed) {
         deleteSurvey(surveyID).then((resultado) => {
           // agregar funciones
-          Swal.fire("El usuario fue borrado", `${resultado.msg}`, "success"); //ver respuesta
+          Swal.fire("La encueta fue borrado", `${resultado.msg}`, "success"); //ver respuesta
         });
       } else if (result.isDenied) {
-        Swal.fire("El usuario no se inactivó", "", "info");
+        Swal.fire("La encueta no se inactivó", "", "info");
       }
     });
   };
