@@ -28,8 +28,7 @@ const Card = ({ user, dark }) => {
   return (
     <>
       <div
-        className={`row justify-content-center ${
-          dark ? "card-dark" : "card-light"
+        className={`row justify-content-center 
         }`}
       >
         <div className="card col-sm-8 my-2">

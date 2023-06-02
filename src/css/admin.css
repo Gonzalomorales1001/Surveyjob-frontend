@@ -10,6 +10,18 @@
   background-color: var(--SurveyJob-Light1);
   color: var(--SurveyJob-Dark1);
 };
+
+.secAdmin-dark div h5{
+background-color: sienna !important;
+  color:#111827 !important;
+};
+
+.secAdmin-light div h5{
+background-color: sienna !important;
+  color:#111827 !important;
+};
+
+
 #sidebar-menu {
   /* background-color: #333333    ; */
   height: 100%    ; /* Full height */
