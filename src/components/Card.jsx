@@ -6,7 +6,7 @@ import { deleteUser } from "../helpers/UserAPI";
 
 const Card = ({ user, dark }) => {
   const { username, email, userID, status } = user; //datos a usar de los usuarios
-  const inactivarUsuario = async () => {
+  const inactivarUsuario = async (username, userID) => {
     Swal.fire({
       // este es el modal de sweeralert
       title: `Está seguro que quiere inactivar este usuario ${username}?`,
@@ -28,8 +28,7 @@ const Card = ({ user, dark }) => {
   return (
     <>
       <div
-        className={`row justify-content-center ${
-          dark ? "card-dark" : "card-light"
+        className={`row justify-content-center 
         }`}
       >
         <div className="card col-sm-8 my-2">

@@ -38,7 +38,7 @@ const AdminsScreen = () => {
   return (
     <>
       <div className={` ${dark ? "secAdmin-dark" : "secAdmin-light"}`}>
-        <div className="container-fluid w-100">
+        <div className=" container-fluid w-100">
           <div className="row  py-5">
             <div className="col text-center ">
               <h1>
@@ -70,7 +70,7 @@ const AdminsScreen = () => {
                     <div className="ms-3">
                       <div className="d-flex align-items-center">
                         <h3 className="mb-0">{}</h3>{" "}
-                        <span className="d-block ms-2">
+                        <span className=" d-block ms-2">
                           {totalEncuestas} Encuestas activas
                         </span>
                       </div>
