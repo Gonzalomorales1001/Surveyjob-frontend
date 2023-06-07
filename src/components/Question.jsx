@@ -1,6 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import { AnswerContext } from '../views/SurveyScreen';
 import '../css/Question.css';
+import Swal from 'sweetalert2';
 
 const Question = ({content,questionType,options,questionID,questionNumber,surveyCategory,dark}) => {
     const {surveyElements} = useContext(AnswerContext);
@@ -27,23 +28,16 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
         } else {
             setUserAnswer({
                 ...userAnswer,
-                answer:[
+                answer:
                     e.target.value
-                ]
+                
             });
         }
-
-        // setUserAnswer({
-        //     ...userAnswer,
-        //     answer:[
-        //         e.target.value
-        //     ]
-        // });
     };
 
     useEffect(() => {
-        if(userAnswer.answer.length>=1){
-            const ansIndex=answerArray.findIndex((answer)=>answer.questionID===questionID);
+        const ansIndex=answerArray.findIndex((answer)=>answer.questionID===questionID);
+        if(userAnswer.answer.length>0){
             if (ansIndex>=0) {
                 const updatedAnswerArray=[...answerArray];
                 updatedAnswerArray[ansIndex]=userAnswer;
@@ -51,8 +45,12 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
             } else {
                 setAnswerArray([...answerArray,userAnswer]);
             }  
+        }else{
+            const spliceAnswerArray=answerArray.slice(0)
+            spliceAnswerArray.splice(ansIndex,1)
+            setAnswerArray(spliceAnswerArray)
         }
-    }, [userAnswer.answer])
+    }, [userAnswer])
     
     const questionTypeInfo=(type)=>{
         switch(type){
@@ -77,7 +75,8 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                         <textarea 
                         name={`textarea-${questionID}`} 
                         id={`textarea-${questionID}`} 
-                        maxLength={250} 
+                        maxLength={250}
+                        minLength={16} 
                         className={`form-control question__text ${dark&&'question__text--dark'}`}
                         onChange={(e)=>handleSubmit(e)}
                         >
@@ -126,7 +125,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
     };
 
   return (
-        <form className={`card card-margin w-100 ${dark&&'card--dark text-light'}`}>
+        <section className={`card card-margin w-100 ${dark&&'card--dark text-light'}`}>
             <div className="card-body pt-4">
                 <div className="widget-49">
                     <div className={`widget-49-title-wrapper`}>
@@ -144,7 +143,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                     </div>
                 </div>
             </div>
-        </form>
+        </section>
     )
 }
 

@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import './App.css'
+import '@sweetalert2/themes/bulma/bulma.css'
 import Navbar from './components/Navbar'
 import { Router, json } from 'react-router'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'

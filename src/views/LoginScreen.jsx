@@ -4,7 +4,6 @@ import Job from "../assets/job.png";
 import "../css/login.css"; //ver si hay que agregar export default
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import '@sweetalert2/themes/bulma/bulma.css'
 import {login,requestNewPassword} from '../helpers/AuthAPI'
 import {register} from '../helpers/UserAPI'
 import { UserContext, DarkModeContext } from "../App";
