@@ -1,4 +1,4 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { AnswerContext } from '../views/SurveyScreen';
 import '../css/Question.css';
 
@@ -14,7 +14,12 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
     const handleSubmit=(e,check)=>{
         if (check) {
             const checkArray=userAnswer.answer.slice(0)
-            checkArray.push(e.target.value)
+            const answerExistsIndex=checkArray.findIndex((answer)=>answer==e.target.value)
+            if(answerExistsIndex<0){
+                checkArray.push(e.target.value)
+            }else{
+                checkArray.splice(answerExistsIndex,1)
+            }
             setUserAnswer({
                 ...userAnswer,
                 answer:checkArray
@@ -34,16 +39,20 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
         //         e.target.value
         //     ]
         // });
-
-        const ansIndex=answerArray.findIndex((answer)=>answer.questionID===questionID);
-        if (ansIndex>=0) {
-            const updatedAnswerArray=[...answerArray];
-            updatedAnswerArray[ansIndex]=userAnswer;
-            setAnswerArray(updatedAnswerArray);
-        } else {
-            setAnswerArray([...answerArray,userAnswer]);
-        } 
     };
+
+    useEffect(() => {
+        if(userAnswer.answer.length>=1){
+            const ansIndex=answerArray.findIndex((answer)=>answer.questionID===questionID);
+            if (ansIndex>=0) {
+                const updatedAnswerArray=[...answerArray];
+                updatedAnswerArray[ansIndex]=userAnswer;
+                setAnswerArray(updatedAnswerArray);
+            } else {
+                setAnswerArray([...answerArray,userAnswer]);
+            }  
+        }
+    }, [userAnswer.answer])
     
     const questionTypeInfo=(type)=>{
         switch(type){

@@ -55,10 +55,16 @@ const SurveyScreen = () => {
       console.log('Loading user data...');
     }
   }, [surveyData]);
-  
+
   const sendAnswer=async(e)=>{
     e.preventDefault();
-    console.log(answerArray)
+    const answerArraySort=answerArray.slice(0)
+    answerArraySort.sort((element1,element2)=>{
+      if(element1.questionID<element2.questionID){return -1}
+      else if(element1.questionID>element2.questionID){return 1}
+      else{return 0}
+    })
+    console.log(answerArraySort)
   }
 
   // useEffect(() => {
