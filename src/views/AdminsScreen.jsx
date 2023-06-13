@@ -6,6 +6,8 @@ import "../css/admin.css";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import { UserContext, DarkModeContext } from "../App";
+// import Pagination from "../components/Pagination";
+// import Paginacion from "../../../../fanl rolling/Surveyjob-frontend/src/components/Paginacion";
 
 const AdminsScreen = () => {
   const {dark}=useContext(DarkModeContext)
@@ -13,7 +15,7 @@ const AdminsScreen = () => {
   const [surveys, setSurveys] = useState([]);
   const [totalEncuestas, setTotalEncuestas] = useState(0);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
-  const limite = 4; //prueba con limite
+  const limite =0; //prueba con limite
   const [pagina, setPagina] = useState(0);
 
   const traerUsuarios = async () => {
@@ -100,6 +102,11 @@ const AdminsScreen = () => {
           </section>
           <Outlet />
         </div>
+        {/* <Paginacion/> */}
+        {/* <Pagination 
+        // totalEncuestas={totalEncuestas}
+        // totalUsuarios={totalUsuarios}
+         /> */}
       </div>
     </>
   );
