@@ -1,0 +1,112 @@
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Prompt:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+
+:root{
+    --SurveyJob: #F0A500;
+    --SurveyJob-Alt: #F5A623;
+    --SurveyJob-2: #bc8000;
+
+    /*Light Theme Colors*/
+    --SurveyJob-Light1: #EAEAEA;
+    --SurveyJob-Light2: #858585;
+    --SurveyJob-Light3: #CDCDCD;
+
+    /*Dark Theme Colors*/
+    --SurveyJob-Black1: #222;
+    --SurveyJob-Black2: #121212;
+    --SurveyJob-Black3: #000;
+
+    /*Blue Colors*/
+    --SurveyJob-Dark1: #082032;
+    --SurveyJob-Dark2: #061928;
+    --SurveyJob-Dark3: #334756;
+}
+
+*{
+    font-family: 'Outfit', sans-serif;
+}
+
+input{
+    font-family: 'Prompt', sans-serif;
+    font-weight: 200;
+}
+
+textarea{
+    resize: none !important;
+    font-family: 'Prompt', sans-serif !important;
+    font-weight: 200 !important;
+}
+
+.fw-100{font-weight: 100 !important;}
+.fw-200{font-weight: 200 !important;}
+
+.surveyjob-bg-light{
+    background: white;
+}
+
+.surveyjob-bg-dark{
+    background: var(--SurveyJob-Black2);
+}
+
+.surveyscreen-bg-light{
+    background-color: #EAEAEA;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23061928' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23041019' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23002341' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23031b2d' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23002c5c' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23002443' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23003477' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%23002e5a' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23003a91' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23003671' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23003faa' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%23053e88' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.surveyscreen-bg-dark{
+    background-color: #030303;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900'%3E%3Cpolygon fill='%23f0a500' points='957 450 539 900 1396 900'/%3E%3Cpolygon fill='%23e8a000' points='957 450 872.9 900 1396 900'/%3E%3Cpolygon fill='%23e28d00' points='-60 900 398 662 816 900'/%3E%3Cpolygon fill='%23cf8000' points='337 900 398 662 816 900'/%3E%3Cpolygon fill='%23d47600' points='1203 546 1552 900 876 900'/%3E%3Cpolygon fill='%23b76000' points='1203 546 1552 900 1162 900'/%3E%3Cpolygon fill='%23c65e00' points='641 695 886 900 367 900'/%3E%3Cpolygon fill='%239e4000' points='587 900 641 695 886 900'/%3E%3Cpolygon fill='%23b84700' points='1710 900 1401 632 1096 900'/%3E%3Cpolygon fill='%23862000' points='1710 900 1401 632 1365 900'/%3E%3Cpolygon fill='%23aa2f00' points='1210 900 971 687 725 900'/%3E%3Cpolygon fill='%236d0000' points='943 900 1210 900 971 687'/%3E%3C/svg%3E");
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.loading-screen{
+    height: 50vh;
+}
+.secAdmin-dark .card  {
+    
+    background-color: var(--SurveyJob-Dark3);
+    color: var(--SurveyJob-Light3);
+};
+    
+    .secAdmin-light .card  {
+        background-color: var(--SurveyJob-Light1);
+        color: var(--SurveyJob-Dark1);
+    };
+    
+
+/* Bootstrap Breakpoints */
+
+/*Small (sm)*/
+@media (min-width:576px) {
+    
+}
+
+/*Medium (md)*/
+@media (min-width:768px) {
+    
+}
+
+/*Large (lg)*/
+@media (min-width:992px) {
+    .loading-screen{
+        height: 100vh;
+    }
+    
+    .w-lg-50{
+        width: 50% !important;
+    }
+}
+
+/*Extra-Large (xl)*/
+@media (min-width:1200px) {
+    
+}
+
+/*Extra extra-large (xxl)*/
+@media (min-width:1400px) {
+    
+}
