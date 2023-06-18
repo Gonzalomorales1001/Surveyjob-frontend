@@ -28,9 +28,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
         } else {
             setUserAnswer({
                 ...userAnswer,
-                answer:
-                    e.target.value
-                
+                answer:e.target.value
             });
         }
     };
