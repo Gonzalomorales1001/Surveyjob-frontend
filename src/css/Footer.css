@@ -55,12 +55,12 @@ footer {
 }
 .footer-links a
 {
-  color:#737373
+  color:#737373;
+  text-decoration:none;
 }
 .footer-links a:active,.footer-links a:focus,.footer-links a:hover
 {
   color:#3366cc;
-  text-decoration:none;
 }
 .footer-links.inline li
 {
@@ -173,3 +173,168 @@ footer {
     font-weight:600
   }
 }
+
+/*Toggle Dark Mode Button*/
+
+:root {
+    /** sunny side **/
+    --blue-background: #C2E9F6;
+    --blue-border: #72cce3;
+    --blue-color: #96dcee;
+    --yellow-background: #fffaa8;
+    --yellow-border: #f5eb71;
+    /** dark side **/
+    --indigo-background: #20337a;
+    --indigo-border: #172770;
+    --indigo-color: #253471;
+    --gray-border: #e8e8ea;
+    --gray-dots: #e8e8ea;
+    /** general **/
+    --white: #fff;
+  }
+  
+  .toggle--checkbox {
+    display: none;
+  }
+  .toggle--checkbox:checked {
+    /** This will all flip from sun to moon **/
+    /** Change the label color **/
+  }
+  .toggle--checkbox:checked ~ .background {
+    background: var(--indigo-background);
+  }
+  .toggle--checkbox:checked + .toggle--label {
+    background: var(--indigo-color);
+    border-color: var(--indigo-border);
+    /** Change the cloud to stars **/
+    /** Change the sun into the moon **/
+    /** Show the dimples on the moon **/
+  }
+  .toggle--checkbox:checked + .toggle--label .toggle--label-background {
+    left: 0.9375rem;
+    width: 0.0781rem;
+  }
+  .toggle--checkbox:checked + .toggle--label .toggle--label-background:before {
+    width: 0.0781rem;
+    height: 0.0781rem;
+    top: -0.3906rem;
+  }
+  .toggle--checkbox:checked + .toggle--label .toggle--label-background:after {
+    width: 0.0781rem;
+    height: 0.0781rem;
+    left: -0.4688rem;
+    top: 0.3125rem;
+  }
+  .toggle--checkbox:checked + .toggle--label:before {
+    background: var(--white);
+    border-color: var(--gray-border);
+    animation-name: switch;
+    animation-duration: 350ms;
+    animation-fill-mode: forwards;
+  }
+  .toggle--checkbox:checked + .toggle--label:after {
+    transition-delay: 350ms;
+    opacity: 1;
+  }
+  .toggle--label {
+    /** Placeholder element, starting at blue **/
+    width: 3.125rem;
+    height: 1.5625rem;
+    background: var(--blue-color);
+    border-radius: 1.5625rem;
+    border: 0.0781rem solid var(--blue-border);
+    display: flex;
+    position: relative;
+    transition: all 350ms ease-in;
+    /** The sun cloud and moon stars **/
+    /** Sun/Moon element **/
+    /** Gray dots on the moon **/
+  }
+  .toggle--label-background {
+    width: 0.1563rem;
+    height: 0.0781rem;
+    border-radius: 0.0781rem;
+    position: relative;
+    background: var(--white);
+    left: 2.1094rem;
+    top: 0.7031rem;
+    transition: all 150ms ease-in;
+  }
+  .toggle--label-background:before {
+    content: "";
+    position: absolute;
+    top: -0.0781rem;
+    width: 0.625rem;
+    height: 0.0781rem;
+    border-radius: 0.0781rem;
+    background: var(--white);
+    left: -0.3125rem;
+    transition: all 150ms ease-in;
+  }
+  .toggle--label-background:after {
+    content: "";
+    position: absolute;
+    top: 0.0781rem;
+    width: 0.625rem;
+    height: 0.0781rem;
+    border-radius: 0.0781rem;
+    background: var(--white);
+    left: -0.1563rem;
+    transition: all 150ms ease-in;
+  }
+  .toggle--label:before {
+    animation-name: reverse;
+    animation-duration: 350ms;
+    animation-fill-mode: forwards;
+    transition: all 350ms ease-in;
+    content: "";
+    width: 1.2813rem;
+    height: 1.2813rem;
+    border: 0.0781rem solid var(--yellow-border);
+    top: 0.0625rem;
+    left: 0.0625rem;
+    position: absolute;
+    border-radius: 1.2813rem;
+    background: var(--yellow-background);
+  }
+  .toggle--label:after {
+    transition-delay: 0ms;
+    transition: all 250ms ease-in;
+    position: absolute;
+    content: "";
+    box-shadow: var(--gray-dots) -0.2031rem 0 0 0.0313rem, var(--gray-dots) -0.375rem 0.2188rem 0 -0.0313rem;
+    left: 2.2344rem;
+    top: 0.3594rem;
+    width: 0.1563rem;
+    height: 0.1563rem;
+    background: transparent;
+    border-radius: 50%;
+    opacity: 0;
+  }
+  
+  @keyframes switch {
+    0% {
+      left: 0.0625rem;
+    }
+    60% {
+      left: 0.0625rem;
+      width: 1.75rem;
+    }
+    100% {
+      left: 1.625rem;
+      width: 1.2813rem;
+    }
+  }
+  @keyframes reverse {
+    0% {
+      left: 1.625rem;
+      width: 1.2813rem;
+    }
+    60% {
+      left: 1.125rem;
+      width: 1.75rem;
+    }
+    100% {
+      left: 0.0625rem;
+    }
+  }

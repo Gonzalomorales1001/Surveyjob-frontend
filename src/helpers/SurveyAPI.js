@@ -1,8 +1,10 @@
 import { URL } from "./URL";
 const token = window.localStorage.getItem("x-token") //importar / traer datos de token de local storage
+
 export const getSurveyByID = async (surveyID) => {
   const response = await fetch(`${URL}/surveys/${surveyID}`);
   const data = await response.json();
+  console.log(data)
   return data;
 };
 

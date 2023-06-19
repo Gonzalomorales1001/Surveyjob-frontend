@@ -7,6 +7,7 @@ import Swal from "sweetalert2";
 import {login,requestNewPassword} from '../helpers/AuthAPI'
 import {register} from '../helpers/UserAPI'
 import { UserContext, DarkModeContext } from "../App";
+import SurveyJobLogo from '../assets/LightLetterLogo.png'
 
 const LoginScreen = () => {
   const {saveUserData}=useContext(UserContext)
@@ -74,8 +75,8 @@ const LoginScreen = () => {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 1000,
-    timerProgressBar: true,
+    timer: 3000,
+    timerProgressBar: false,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -89,12 +90,9 @@ const LoginScreen = () => {
       saveUserData(loginResp.user)
       Toast.fire({
         icon: 'success',
-        title: loginResp.msg,
-        text: 'Iniciando sesión...'
+        title: `Bienvenido, ${loginResp.user.username}`,
       })
-      setTimeout(() => {
-        navigate('/')
-      }, 1000);
+      navigate('/')
     }else{
       Swal.fire({
         icon: 'error',
@@ -145,10 +143,10 @@ const LoginScreen = () => {
 
   return (
     <>
-      <div className={`bodylog ${dark?'login__bg--dark':'login__bg--light'}`}>
+      <main className={`bodylog ${dark?'login__bg--dark':'login__bg--light'}`}>
+        <section className="login-section">
         <div className="main">
           <input type="checkbox" id="chk" aria-hidden="true" />
-
           <div className={`signup ${dark?'signup__bg--dark':'signup__bg--light'}`}>
             <form onSubmit={loginSubmit}>
               <label htmlFor="chk" className="login__label" aria-hidden="true">
@@ -186,7 +184,6 @@ const LoginScreen = () => {
               </div>
             </form>
           </div>
-
           <div className={`login ${dark&&'login--dark'}`}>
           <form onSubmit={registerSubmit}>
               <label htmlFor="chk" className="login__label" aria-hidden="true">
@@ -246,7 +243,13 @@ const LoginScreen = () => {
             </form>
           </div>
         </div>
-      </div>
+        <div className="login-image d-none d-md-block">
+          <div className="login-image__overlay d-flex justify-content-center align-items-center">
+            <img src={SurveyJobLogo} alt="SurveyJobLogo" className="w-50"/>
+          </div>
+        </div>
+        </section>
+      </main>
     </>
   );
 };

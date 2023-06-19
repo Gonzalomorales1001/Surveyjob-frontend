@@ -3,9 +3,10 @@ import Question from '../components/Question';
 import SpeechBubble from '../components/SpeechBubble';
 import { addAnswer, getSurveyByID } from '../helpers/SurveyAPI';
 import { getUserByID } from '../helpers/UserAPI';
-import { Navigate, useParams } from 'react-router';
+import { Navigate, useParams, useNavigate } from 'react-router';
 import { InfiniteLoader } from '../components/InfiniteLoader';
 import Error500 from '../assets/Error500.svg'
+import Job from '../assets/job.png'
 import {DarkModeContext} from '../App'
 import '../css/Question.css'
 import Swal from 'sweetalert2';
@@ -14,6 +15,7 @@ export const AnswerContext=createContext(null)
 
 const SurveyScreen = () => {
   const {dark}=useContext(DarkModeContext)
+  const navigate=useNavigate()
   const {surveyID}=useParams();
   const [surveyData, setSurveyData] = useState(null);
   const [userData, setUserData] = useState(null)
@@ -59,8 +61,7 @@ const SurveyScreen = () => {
 
   const sendAnswer=async(e)=>{
     e.preventDefault();
-    // console.log('answerarray lenght: '+answerArray.length)
-    // console.log('surveydata.questions lenght: '+surveyData.questions.length)
+    //validate
     if(answerArray.length!=surveyData.questions.length){
       return Swal.fire({
         icon:'warning',
@@ -68,24 +69,52 @@ const SurveyScreen = () => {
         text:'Revisa tus respuestas y vuelve a intentarlo.'
       })
     }
+    //sort questions by ID
     const answerArraySort=answerArray.slice(0)
     answerArraySort.sort((element1,element2)=>{
       if(element1.questionID<element2.questionID){return -1}
       else if(element1.questionID>element2.questionID){return 1}
       else{return 0}
     })
-
-    console.log(answerArraySort)
+    //send
+    const content={
+      answers:answerArraySort
+    }
+    try {
+      const addAnswerResp=await addAnswer(surveyID,content)
+      Swal.fire({
+        icon:'success',
+        title:'Tu respuesta se ha enviado correctamente'
+      })
+      setTimeout(() => {
+        navigate('/')
+      }, 2000);
+    } catch (err) {
+      Swal.fire({
+        icon:'error',
+        title:'Ha ocurrido un error al enviar la información'
+      })
+    }
   }
   
 
   return (
     <main className={`${dark?'surveyscreen-bg-dark text-light':'surveyscreen-bg-light'}`}>
-      <div className="container">
+      <div className="container pt-3">
         {userData?(
           <AnswerContext.Provider value={{surveyElements}}>
-            <h3>Encuesta de {userData?.username}</h3>
-            <h1 className='text-center my-3'>{surveyData.title}</h1>
+        <section className={`card card-margin w-100 ${dark&&'card--dark text-light'}`}>
+          <div className="card-body pt-4">
+              <div className="widget-49">
+                <div className="widget-49-meeting-info">
+                    <small className="text-muted mb-2">Encuesta de {userData.username}</small>
+                    <h1 className={`widget-49-pro-title fw-light text-center ${dark&&'text-light'}`}>{surveyData.title}</h1>
+                    <span className="widget-49-meeting-time">Categoría: {surveyData.category.charAt(0).toUpperCase() + surveyData.category.slice(1).toLowerCase()}</span>
+                </div>
+              <br />
+              </div>
+          </div>
+        </section>
             <form>
               {surveyData.questions.map((question,index)=>
               <div className='mx-lg-5 px-lg-5' key={index}>
