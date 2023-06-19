@@ -45,6 +45,7 @@ function App() {
           <DarkModeContext.Provider value={{dark}}>
             <Navbar ToggleDarkMode={ToggleDarkMode} userData={userData}/>
             <Routes>
+            <Route path='*' element={<PageNotFoundScreen/>}/>
               <Route path="/*" element={
                   <ProtectedRoutes userData={userData}>
                     <RoutesApp />
@@ -53,7 +54,6 @@ function App() {
               <Route path="/" element={<HomeScreen ToggleDarkMode={ToggleDarkMode} />}/>
               <Route path="/login" element={<LoginScreen/>}/>
               <Route path="/contact" element={<ContactScreen />} />
-              <Route path='/*' element={<PageNotFoundScreen/>}/>
               <Route path="/survey/:surveyID" element={<SurveyScreen/>}/>
               <Route path='/reset-password/:id' element={<ChangePasswordScreen/>}/>
             </Routes>
