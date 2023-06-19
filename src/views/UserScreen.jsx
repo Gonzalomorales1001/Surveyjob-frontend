@@ -4,6 +4,7 @@ import "../css/userScreen.css";
 import userIcon from '../assets/icons8-usuario-masculino-en-círculo-64.png';
 import documentIcon from '../assets/icons8-documento-50.png';
 import { useParams } from 'react-router';
+import SurveysCreated from './SurveysCreated';
 
 //import { UserContext,DarkModeContext } from "../App";
 
@@ -14,6 +15,8 @@ const UserScreen = () => {
     email: '',
     company: ''
   });
+
+  const [showModal, setShowModal] = useState(false);
 
   const params=useParams()
 
@@ -38,6 +41,13 @@ const UserScreen = () => {
     fetchUserData();
   }, []);
 
+  const openModal = () => {
+    setShowModal(true);
+  };
+
+  const closeModal = () => {
+    setShowModal(false);
+  };
 
   return (
     <div>
@@ -69,6 +79,9 @@ const UserScreen = () => {
           <div className="card-body">
             <h5 className="card-title">Encuestas</h5>
             <p className="card-text">Encuestas creadas por el usuario</p>
+            <button className="btn btn-warning" onClick={openModal}>
+              Abrir 
+            </button>
           </div>
         </div>
         <div className="card">
@@ -82,6 +95,9 @@ const UserScreen = () => {
           <div className="card-body">
             <h5 className="card-title">Encuestas respondidas</h5>
             <p className="card-text">Encuestas respondidas por el usuario</p>
+            <button className="btn btn-warning" onClick={openModal}>
+              Abrir 
+            </button>
           </div>
         </div>
         <div className="card">
@@ -96,9 +112,21 @@ const UserScreen = () => {
           <div className="card-body">
             <h5 className="card-title">Respuestas</h5>
             <p className="card-text">Respuestas del usuario</p>
+            <button className="btn btn-warning" onClick={openModal}>
+              Abrir 
+            </button>
           </div>
         </div>
       </div>
+
+      {showModal && (
+        <div className="modal">
+          <div className="modal-content">
+            <SurveysCreated userId={params.id} closeModal={closeModal} />
+          </div>
+        </div>
+      )}
+
       <br />
       <hr />
   
