@@ -3,6 +3,7 @@ import "../css/Card.css";
 import { getUsers, deleteUser } from "../helpers/UserAPI";
 import "../css/admin.css";
 import Card from "../components/Card";
+import { InfiniteLoader } from "../components/InfiniteLoader";
 
 const ListasUsuarios = ({dark}) => {
   const [users, setUsers] = useState([]);
@@ -32,9 +33,9 @@ const ListasUsuarios = ({dark}) => {
           ))
         ) : (
           <div className="d-flex justify-content-center">
-            <div className="spinner-border text-warning  " role="status">
+            <InfiniteLoader dark={dark}/>
               <span className="visually-hidden">Loading...</span>
-            </div>
+            
           </div>
         )}
       </div>

@@ -25,7 +25,7 @@
 }
 
 .main{
-	width: 21.875rem;
+	width: 25rem;
 	height: 29.2188rem;
 	background: red;
 	overflow: hidden;
@@ -68,8 +68,8 @@
 	width: 100%;
 	height: 1.25rem;
 	background: rgba(0, 0, 0, 0.15);
-	justify-content: center;
-	display: flex;
+	/* justify-content: center;
+	display: flex; */
 	margin: 0.612rem auto;
 	padding: 1.25rem;
 	border: none;

@@ -3,7 +3,6 @@ import SpeechBubble from '../components/SpeechBubble'
 import { UserContext,DarkModeContext } from "../App";
 
 const HomeScreen = () => {
-
   const {dark}=useContext(DarkModeContext)
 
   return (

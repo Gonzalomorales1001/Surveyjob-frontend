@@ -66,6 +66,17 @@ textarea{
 .loading-screen{
     height: 50vh;
 }
+.secAdmin-dark .card  {
+    
+    background-color: var(--SurveyJob-Dark3);
+    color: var(--SurveyJob-Light3);
+};
+    
+    .secAdmin-light .card  {
+        background-color: var(--SurveyJob-Light1);
+        color: var(--SurveyJob-Dark1);
+    };
+    
 
 /* Bootstrap Breakpoints */
 
@@ -83,6 +94,10 @@ textarea{
 @media (min-width:992px) {
     .loading-screen{
         height: 100vh;
+    }
+    
+    .w-lg-50{
+        width: 50% !important;
     }
 }
 

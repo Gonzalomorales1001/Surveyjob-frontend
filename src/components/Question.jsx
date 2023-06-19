@@ -1,38 +1,57 @@
-import React, { useContext, useState } from 'react'
-import { useForm, useFormState } from 'react-hook-form'
-import { AnswerContext } from '../views/SurveyScreen'
-import '../css/Question.css'
+import React, { useContext, useEffect, useState } from 'react';
+import { AnswerContext } from '../views/SurveyScreen';
+import '../css/Question.css';
+import Swal from 'sweetalert2';
 
 const Question = ({content,questionType,options,questionID,questionNumber,surveyCategory,dark}) => {
-    const {answerArray,setAnswerArray} = useContext(AnswerContext);
+    const {surveyElements} = useContext(AnswerContext);
+    const {answerArray,setAnswerArray}=surveyElements
 
     const [userAnswer, setUserAnswer] = useState({
         question:content,
         questionID:questionID,
-        answer:{}
-    })
-
-    const handleSubmit=(e)=>{
-        const id=questionID
-        e.preventDefault()
-        setUserAnswer({
-            ...userAnswer,
-            answer:{
-                [e.target.name]:e.target.value
+        answer:[]
+    });
+    const handleSubmit=(e,check)=>{
+        if (check) {
+            const checkArray=userAnswer.answer.slice(0)
+            const answerExistsIndex=checkArray.findIndex((answer)=>answer==e.target.value)
+            if(answerExistsIndex<0){
+                checkArray.push(e.target.value)
+            }else{
+                checkArray.splice(answerExistsIndex,1)
             }
-        })
+            setUserAnswer({
+                ...userAnswer,
+                answer:checkArray
+            });
+        } else {
+            setUserAnswer({
+                ...userAnswer,
+                answer:
+                    e.target.value
+                
+            });
+        }
+    };
 
-        // if(id===userAnswer.questionID){
-        //     const ansIndex=answerArray.findIndex((answer)=>answer.questionID===id)
-        //     console.log(ansIndex)
-        //     setAnswerArray(answerArray[ansIndex])
-        // }else{
-        //     setAnswerArray([...answerArray,userAnswer])
-        // }
-        
-        setAnswerArray([...answerArray,userAnswer])
-    }
-
+    useEffect(() => {
+        const ansIndex=answerArray.findIndex((answer)=>answer.questionID===questionID);
+        if(userAnswer.answer.length>0){
+            if (ansIndex>=0) {
+                const updatedAnswerArray=[...answerArray];
+                updatedAnswerArray[ansIndex]=userAnswer;
+                setAnswerArray(updatedAnswerArray);
+            } else {
+                setAnswerArray([...answerArray,userAnswer]);
+            }  
+        }else{
+            const spliceAnswerArray=answerArray.slice(0)
+            spliceAnswerArray.splice(ansIndex,1)
+            setAnswerArray(spliceAnswerArray)
+        }
+    }, [userAnswer])
+    
     const questionTypeInfo=(type)=>{
         switch(type){
             case "TEXT":
@@ -56,9 +75,10 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                         <textarea 
                         name={`textarea-${questionID}`} 
                         id={`textarea-${questionID}`} 
-                        maxLength={250} 
+                        maxLength={250}
+                        minLength={16} 
                         className={`form-control question__text ${dark&&'question__text--dark'}`}
-                        onChange={handleSubmit}
+                        onChange={(e)=>handleSubmit(e)}
                         >
                         </textarea>
                     </div>
@@ -75,7 +95,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                                 id={`btn-check-outlined-${questionID}-radio-${index+1}`} 
                                 name={`radio-${questionID}`} 
                                 autoComplete="off"
-                                onChange={handleSubmit}
+                                onChange={(e)=>handleSubmit(e)}
                                 value={option}
                                 />
                                 <label className={`btn ${dark?'btn-outline-light':'btn-outline-dark'} w-100 rounded-pill`} htmlFor={`btn-check-outlined-${questionID}-radio-${index+1}`}>{option}</label><br/>
@@ -93,7 +113,8 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                                 id={`btn-check-outlined-${questionID}-check-${index+1}`} 
                                 name={`check-${questionID}`}
                                 autoComplete="off"
-                                onChange={handleSubmit}
+                                onChange={(e)=>handleSubmit(e,true)}
+                                value={option}
                                 />
                                 <label className={`btn ${dark?'btn-outline-light':'btn-outline-dark'} w-100 rounded-1 px-4 py-2 text-start`} htmlFor={`btn-check-outlined-${questionID}-check-${index+1}`}>{option}</label><br/>
                             </div>
@@ -104,7 +125,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
     };
 
   return (
-        <form className={`card card-margin w-100 ${dark&&'card--dark text-light'}`}>
+        <section className={`card card-margin w-100 ${dark&&'card--dark text-light'}`}>
             <div className="card-body pt-4">
                 <div className="widget-49">
                     <div className={`widget-49-title-wrapper`}>
@@ -122,7 +143,7 @@ const Question = ({content,questionType,options,questionID,questionNumber,survey
                     </div>
                 </div>
             </div>
-        </form>
+        </section>
     )
 }
 

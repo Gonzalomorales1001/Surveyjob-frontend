@@ -1,5 +1,6 @@
 import { URL } from "./URL";
-
+// const token = window.localStorage.getItem("x-token")
+const token = JSON.parse(localStorage.getItem('x-token'));
 export const getUserByID = async (userID) => {
 const response = await fetch(`${URL}/users/${userID}`);
 const data = await response.json();
@@ -54,8 +55,8 @@ try {
 
 export const deleteUser = async (id) => {
 try {
-    const resp = await fetch(URL + "/:" + id, {
-    method: "DELET",
+    const resp = await fetch(URL + "/users/" + id, {
+    method: "DELETE",
     headers: {
         "Content-type": "application/json; charset=UTF-8",
         "x-token": token,

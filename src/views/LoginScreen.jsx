@@ -4,13 +4,12 @@ import Job from "../assets/job.png";
 import "../css/login.css"; //ver si hay que agregar export default
 import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
-import '@sweetalert2/themes/bulma/bulma.css'
-import {login} from '../helpers/AuthAPI'
+import {login,requestNewPassword} from '../helpers/AuthAPI'
 import {register} from '../helpers/UserAPI'
 import { UserContext, DarkModeContext } from "../App";
 
 const LoginScreen = () => {
-  const {userData,saveUserData}=useContext(UserContext)
+  const {saveUserData}=useContext(UserContext)
   const {dark}=useContext(DarkModeContext)
   const navigate = useNavigate();
 
@@ -24,6 +23,38 @@ const LoginScreen = () => {
     registerPassword:'',
     confirmPassword:''
   })
+  const [visiblePassword, setVisiblePassword] = useState(false)
+  const viewPassword=(e)=>{
+    e.preventDefault()
+    setVisiblePassword(!visiblePassword)
+  }
+
+  const forgottenPassword=async(e)=>{
+    e.preventDefault()
+    const { value: email } = await Swal.fire({
+      icon:'question',
+      title: '¿Has olvidado tu contraseña?',
+      input: 'email',
+      inputLabel: 'Te enviaremos un mail para reestablecer contraseña',
+      inputPlaceholder: 'Tu email',
+      validationMessage: 'El correo electrónico ingresado no es válido.',
+    })
+    
+    if (email) {
+      try {
+        const requestResp=await requestNewPassword({email})
+        Swal.fire({
+          icon:'info',
+          title:requestResp.msg
+        })
+      } catch (error) {
+        Swal.fire({
+          icon:'error',
+          title:error
+        })
+      }
+    }
+  }
 
   const handleLoginInputs=(e)=>{
     setLoginData({
@@ -83,6 +114,12 @@ const LoginScreen = () => {
 
   const registerSubmit=async(e)=>{
     e.preventDefault()
+    if(registerData.registerPassword!=registerData.confirmPassword){
+      return Swal.fire({
+        icon: 'warning',
+        title: 'Las contraseñas no coinciden',
+      })
+    }
     const registerRequestData={
       username:registerData.registerUsername,
       email:registerData.registerEmail,
@@ -118,28 +155,34 @@ const LoginScreen = () => {
                 Iniciar sesión
               </label>
               <div className="d-flex h-100 align-items-center flex-column pt-3">
-              <input
-                className="mt-1 login__input"
-                type="email"
-                name="loginEmail"
-                value={loginData.loginEmail}
-                placeholder="Email"
-                required={true}
-                onChange={handleLoginInputs}
-                />
-              <input
-                className="mt-1 login__input"
-                type="password"
-                name="loginPassword"
-                value={loginData.loginPassword}
-                placeholder="Contraseña"
-                required={true}
-                onChange={handleLoginInputs}
-                />
-              <button className="mt-3 login__btn">Iniciar sesión</button>
-              {/* <input type="submit" value="Iniciar Sesion" className="mt-3 login__btn" /> */}
-              <a href="" className={`fs-xs ${!dark&&'text-light'} text-decoration-none`}> <small>Olvide mi contraseña</small> </a>
-
+                <div className='w-100'>
+                  <input
+                    className="mt-1 login__input"
+                    type="email"
+                    name="loginEmail"
+                    value={loginData.loginEmail}
+                    placeholder="Email"
+                    required={true}
+                    onChange={handleLoginInputs}
+                    />
+                </div>
+                <div className='w-100'>
+                  <input
+                    className="mt-1 login__input"
+                    type={visiblePassword?'text':'password'}
+                    name="loginPassword"
+                    value={loginData.loginPassword}
+                    placeholder="Contraseña"
+                    required={true}
+                    onChange={handleLoginInputs}
+                    />
+                </div>
+                <div>
+                <button onClick={viewPassword} className="btn btn-link text-decoration-none btn-sm"><i className={`fa fa-eye${visiblePassword?'-slash':''}`}></i> {`${visiblePassword?'Ocultar ':'Mostrar '}`}Contraseña</button>
+                </div>
+                <button className="mt-3 login__btn" type="submit">Iniciar sesión</button>
+                {/* <input type="submit" value="Iniciar Sesion" className="mt-3 login__btn" /> */}
+                <button className={`fs-xs ${!dark&&'text-light'} text-decoration-none btn btn-link`} onClick={forgottenPassword}> <small>Olvide mi contraseña</small> </button>
               </div>
             </form>
           </div>
@@ -150,45 +193,56 @@ const LoginScreen = () => {
                 Regístrate{" "}
               </label>
               <div className="container">
-                <input
-                  className={`mt-1 login__input ${dark&&'login__input--dark'}`}
-                  type="text"
-                  name="registerUsername"
-                  value={registerData.registerUsername}
-                  onChange={handleRegisterInputs}
-                  placeholder="Usuario"
-                  required=""
+                <div className='w-100'>
+                  <input
+                    className={`mt-1 login__input ${dark&&'login__input--dark'}`}
+                    type="text"
+                    name="registerUsername"
+                    value={registerData.registerUsername}
+                    onChange={handleRegisterInputs}
+                    placeholder="Usuario"
+                    required=""
+                    />
+                </div>
+                <div className='w-100'>
+                  <input
+                    className={`mt-1 login__input ${dark&&'login__input--dark'}`}
+                    type="email"
+                    name="registerEmail"
+                    value={registerData.registerEmail}
+                    onChange={handleRegisterInputs}
+                    placeholder="Email"
+                    required=""
                   />
-                <input
-                  className={`mt-1 login__input ${dark&&'login__input--dark'}`}
-                  type="email"
-                  name="registerEmail"
-                  value={registerData.registerEmail}
-                  onChange={handleRegisterInputs}
-                  placeholder="Email"
-                  required=""
-                />
-                <input
-                  className={`mt-1 login__input ${dark&&'login__input--dark'}`}
-                  type="password"
-                  name="registerPassword"
-                  value={registerData.registerPassword}
-                  onChange={handleRegisterInputs}
-                  placeholder="Contraseña"
-                  required=""
-                />
-                <input
-                  className={`mt-1 login__input ${dark&&'login__input--dark'}`}
-                  type="password"
-                  name="confirmPassword"
-                  value={registerData.confirmPassword}
-                  onChange={handleRegisterInputs}
-                  placeholder="Contraseña"
-                  required=""
-                />
+                </div>
+                <div className='w-100'>
+                  <input
+                    className={`mt-1 login__input ${dark&&'login__input--dark'}`}
+                    type={visiblePassword?'text':'password'}
+                    name="registerPassword"
+                    value={registerData.registerPassword}
+                    onChange={handleRegisterInputs}
+                    placeholder="Contraseña"
+                    required=""
+                  />
+                </div>
+                <div className='w-100'>
+                  <input
+                    className={`mt-1 login__input ${dark&&'login__input--dark'}`}
+                    type={visiblePassword?'text':'password'}
+                    name="confirmPassword"
+                    value={registerData.confirmPassword}
+                    onChange={handleRegisterInputs}
+                    placeholder="Confirmar Contraseña"
+                    required=""
+                  />
+                </div>
+                <div>
+                  <button onClick={viewPassword} className="btn btn-link text-decoration-none btn-sm mb-2"><i className={`fa fa-eye${visiblePassword?'-slash':''}`}></i> {`${visiblePassword?'Ocultar ':'Mostrar '}`}Contraseña</button>
+                </div>
                 <small className="login__password__small">Tu contraseña debe tener almenos 1 mayúscula, 1 minúscula, 1 número y almenos 1 símbolo.</small>
               </div>
-              <button className={`mt-3 login__btn`}>Registrate</button>
+              <button className={`mt-3 login__btn`} type="submit">Registrate</button>
             </form>
           </div>
         </div>

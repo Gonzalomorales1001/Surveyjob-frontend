@@ -15,16 +15,14 @@
     max-width: 62vw !important ; 
 }
  */
-
+/* 
  .card-dark{
     background-color: var(--SurveyJob-Black3);
-    /* color: var(--SurveyJob-Light1); */
-    color: black;
-    
+    color: var(--SurveyJob-Light1);
 };
+
 
  .card-light{
     background-color: var(--SurveyJob-Light1);
     color: var(--SurveyJob-Dark1);
-}
-
+} */

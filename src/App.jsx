@@ -1,5 +1,6 @@
 import { createContext, useState } from 'react'
 import './App.css'
+import '@sweetalert2/themes/bulma/bulma.css'
 import Navbar from './components/Navbar'
 import { Router, json } from 'react-router'
 import { BrowserRouter,Routes,Route } from 'react-router-dom'
@@ -17,6 +18,7 @@ import ListasUsuarios from './views/ListasUsuarios'
 import ListasEncuestas from './views/ListaEncuestas'
 import AdminOnlyRoutes from './routes/AdminOnlyRoutes'
 import AdminRoutes from './routes/AdminRoutes'
+import ChangePasswordScreen from './views/ChangePasswordScreen'
 
 export const UserContext=createContext(null)
 export const DarkModeContext=createContext(null)
@@ -53,6 +55,7 @@ function App() {
               <Route path="/contact" element={<ContactScreen />} />
               <Route path='/*' element={<PageNotFoundScreen/>}/>
               <Route path="/survey/:surveyID" element={<SurveyScreen/>}/>
+              <Route path='/reset-password/:id' element={<ChangePasswordScreen/>}/>
             </Routes>
             <Footer dark={dark} />
           </DarkModeContext.Provider>
