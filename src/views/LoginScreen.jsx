@@ -75,8 +75,8 @@ const LoginScreen = () => {
     toast: true,
     position: 'top-end',
     showConfirmButton: false,
-    timer: 1000,
-    timerProgressBar: true,
+    timer: 3000,
+    timerProgressBar: false,
     didOpen: (toast) => {
       toast.addEventListener('mouseenter', Swal.stopTimer)
       toast.addEventListener('mouseleave', Swal.resumeTimer)
@@ -90,12 +90,9 @@ const LoginScreen = () => {
       saveUserData(loginResp.user)
       Toast.fire({
         icon: 'success',
-        title: loginResp.msg,
-        text: 'Iniciando sesión...'
+        title: `Bienvenido, ${loginResp.user.username}`,
       })
-      setTimeout(() => {
-        navigate('/')
-      }, 1000);
+      navigate('/')
     }else{
       Swal.fire({
         icon: 'error',
