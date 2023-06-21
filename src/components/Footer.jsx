@@ -1,6 +1,7 @@
 import React, { useContext } from "react";
 import "../css/Footer.css";
 import { DarkModeContext } from "../App";
+import {Link, NavLink} from'react-router-dom'
 
 const Footer = () => {
 
@@ -30,20 +31,20 @@ const Footer = () => {
               <h6>Compañía</h6>
               <ul className="footer-links">
                 <li>
-                  <a href="http://scanfcode.com/about/">Sobre nosotros</a>
+                  <Link to="*">Sobre nosotros</Link>
                 </li>
                 <li>
-                  <a href="http://scanfcode.com/contact/">Contacto</a>
+                  <Link to="*">Contacto</Link>
                 </li>
                 <li>
-                  <a href="http://scanfcode.com/contribute-at-scanfcode/">
+                  <Link to="*">
                     Contribuciones
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a href="http://scanfcode.com/privacy-policy/">
+                  <Link to="*">
                     Politica de privacidad
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
@@ -55,31 +56,30 @@ const Footer = () => {
             <div className="col-md-8 col-sm-6 col-xs-12">
               <p className="copyright-text">
                 Copyright &copy; 2023 Todos los derechos reservados por
-                <a href="#"> SurveyJob</a>.
+                <Link to="*"> SurveyJob</Link>.
               </p>
             </div>
             <div className="col-md-4 col-sm-6 col-xs-12">
               <ul className="social-icons">
-                {/* Agregar pagina de error */}
                 <li>
-                  <a className="facebook" href="#">
+                  <Link className="facebook" to="*">
                     <i className="fa fa-facebook"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="twitter" href="#">
+                  <Link className="twitter" to="*">
                     <i className="fa fa-twitter"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="dribbble" href="#">
+                  <Link className="dribbble" to="*">
                     <i className="fa fa-dribbble"></i>
-                  </a>
+                  </Link>
                 </li>
                 <li>
-                  <a className="linkedin" href="#">
+                  <Link className="linkedin" to="*">
                     <i className="fa fa-linkedin"></i>
-                  </a>
+                  </Link>
                 </li>
               </ul>
             </div>
