@@ -17,82 +17,93 @@ const Navbar = ({ToggleDarkMode}) => {
   return (
     <header>
       <nav
-        className={`navbar navbar-expand-lg bg-body-tertiary sticky-top ${
+        className={`navbar-expand bg-body-tertiary sticky-top d-flex align-items-center justify-content-center ${
           dark ? "navbar-dark" : "navbar-light"
         }`}
       >
         <div className="container-fluid">
-          <Link
-            className="navbar-brand d-flex justify-content-center align-items-center"
-            to='/'
-          >
-            {dark ? (
-              <img
-                src={DarkModeSurveyJobLogo}
-                alt="Survey Job Logo"
-                className="navbar-brand__logo"
-              />
-            ) : (
-              <img
-                src={LightModeSurveyJobLogo}
-                alt="Survey Job Logo"
-                className="navbar-brand__logo"
-              />
-            )}
-          </Link>
-          <input
-            type="checkbox"
-            id="toggle"
-            className="toggle--checkbox"
-            onChange={ToggleDarkMode}
-            checked={dark}
-          />
-          <label htmlFor="toggle" className="toggle--label">
-            <span className="toggle--label-background"></span>
-          </label>
-          <button
-            className="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarNav"
-            aria-controls="navbarNav"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span className="navbar-toggler-icon"></span>
-          </button>
-          <div className="collapse navbar-collapse" id="navbarNav">
-            <ul className="navbar-nav ms-auto me-5">
-            {userData?.admin&&(
-              <li className="nav-item">
-                <NavLink className="nav-link text-danger" to="/admin">
-                  Admin
-                </NavLink>
-              </li>
+          <div className="nav__logo">
+            <Link
+              className="navbar-brand d-flex justify-content-center align-items-center"
+              to='/'
+            >
+              {dark ? (
+                <img
+                  src={DarkModeSurveyJobLogo}
+                  alt="Survey Job Logo"
+                  className="navbar-brand__logo"
+                />
+              ) : (
+                <img
+                  src={LightModeSurveyJobLogo}
+                  alt="Survey Job Logo"
+                  className="navbar-brand__logo"
+                />
               )}
-              <li className="nav-item">
-                <NavLink className="nav-link" aria-current="page" to="/">
-                  Inicio
-                </NavLink>
-              </li>
-              {userData?.username?(
-                <li className="nav-item dropdown">
-                  <a className="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                    {userData.username}
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li><Link className="dropdown-item" to={`/user/${userData.userID}`}>Mi perfil</Link></li>
-                    <li><Link className="dropdown-item" to='/login' onClick={logout}>Cerrar Sesión</Link></li>
-                  </ul>
-                </li>
-              ):(
+            </Link>
+          </div>
+          <div className="nav-menu">
+            <button
+              className="navbar-toggler"
+              type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNav"
+              aria-controls="navbarNav"
+              aria-expanded="false"
+              aria-label="Toggle navigation"
+            >
+              <span className="navbar-toggler-icon"></span>
+            </button>
+            <div className="collapse navbar-collapse" id="navbarNav">
+              <ul className="navbar-nav m-auto d-flex justify-content-center align-items-center">
+              {userData?.admin&&(
                 <li className="nav-item">
-                  <NavLink className="nav-link" to="/login">
-                    Iniciar Sesión
+                  <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'} text-danger`} to="/admin">
+                    <i className="fa fa-cogs" aria-hidden="true"></i>
+                    <span className="d-none d-md-inline ms-2">Admin</span>
                   </NavLink>
                 </li>
-              )}
-            </ul>
+                )}
+                <li className="nav-item">
+                  <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} aria-current="page" to="/">
+                    <i className="fa fa-home" aria-hidden="true"></i>
+                    <span className="d-none d-md-inline ms-2">Inicio</span>
+                  </NavLink>
+                </li>
+                {userData?.username?(
+                  <>
+                  <li className="nav-item">
+                    <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} aria-current="page" to={`/user/${userData.userID}`}>
+                      <i className="fa fa-user" aria-hidden="true"></i>
+                      <span className="d-none d-md-inline ms-2">Mi Perfil</span>
+                    </NavLink>
+                  </li>
+                  <li className="nav-item">
+                    <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} aria-current="page" to="/login" onClick={logout}>
+                      <i className="fa fa-sign-out" aria-hidden="true"></i>
+                      <span className="d-none d-md-inline ms-2">Cerrar Sesión</span>
+                    </NavLink>
+                  </li>
+                  </>
+                  // <li className="nav-item dropdown">
+                  //   <a className={`nav-link ${dark?'nav-link--dark':'nav-link--light'} dropdown-toggle`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  //     {userData.username}
+                  //   </a>
+                  //   <ul className="dropdown-menu">
+                  //     <li><Link className="dropdown-item" to={`/user/${userData.userID}`}>Mi perfil</Link></li>
+                  //     <li><Link className="dropdown-item" to='/login' onClick={logout}>Cerrar Sesión</Link></li>
+                  //   </ul>
+                  // </li>
+                ):(
+                  <li className="nav-item">
+                    <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} to="/login">
+                      <i className="fa fa-sign-in" aria-hidden="true"></i>
+                      <span className="d-none d-md-inline ms-2">Iniciar Sesión</span>
+                    </NavLink>
+                  </li>
+                )}
+              </ul>
+            </div>
           </div>
         </div>
       </nav>

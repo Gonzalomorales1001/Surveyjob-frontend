@@ -3,7 +3,7 @@ import "../css/Footer.css";
 import { DarkModeContext } from "../App";
 import {Link, NavLink} from'react-router-dom'
 
-const Footer = () => {
+const Footer = ({ToggleDarkMode}) => {
 
   const {dark}=useContext(DarkModeContext)
 
@@ -15,7 +15,21 @@ const Footer = () => {
         <div className="container">
           <div className="">
             <div className="col-sm-12 col-md-12">
-              <h6>SurveyJob </h6>
+              <div className="d-flex align-items-center gap-3">
+                <h6>SurveyJob</h6>
+                <div className="darkmode-toggler">
+                  <input
+                    type="checkbox"
+                    id="toggle"
+                    className="toggle--checkbox"
+                    onChange={ToggleDarkMode}
+                    checked={dark}
+                  />
+                  <label htmlFor="toggle" className="toggle--label">
+                    <span className="toggle--label-background"></span>
+                  </label>
+                </div>
+              </div>
               <p className="text-justify">
                 Es una empresa con fines de prestar servicios a partir
                 de encuesta, para mejorar el rendimiento de distintos ámbitos.
