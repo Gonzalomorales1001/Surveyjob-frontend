@@ -1,24 +1,30 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { URL } from '../helpers/URL';
 import "../css/userScreen.css";
 import userIcon from '../assets/icons8-usuario-masculino-en-círculo-64.png';
 import documentIcon from '../assets/icons8-documento-50.png';
 import { useParams } from 'react-router';
 import SurveysCreated from './SurveysCreated';
-
-//import { UserContext,DarkModeContext } from "../App";
+import { UserContext,DarkModeContext } from "../App";
 
 
 const UserScreen = () => {
+  const {userData}=useContext(UserContext);
+  const {dark}=useContext(DarkModeContext);
+  const params=useParams();
+  const [forbidden, setForbidden] = useState(false);
   const [userInfo, setUserInfo] = useState({
     username: '',
     email: '',
     company: ''
   });
-
   const [showModal, setShowModal] = useState(false);
-
-  const params=useParams()
+  
+  useEffect(() => {
+    if(params.id!=userData.userID){
+      setForbidden(true)
+    }
+  }, [])
 
   useEffect(() => {
     const fetchUserData = async () => {
@@ -50,7 +56,12 @@ const UserScreen = () => {
   };
 
   return (
-    <div>
+    <div className='container'>
+      {forbidden?(
+      <div>
+        <h1>Prohibido</h1>
+      </div>
+      ):(<>
       <div className="container-fluid">
         <a className="navbar-brand" href="#">
           <img
@@ -132,6 +143,8 @@ const UserScreen = () => {
   
       <h2 className="encuesta-nueva">Prueba crear tu primera encuesta</h2>
       <h4 className="crear-encuesta">Crear encuesta</h4>
+      </>
+      )}
     </div>
   )};
 

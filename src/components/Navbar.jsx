@@ -18,10 +18,10 @@ const Navbar = ({ToggleDarkMode}) => {
     <header>
       <nav
         className={`navbar-expand w-100 bg-body-tertiary sticky-top ${
-          dark ? "navbar-dark" : "navbar-light"
+          dark ? "texturized--dark" : "texturized--light"
         }`}
       >
-        <div className="">
+        <div className="navbar__overlay">
           <div className="nav__logo">
             <Link
               className="navbar-brand d-flex justify-content-center align-items-center"

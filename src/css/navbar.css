@@ -1,15 +1,12 @@
 .navbar{
-    font-weight: 300;
+  font-weight: 300;
 }
 
-.navbar-light{
-    background-color: var(--SurveyJob-Light1);
-    color: var(--SurveyJob-Dark1);
-}
-
-.navbar-dark{
-    background-color: var(--SurveyJob-Black3);
-    color: var(--SurveyJob-Light1);
+.navbar__overlay{
+  padding-bottom: 30px;
+  background: transparent;
+  background: linear-gradient(0deg, transparent 0%, rgba(0,0,0,0.3) 30%);
+  /* background-color: rgba(0, 0, 0, 0.15); */
 }
 
 .navbar--scrolled{background-color: rgba(240, 165, 0, 0.5) ;}
