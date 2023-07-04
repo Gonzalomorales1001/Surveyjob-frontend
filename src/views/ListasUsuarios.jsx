@@ -8,7 +8,7 @@ import { InfiniteLoader } from "../components/InfiniteLoader";
 const ListasUsuarios = ({dark}) => {
   const [users, setUsers] = useState([]);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
-  const limite = 3; //prueba con limite
+  const limite = 4; //prueba con limite
   const [pagina, setPagina] = useState(0);
 
   const traerUsuarios = async () => {

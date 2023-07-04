@@ -1,9 +1,6 @@
 import React from "react";
 
 const Pagination = (totalEncuestas, totalUsuarios) => {
-  
-  
-  
   // const chunk = (array, size) => {
   //   const chunks = [];
   //   for (let i = 0; i < array.length; i += size) {
@@ -11,10 +8,10 @@ const Pagination = (totalEncuestas, totalUsuarios) => {
   //   }
   //   return chunks;
   // };
-  
+
   // const createItem = () => {
   //   const gameChunks = chunk(games, 5);
-  
+
   //   return gameChunks.map((chunk, index) => (
   //     <Box key={index} display="flex" justifyContent='center' height='360px'>
   //       {chunk.map((game) => (
@@ -23,9 +20,7 @@ const Pagination = (totalEncuestas, totalUsuarios) => {
   //     </Box>
   //   ));
   // };
-  
-  
-  
+
   return (
     <>
       <nav aria-label="Page navigation example">
@@ -38,16 +33,6 @@ const Pagination = (totalEncuestas, totalUsuarios) => {
           <li className="page-item">
             <a className="page-link" href="#">
               1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              2
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              3
             </a>
           </li>
           <li className="page-item">

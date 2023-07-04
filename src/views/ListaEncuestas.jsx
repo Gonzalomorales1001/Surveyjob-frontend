@@ -8,7 +8,7 @@ import { InfiniteLoader } from "../components/InfiniteLoader";
 const ListasEncuestas = ({dark}) => {
   const [surveys, setSurveys] = useState([]);
   const [totalEncuestas, setTotalEncuestas] = useState(0);
-  const limite = 3; //prueba con limite
+  const limite = 7; //prueba con limite
   const [pagina, setPagina] = useState(0);
 
   const traerEncuestas = async () => {
