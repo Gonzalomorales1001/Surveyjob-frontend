@@ -1,54 +1,62 @@
-* {
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
-  }
-  
-  body {
-    font-family: Arial, Helvetica, sans-serif;
-  }
-  
-  .card-group {
-    display: flex;
-    justify-content: space-between;
-  }
-  
-  .card {
-    flex: 1;
-    text-align: center;
-    margin: 0 5px;
-  }
-  
-  .container-fluid a img {
-    margin-bottom: 8px;
-    margin-top: 15px;
-    margin-left: 5px; 
-  }
-  
-  .datos {
-    margin-bottom: 20px;
-    margin-top: 5px;
-    
-  }
-  
-  .datos p {
-    margin-bottom: 5px;
-    font-weight: bold;
-    margin-left: 5px;
-  }
-  
-  .card-img-top {
-    object-fit: contain;
-    max-height: 100px;
-  }
-  
-  .encuesta-nueva {
-    margin-left: 35%;
-    margin-top: 10px;
-  }
-  
-  .crear-encuesta {
-    margin-top: 5px;
-    margin-left: 43%;
-    color: blue;
-  }
+.new-survey-question{
+  border-radius: 20px;
+}
+
+.add-question{
+  margin: 10px 0px;
+  padding: 15px;
+  border: 1px solid var(--SurveyJob);
+  background-color: rgba(240, 165, 0, 0.3);
+}
+
+.list-group--light{
+  border: 1px solid #0F1F2F;
+}
+
+.list-group--dark{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.card-group {
+  display: flex;
+  justify-content: space-between;
+}
+
+.card {
+  flex: 1;
+  text-align: center;
+  margin: 0 5px;
+}
+
+.container-fluid a img {
+  margin-bottom: 8px;
+  margin-top: 15px;
+  margin-left: 5px; 
+}
+
+.datos {
+  margin-bottom: 20px;
+  margin-top: 5px;
+}
+
+.datos p {
+  margin-bottom: 5px;
+  font-weight: bold;
+  margin-left: 5px;
+}
+
+.card-img-top {
+  object-fit: contain;
+  max-height: 100px;
+}
+
+.encuesta-nueva {
+  margin-left: 35%;
+  margin-top: 10px;
+}
+
+.crear-encuesta {
+  margin-top: 5px;
+  margin-left: 43%;
+  color: blue;
+}

@@ -1,15 +1,12 @@
 .navbar{
-    font-weight: 300;
+  font-weight: 300;
 }
 
-.navbar-light{
-    background-color: var(--SurveyJob-Light1);
-    color: var(--SurveyJob-Dark1);
-}
-
-.navbar-dark{
-    background-color: var(--SurveyJob-Black3);
-    color: var(--SurveyJob-Light1);
+.navbar__overlay{
+  padding-bottom: 30px;
+  background: transparent;
+  background: linear-gradient(0deg, transparent 0%, rgba(0,0,0,0.3) 30%);
+  /* background-color: rgba(0, 0, 0, 0.15); */
 }
 
 .navbar--scrolled{background-color: rgba(240, 165, 0, 0.5) ;}
@@ -18,8 +15,16 @@
     width: 150px;
 }
 
+.nav__logo{
+  text-align: center;
+}
+
+.navbar-nav{
+  width: 100%;
+}
+
 .nav-item{
-  min-width: 75px;
+  width: 100%;
   text-align: center;
 }
 
@@ -30,14 +35,6 @@
 .active{
   border-bottom: 2px solid var(--SurveyJob);
 }
-
-/* .nav-link--light:active{
-  border-bottom: 5px solid var(--SurveyJob-Dark2);
-}
-
-.nav-link--dark:active{
-  border-bottom: 5px solid var(--SurveyJob);
-} */
 
 @media (min-width:768px) {
     .nav-item{

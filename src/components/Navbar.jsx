@@ -17,11 +17,11 @@ const Navbar = ({ToggleDarkMode}) => {
   return (
     <header>
       <nav
-        className={`navbar-expand bg-body-tertiary sticky-top d-flex align-items-center justify-content-center ${
-          dark ? "navbar-dark" : "navbar-light"
+        className={`navbar-expand w-100 bg-body-tertiary sticky-top ${
+          dark ? "texturized--dark" : "texturized--light"
         }`}
       >
-        <div className="container-fluid">
+        <div className="navbar__overlay">
           <div className="nav__logo">
             <Link
               className="navbar-brand d-flex justify-content-center align-items-center"
@@ -85,15 +85,6 @@ const Navbar = ({ToggleDarkMode}) => {
                     </NavLink>
                   </li>
                   </>
-                  // <li className="nav-item dropdown">
-                  //   <a className={`nav-link ${dark?'nav-link--dark':'nav-link--light'} dropdown-toggle`} href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  //     {userData.username}
-                  //   </a>
-                  //   <ul className="dropdown-menu">
-                  //     <li><Link className="dropdown-item" to={`/user/${userData.userID}`}>Mi perfil</Link></li>
-                  //     <li><Link className="dropdown-item" to='/login' onClick={logout}>Cerrar Sesión</Link></li>
-                  //   </ul>
-                  // </li>
                 ):(
                   <li className="nav-item">
                     <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} to="/login">
