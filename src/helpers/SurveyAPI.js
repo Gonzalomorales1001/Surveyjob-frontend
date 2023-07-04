@@ -21,11 +21,11 @@ export const getSurveys = async (limite = 1, pagina = 0) => {
   }
 };
 
-export const addSurvey = async (datos) => {
+export const addSurvey = async (survey,token) => {
   try {
-    const resp = await fetch(URL, {
+    const resp = await fetch(`${URL}/surveys`, {
       method: "POST",
-      body: JSON.stringify(datos),
+      body: JSON.stringify(survey),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         "x-token": token,

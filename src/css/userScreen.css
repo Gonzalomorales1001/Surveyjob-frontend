@@ -9,6 +9,14 @@
   background-color: rgba(240, 165, 0, 0.3);
 }
 
+.list-group--light{
+  border: 1px solid #0F1F2F;
+}
+
+.list-group--dark{
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
 .card-group {
   display: flex;
   justify-content: space-between;

@@ -3,8 +3,9 @@ import { DarkModeContext, UserContext } from '../App';
 import { getCategories } from '../helpers/CategoryAPI';
 import { Modal, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
+import { addSurvey } from '../helpers/SurveyAPI';
 
-const SurveyCreator = () => {
+const SurveyCreator = ({toggleShowSurveyCreator}) => {
     const {dark}=useContext(DarkModeContext);
     const {userData} = useContext(UserContext);
 
@@ -14,8 +15,8 @@ const SurveyCreator = () => {
         title:'',
         questions:[],
         category:'',
-        public: null,
-        anonymous: true,
+        public: false,
+        anonymous: false,
     })
     const defaultQuestionConfig = {
         content:'',
@@ -148,24 +149,70 @@ const SurveyCreator = () => {
                 setNewSurvey({...newSurvey,questions:questionsArray});
                 Swal.fire({
                     icon:'info',
-                    title:'Encuesta eliminada',
-                })
+                    title:'Pregunta eliminada',
+                });
             }
-          })
+          });
     }
 
+    const sendNewSurvey=async(e)=>{
+        e.preventDefault();
+        //validations
+        if (newSurvey.title.length<5) {
+            return Swal.fire({
+                icon:'error',
+                title:'El título de la encuesta debe tener almenos 5 caracteres'
+            });
+        }
+
+        if(newSurvey.category.length<1){
+            return Swal.fire({
+                icon:'warning',
+                title:'No has seleccionado una categoría'
+            });
+        }
+
+        if(newSurvey.questions.length<1){
+            return Swal.fire({
+                icon:'error',
+                title:'No puedes crear una encuesta sin preguntas'
+            });
+        }
+
+        const token=JSON.parse(localStorage.getItem('x-token'));
+
+        const addSurveyResponse = await addSurvey(newSurvey,token)
+
+        if(addSurveyResponse.newSurvey){
+            Swal.fire({
+                icon:'success',
+                title:'Tu encuesta ha sido creada con éxito',
+            })
+            return toggleShowSurveyCreator();
+        }else{
+            console.log(addSurveyResponse);
+            Swal.fire({
+                icon:'error',
+                title:'Error al crear encuesta',
+                titleText:'Vuelve a iniciar sesión',
+                text:'Si el problema persiste, por favor, ponte en contacto con el administrador.'
+            });
+        }
+        
+    }
 
   return (
-    <form className='container py-2' onSubmit={(e)=>e.preventDefault()}>
+    <form className='container py-2' onSubmit={(e)=>sendNewSurvey(e)}>
         <h2>Crear nueva encuesta</h2>
         <div className="row row-cols-1 row-cols-md-2 pb-3">
             <div className="col">
                 <label htmlFor="title" className="mb-2">Título de la encuesta</label>
                 <input type="text" name='title' onChange={(e)=>setNewSurvey({...newSurvey,title:e.target.value})} value={newSurvey.title} className={`form-control ${dark&&'question__text--dark'}`}/>
+                <small className="text-muted">El título debe tener almenos 5 caracteres.</small>
             </div>
             <div className="col">
                 <label htmlFor="category" className="mb-2">Selecciona una categoría</label>
-                <select defaultValue='' aria-label="Default select example" name='category' onChange={(e)=>setNewSurvey({...newSurvey,category:e.target.value})} className={`form-select ${dark&&'question__text--dark'}`}>
+                <select defaultValue='' aria-label="Default select example" name='category' onChange={(e)=>setNewSurvey({...newSurvey,category:e.target.value.toUpperCase()})} className={`form-select ${dark&&'question__text--dark'}`}>
                     <option value="" className="py-3">Elige una categoría</option>
                     {categories.map((category,index)=>{
                         return (<option className='py-3' key={'category-'+index}>{category}</option>)
@@ -174,8 +221,8 @@ const SurveyCreator = () => {
             </div>
         </div>
         <div className="form-check form-switch">
-            <input className="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
-            <label className="form-check-label" for="flexSwitchCheckDefault">Quiero que mi encuesta aparezca en el inicio de la página. <abbr title="Solo se puede acceder a la encuesta mediante un link"><i className="fa fa-question-circle" aria-hidden="true"></i></abbr></label>
+            <input className="form-check-input form-check-input-warning" onChange={()=>setNewSurvey({...newSurvey,public:!newSurvey.public})} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
+            <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Quiero que mi encuesta aparezca en el inicio de la página. <abbr title="Elige si quieres que la encuesta aparezca en la página de inicio, o que solo se pueda acceder mediante un link"><i className="fa fa-question-circle" aria-hidden="true"></i></abbr></label>
         </div>
         <h3>Preguntas de la encuesta</h3>
         <section>
@@ -195,22 +242,24 @@ const SurveyCreator = () => {
                         return (
                             <tr key={'question-'+(index+1)}>
                                 <th scope="row">{index+1}</th>
-                                <td>{question.content}</td>
+                                <td className='text-ellipsis'>{question.content}</td>
                                 <td className="d-none d-lg-table-cell">{question.questionType}</td>
-                                <td><button className="btn btn-outline-warning" onClick={()=>viewQuestion(index)}><i className="fa fa-pencil"></i></button></td>
-                                <td><button className="btn btn-outline-danger" onClick={()=>deleteQuestion(index)}><i className="fa fa-trash"></i></button></td>
+                                <td><button type='button' className="btn btn-outline-warning" onClick={()=>viewQuestion(index)}><i className="fa fa-pencil"></i></button></td>
+                                <td><button type='button' className="btn btn-outline-danger" onClick={()=>deleteQuestion(index)}><i className="fa fa-trash"></i></button></td>
                             </tr>
                         );
                     })}
                 </tbody>
             </table>
             ):(
-                <p className="text-muted">Esta encuesta aún no tiene preguntas.</p>
+                <div className={`card ${dark&&'card--dark'}`}>
+                    <h4 className='my-3'>Esta encuesta aún no tiene preguntas</h4>
+                </div>
             )}
-            <button className={`mt-3 btn btn-sm rounded-4 ${dark?'btn-outline-warning':'btn-warning'}`} onClick={()=>setShowModal(true)}><i className="fa fa-plus me-2"></i>Añadir nueva pregunta</button>
+            <button type='button' className={`mt-4 btn btn-sm rounded-4 ${dark?'btn-outline-warning':'btn-warning'}`} onClick={()=>setShowModal(true)}><i className="fa fa-plus me-2"></i>Añadir nueva pregunta</button>
         </section>
         <hr />
-        <button className={`rounded-4 btn-lg w-100 btn ${dark?'btn-outline-warning':'btn-warning'}`}><i className="fa fa-user-plus me-3"></i>Crear nueva encuesta</button>
+        <button type='submit' value='Crear nueva encuesta' className={`rounded-4 btn-lg w-100 btn ${dark?'btn-outline-warning':'btn-warning'}`}><i className="fa fa-user-plus me-3"></i>Crear nueva encuesta</button>
         <Modal show={showModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
           <Modal.Header>
             <Modal.Title id="contained-modal-title-vcenter">
@@ -221,7 +270,7 @@ const SurveyCreator = () => {
             <div className="row row-cols-1 pb-3">
                 <div className="col">
                     <label htmlFor="content" className="my-2">Escribe tu pregunta</label>
-                    <input type="text" value={newQuestion.content} name='content' className={`form-control ${dark&&'question__text--dark'}`} onChange={(e)=>setNewQuestion({...newQuestion,content:e.target.value})}/>
+                    <input type="text" placeholder='Ej: ¿Que opinas sobre ...?' value={newQuestion.content} name='content' className={`form-control ${dark&&'question__text--dark'}`} onChange={(e)=>setNewQuestion({...newQuestion,content:e.target.value})}/>
                     <small className='text-muted'>Recuerda que la pregunta debe tener almenos 5 caracteres.</small>
                 </div>
                 <div className="col">
@@ -238,11 +287,11 @@ const SurveyCreator = () => {
                         <label htmlFor="option" className="my-2">Agregar Opciones</label>
                         <div className="input-group mb-3 d-none d-lg-flex">
                             <input type="text" className="form-control" name='option' onChange={(e)=>setOption(e.target.value)} onKeyDown={(e)=>addOption(e)} value={option} placeholder="Escribe aquí y presiona enter" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                            <button className="btn btn-warning" type="button" onClick={(e)=>addOption(e,true)} id="button-addon2">Añadir</button>
+                            <button className="btn btn-warning" type="button" onClick={(e)=>addOption(e,true)} id="button-addon2">Agregar</button>
                         </div>
                         <div className="d-lg-none">
                             <input type="text" className="form-control" name='option' onChange={(e)=>setOption(e.target.value)} onKeyDown={(e)=>addOption(e)} value={option} placeholder="Escribe aquí y presiona enter" aria-label="Recipient's username" aria-describedby="button-addon2"/>
-                            <button className="btn btn-warning mt-2 w-100" type="button" onClick={(e)=>addOption(e,true)}>Añadir</button>
+                            <button className="btn btn-warning mt-2 w-100" type="button" onClick={(e)=>addOption(e,true)}>Agregar</button>
                         </div>
                         <small className='text-muted'>Recuerda que la pregunta debe tener almenos 2 opciones.</small>
                     </div>
@@ -265,7 +314,7 @@ const SurveyCreator = () => {
           </Modal.Footer>
         </Modal>
     </form>
-  )
+  );
 }
 
 export default SurveyCreator
