@@ -48,7 +48,20 @@ textarea{
 
 .text-hover:hover{color: #334756 !important;}
 
+.text-ellipsis{text-overflow: ellipsis;}
+
 .bg-dark-transparency{background-color: rgba(0, 0, 0, 0.3) !important;}
+
+.form-check-input-warning:checked{
+    background-color: #F0A500 !important;
+    border: 0.5px solid var(--SurveyJob) !important;
+    box-shadow: 0px 0px 0px 3px rgba(240, 165, 0, 0.5)!important;
+}
+.form-check-input-warning:focus{
+    color: var(--SurveyJob);
+    border: 0.5px solid var(--SurveyJob) !important;
+    box-shadow: 0px 0px 0px 3px rgba(240, 165, 0, 0.2)!important;
+}
 
 .surveyjob-bg-light{
     background: white;

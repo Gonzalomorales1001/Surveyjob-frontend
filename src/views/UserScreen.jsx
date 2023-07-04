@@ -31,6 +31,10 @@ const UserScreen = () => {
     }
   }, [])
 
+  const toggleShowSurveyCreator=()=>{
+    setShowSurveyCreator(!showSurveyCreator);
+  }
+
   return (
     <div className={`${dark?'texturized--dark':'texturized--light'}`}>
       <div className="container">
@@ -51,10 +55,10 @@ const UserScreen = () => {
       <>
         <div className='d-flex justify-content-between align-items-center'>
           <h1>Mis encuestas</h1>
-          <button className="btn btn-warning rounded-4" onClick={()=>setShowSurveyCreator(!showSurveyCreator)}><i className={`fa ${showSurveyCreator?'fa-times':'fa-plus'}`} aria-hidden="true"></i> {showSurveyCreator?'Cerrar':'Nueva Encuesta'}</button>
+          <button className="btn btn-warning rounded-4" onClick={toggleShowSurveyCreator}><i className={`fa ${showSurveyCreator?'fa-times':'fa-plus'}`} aria-hidden="true"></i> {showSurveyCreator?'Cerrar':'Nueva Encuesta'}</button>
         </div>
         <hr />
-        {showSurveyCreator&&(<SurveyCreator/>)}
+        {showSurveyCreator&&(<SurveyCreator toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
       </>
       )}
       </div>
