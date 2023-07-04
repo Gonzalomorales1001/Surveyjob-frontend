@@ -85,6 +85,7 @@ const LoginScreen = () => {
 
   const loginUser=async(loginRequestData)=>{
     const loginResp=await login(loginRequestData)
+    console.log(loginResp)
     if(loginResp?.token){
       localStorage.setItem('x-token',JSON.stringify(loginResp.token))
       saveUserData(loginResp.user)
@@ -92,7 +93,7 @@ const LoginScreen = () => {
         icon: 'success',
         title: `Bienvenido, ${loginResp.user.username}`,
       })
-      navigate('/')
+      navigate(`/user/${loginResp.user.userID}`)
     }else{
       Swal.fire({
         icon: 'error',
@@ -143,7 +144,7 @@ const LoginScreen = () => {
 
   return (
     <>
-      <main className={`bodylog ${dark?'login__bg--dark':'login__bg--light'}`}>
+      <main className={`bodylog ${dark?'texturized--dark':'texturized--light'}`}>
         <section className="login-section">
         <div className="main">
           <input type="checkbox" id="chk" aria-hidden="true" />
@@ -244,8 +245,9 @@ const LoginScreen = () => {
           </div>
         </div>
         <div className="login-image d-none d-md-block">
-          <div className="login-image__overlay d-flex justify-content-center align-items-center">
+          <div className="login-image__overlay d-flex justify-content-center align-items-center flex-column">
             <img src={SurveyJobLogo} alt="SurveyJobLogo" className="w-50"/>
+            <p className="text-light">¡Encuestas a un click!</p>
           </div>
         </div>
         </section>

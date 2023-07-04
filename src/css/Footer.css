@@ -1,22 +1,18 @@
-.footer-dark{
-  background-color: var(--SurveyJob-Black3);
-  color: var(--SurveyJob-Light1);
-}
 footer {
   bottom: 0;
 }
-.footer-light{
-  background-color: var(--SurveyJob-Light1);
-  color: var(--SurveyJob-Dark1);
+
+.footer-container{
+  background: transparent;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.3) 20%);
+  /* background-color: rgba(0, 0, 0, 0.3); */
+  padding:45px 0 20px;
 }
 
 .site-footer
 {
-  /* background-color:#dddfea; */
-  padding:45px 0 20px;
   font-size:15px;
   line-height:24px;
-  /* color:#0c0b0b; */
 }
 .site-footer hr
 {

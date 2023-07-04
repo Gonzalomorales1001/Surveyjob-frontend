@@ -99,7 +99,7 @@ const SurveyScreen = () => {
   
 
   return (
-    <main className={`${dark?'surveyscreen-bg-dark text-light':'surveyscreen-bg-light'}`}>
+    <main className={`${dark?'texturized--dark text-light':'texturized--light'}`}>
       <div className="container pt-3">
         {userData?(
           <AnswerContext.Provider value={{surveyElements}}>
