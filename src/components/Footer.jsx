@@ -24,7 +24,7 @@ const Footer = ({ToggleDarkMode}) => {
                         id="toggle"
                         className="toggle--checkbox"
                         onChange={ToggleDarkMode}
-                        checked={dark}
+                        defaultChecked={dark}
                       />
                       <label htmlFor="toggle" className="toggle--label">
                         <span className="toggle--label-background"></span>

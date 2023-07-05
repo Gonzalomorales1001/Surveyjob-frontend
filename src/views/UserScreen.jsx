@@ -17,7 +17,7 @@ const UserScreen = () => {
   const {dark}=useContext(DarkModeContext);
   const params=useParams();
   const [forbidden, setForbidden] = useState(false);
-  const [showSurveyCreator, setShowSurveyCreator] = useState(true);
+  const [showSurveyCreator, setShowSurveyCreator] = useState(false);
   const [userInfo, setUserInfo] = useState({
     username: '',
     email: '',
