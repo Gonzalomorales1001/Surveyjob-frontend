@@ -1,0 +1,13 @@
+.home-section-bg--dark{
+    background-image: url('../assets/CarruselHS/HS1D.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
+
+.home-section-bg--light{
+    background-image: url('../assets/CarruselHS/HS1L.jpg');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+}
