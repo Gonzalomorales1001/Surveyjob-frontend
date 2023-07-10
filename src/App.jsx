@@ -25,7 +25,7 @@ export const DarkModeContext=createContext(null)
 
 function App() {
   const [login, setLogin] = useState(false)
-  const [dark, setDark] = useState(!JSON.parse(localStorage.getItem('DarkMode')))
+  const [dark, setDark] = useState(JSON.parse(localStorage.getItem('DarkMode')))
   const [userData, setUserData] = useState(JSON.parse(localStorage.getItem('userData')))
 
   const ToggleDarkMode=()=>{

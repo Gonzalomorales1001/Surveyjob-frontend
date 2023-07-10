@@ -109,7 +109,8 @@ const SurveyScreen = () => {
                 <div className="widget-49-meeting-info">
                     <small className="text-muted mb-2">Encuesta de {userData.username}</small>
                     <h1 className={`widget-49-pro-title fw-light text-center ${dark&&'text-light'}`}>{surveyData.title}</h1>
-                    <span className="widget-49-meeting-time">Categoría: {surveyData.category.charAt(0).toUpperCase() + surveyData.category.slice(1).toLowerCase()}</span>
+                    <p className="my-2">{surveyData.description}</p>
+                    <span className="widget-49-meeting-time text-muted">{surveyData.category.charAt(0).toUpperCase() + surveyData.category.slice(1).toLowerCase()}</span>
                 </div>
               <br />
               </div>

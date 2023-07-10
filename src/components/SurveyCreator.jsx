@@ -13,10 +13,10 @@ const SurveyCreator = ({toggleShowSurveyCreator}) => {
     const [categories, setCategories] = useState([]);
     const [newSurvey, setNewSurvey] = useState({
         title:'',
-        questions:[],
         category:'',
+        description:'',
+        questions:[],
         public: false,
-        anonymous: false,
     })
     const defaultQuestionConfig = {
         content:'',
@@ -165,6 +165,13 @@ const SurveyCreator = ({toggleShowSurveyCreator}) => {
             });
         }
 
+        if(newSurvey.description.length<10) {
+            return Swal.fire({
+                icon:'error',
+                title:'La descripción de la encuesta debe tener almenos 10 caracteres'
+            })
+        }
+
         if(newSurvey.category.length<1){
             return Swal.fire({
                 icon:'warning',
@@ -220,7 +227,11 @@ const SurveyCreator = ({toggleShowSurveyCreator}) => {
                 </select>
             </div>
         </div>
-        <div className="form-check form-switch">
+        <div className='mt-2'>
+            <label htmlFor="description" className='mb-2'>Descripción de la encuesta</label>
+            <textarea name="description" id="description" cols="30" rows="10" className={`form-control question__text ${dark&&'question__text--dark'}`} onChange={(e)=>setNewSurvey({...newSurvey,description:e.target.value})}></textarea>
+        </div>
+        <div className="form-check form-switch my-3">
             <input className="form-check-input form-check-input-warning" onChange={()=>setNewSurvey({...newSurvey,public:!newSurvey.public})} type="checkbox" role="switch" id="flexSwitchCheckDefault"/>
             <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Quiero que mi encuesta aparezca en el inicio de la página. <abbr title="Elige si quieres que la encuesta aparezca en la página de inicio, o que solo se pueda acceder mediante un link"><i className="fa fa-question-circle" aria-hidden="true"></i></abbr></label>
         </div>

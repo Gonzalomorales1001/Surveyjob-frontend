@@ -10,7 +10,7 @@ import HS3L from '../assets/CarruselHS/HS3L.jpg'
 import LOGO_light from '../assets/DarkLetterLogo.png'
 import LOGO_dark from '../assets/LightLetterLogo.png'
 import survey from '../assets/survey.svg'
-import "../css/HomeScreen.css";
+import "../css/home.css";
 import { Carousel } from 'react-bootstrap';
 
 
@@ -25,7 +25,6 @@ const HomeScreen = () => {
             <h1>¿Qué es SurveyJob?</h1>
             <p>SurveyJob es un servicio de encuestas digitales en el que podrás crear tus propias encuestas y enviar un enlace para que puedan ser respondidas.</p>
             <p>Es muy sencillo de utilizar y ¡Solo lleva un par de minutos!</p>
-            <button className="btn btn-outline-warning rounded-pill">Comenzar</button>
           </div>
           <div className="col d-flex justify-content-center align-items-center">
             <img src={survey} alt="survey" className="w-100" />
@@ -69,8 +68,20 @@ const HomeScreen = () => {
       </div>
       <article>
         <header>
-          {/* <img className='mx-auto' src={dark?LOGO_dark:LOGO_light} alt="SurveyJob logo" /> */}
+          <h2 className="text-center">
+            Encuestas públicas
+          </h2>
         </header>
+        <main className='container'>
+          <div className={`survey-card ${dark?'survey-card--dark':'survey-card--light'}`}>
+            <h2 className='text-center'>Titulo de la encuesta</h2>
+            <small className="text-muted d-block">Categoría</small>
+            <p className="survey-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem culpa similique dignissimos rem porro ab aperiam perferendis, iste architecto non.</p>
+          </div>
+        </main>
+        <footer>
+
+        </footer>
       </article>
     </main>
   )
