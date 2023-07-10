@@ -5,7 +5,7 @@ import { Modal, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { addSurvey } from '../helpers/SurveyAPI';
 
-const SurveyCreator = ({toggleShowSurveyCreator}) => {
+const SurveyCreator = ({toggleShowSurveyCreator,getSurveysByUserId}) => {
     const {dark}=useContext(DarkModeContext);
     const {userData} = useContext(UserContext);
 
@@ -188,6 +188,7 @@ const SurveyCreator = ({toggleShowSurveyCreator}) => {
                 icon:'success',
                 title:'Tu encuesta ha sido creada con éxito',
             })
+            getSurveysByUserId()
             return toggleShowSurveyCreator();
         }else{
             console.log(addSurveyResponse);
