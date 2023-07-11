@@ -6,7 +6,7 @@ import "../css/admin.css";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import { UserContext, DarkModeContext } from "../App";
-// import Pagination from "../components/Pagination";
+import Pagination from "../components/Pagination";
 // import Paginacion from "../../../../fanl rolling/Surveyjob-frontend/src/components/Paginacion";
 
 const AdminsScreen = () => {
@@ -15,31 +15,34 @@ const AdminsScreen = () => {
   const [surveys, setSurveys] = useState([]);
   const [totalEncuestas, setTotalEncuestas] = useState(0);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
-  const limite =0; //prueba con limite
-  const [pagina, setPagina] = useState(0);
+  // const limite =0; //prueba con limite
+  const [limit, setLimit] = useState(5)
+  // const [pagina, setPagina] = useState(0);
+  const [total, setTotal] = useState("")
+
 
   const traerUsuarios = async () => {
-    const { Users, total } = await getUsers(limite, pagina);
+    const { Users, total } = await getUsers(limit);
     setUsers(Users);
     setTotalUsuarios(total);
   };
   useEffect(() => {
     traerUsuarios();
-  }, [pagina]);
+  }, [limit]);
 
   const traerEncuestas = async () => {
-    const { surveys, total } = await getSurveys(limite, pagina);
+    const { surveys, total } = await getSurveys(limit);
     setSurveys(surveys);
     setTotalEncuestas(total);
   };
   useEffect(() => {
     traerEncuestas();
-  }, [pagina]);
+  }, [limit]);
 
-  () => setPagina((prevPagina) => prevPagina + 1);
+  // () => setPagina((prevPagina) => prevPagina + 1);
   return (
     <>
-      <div className={` ${dark ? "secAdmin-dark" : "secAdmin-light"}`}>
+      <div className={` ${dark} ? "secAdmin-dark" : "secAdmin-light"}`}>
         <div className=" container-fluid w-100">
           <div className="row  py-5">
             <div className="col text-center ">
@@ -102,11 +105,6 @@ const AdminsScreen = () => {
           </section>
           <Outlet />
         </div>
-        {/* <Paginacion/> */}
-        {/* <Pagination 
-        // totalEncuestas={totalEncuestas}
-        // totalUsuarios={totalUsuarios}
-         /> */}
       </div>
     </>
   );

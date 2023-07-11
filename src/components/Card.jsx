@@ -41,18 +41,6 @@ const Card = ({ user, dark }) => {
                   <p className="card-text">
                     <small>{email}</small>
                   </p>
-                  {/* <button //se anula el boton para que solo se pueda eliminar
-                    className="btn btn-warning btn-sm"
-                    onClick={() => handleShow(userID)} // agregar funciones
-                  >
-                    <i className="fa fa-pencil" aria-hidden="true"></i>
-                  </button>
-                  <button
-                    className="btn btn-danger btn-sm mx-3"
-                    onClick={() => inactivarUsuario(username, userID)} // agregar funciones
-                  >
-                    <i className="fa fa-trash" aria-hidden="true"></i>
-                  </button> */}
                 </div>
               </div>
             </div>

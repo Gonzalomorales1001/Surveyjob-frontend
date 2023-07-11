@@ -1,9 +1,10 @@
 import { URL } from "./URL";
+const token = JSON.parse(localStorage.getItem("x-token")); //importar / traer datos de token de local storage
 
 export const getSurveyByID = async (surveyID) => {
   const response = await fetch(`${URL}/surveys/${surveyID}`);
   const data = await response.json();
-  console.log(data)
+  console.log(data);
   return data;
 };
 
@@ -11,7 +12,7 @@ export const getSurveyByID = async (surveyID) => {
 export const getSurveys = async (limite = 1, pagina = 0) => {
   try {
     const resp = await fetch(
-      URL + "/surveys?limit" + limite + "&since" + pagina
+      URL + "/surveys?limit=" + limite + "&since=" + pagina
     );
     const data = await resp.json();
     return data;
@@ -20,7 +21,7 @@ export const getSurveys = async (limite = 1, pagina = 0) => {
   }
 };
 
-export const addSurvey = async (survey,token) => {
+export const addSurvey = async (survey, token) => {
   try {
     const resp = await fetch(`${URL}/surveys`, {
       method: "POST",
@@ -74,20 +75,18 @@ export const addAnswer = async (surveyID, content) => {
 };
 
 export const deleteSurvey = async (surveyID) => {
-  console.log(surveyID);
   try {
-    const token = JSON.parse(localStorage.getItem('x-token'));
-    console.log(token)
+    const token = JSON.parse(localStorage.getItem("x-token"));
+
     const resp = await fetch(URL + "/surveys/" + surveyID, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
-        "x-token":`${token}`,
+        "x-token": `${token}`,
       },
     });
-    return resp;
-    // const data = await resp.json();
-    // return data;
+    const data = await resp.json();
+    return data;
   } catch (error) {
     console.log(error);
     return "No se pudo eliminar encuesta";

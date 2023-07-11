@@ -17,7 +17,7 @@ const CardSurvey = ({ survey, dark }) => {
       if (result.isConfirmed) {
         deleteSurvey(surveyID).then((resultado) => {
           // agregar funciones
-          Swal.fire("La encueta fue borrado", `${resultado.msg}`, "success"); //ver respuesta
+          Swal.fire("La encueta fue borrada", `${resultado.msg}`, "success"); //ver respuesta
         });
       } else if (result.isDenied) {
         Swal.fire("La encueta no se inactivó", "", "info");
@@ -60,33 +60,6 @@ const CardSurvey = ({ survey, dark }) => {
             </div>
           </div>
         </div>
-        {/* <div className="card  col-sm-6 col-md-4 mx-5 my-2">
-          <div className="d-flex  gap-3 me-2 mt-2">
-            <div className="row ">
-              <div className="d-flex mx-2 col-md-4 ">
-                <img className="avatar" src={avatar} alt="avatar" />
-                <div className="card-body">
-                  <h5 className="card-title">Nombre {username}</h5> 
-                  <p className="card-text">
-                    <small>Email/Empresa{email}</small>
-                  </p>
-                </div>
-              </div>
-            </div>
-            {/* <button //se anula el boton para que solo se pueda eliminar
-              className="btn btn-warning btn-sm "
-              onClick={() => handleShow(userID)} // agregar funciones
-            >
-              <i className="fa fa-pencil" aria-hidden="true"></i>
-            </button> 
-            <button
-              className="btn btn-danger btn-sm "
-              onClick={() => inactivarUsuario(username, userID)} // agregar funciones
-            >
-              <i className="fa fa-trash" aria-hidden="true"></i>
-            </button>
-          </div>
-        </div> */}
       </div>
     </>
   );
