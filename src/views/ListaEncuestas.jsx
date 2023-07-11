@@ -8,17 +8,18 @@ import { InfiniteLoader } from "../components/InfiniteLoader";
 const ListasEncuestas = ({dark}) => {
   const [surveys, setSurveys] = useState([]);
   const [totalEncuestas, setTotalEncuestas] = useState(0);
-  const limite = 7; //prueba con limite
-  const [pagina, setPagina] = useState(0);
+  // const limite = 5; //prueba con limite - este es el limite que funciona
+  const [limit, setLimit] = useState(5)
+  // const [pagina, setPagina] = useState(0);
 
   const traerEncuestas = async () => {
-    const { surveys, total } = await getSurveys(limite, pagina);
+    const { surveys, total } = await getSurveys(limit);
     setSurveys(surveys);
     setTotalEncuestas(total);
   };
   useEffect(() => {
     traerEncuestas();
-  }, [pagina]);
+  }, [limit]);
 
   () => setPagina((prevPagina) => prevPagina + 1);
   const { title, surveyID } = surveys; //datos a usar de los usuarios
@@ -39,6 +40,9 @@ const ListasEncuestas = ({dark}) => {
           </div>
         )}
       </div>
+      <button onClick={()=>setLimit(limit+5)}>Ver Más</button>
+      
+      <button onClick={()=>setLimit(limit-5)}>Ver Menos</button>
     </>
   );
 };

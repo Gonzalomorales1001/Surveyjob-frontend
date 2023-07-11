@@ -12,7 +12,7 @@ export const getSurveyByID = async (surveyID) => {
 export const getSurveys = async (limite = 1, pagina = 0) => {
   try {
     const resp = await fetch(
-      URL + "/surveys?limit" + limite + "&since" + pagina
+      URL + "/surveys?limit=" + limite + "&since=" + pagina
     );
     const data = await resp.json();
     return data;
