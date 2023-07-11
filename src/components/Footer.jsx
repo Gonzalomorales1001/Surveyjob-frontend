@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import "../css/Footer.css";
 import { DarkModeContext } from "../App";
-import { Link } from "react-router-dom";
+import {Link, NavLink} from'react-router-dom'
 
 const Footer = ({ToggleDarkMode}) => {
 
@@ -24,7 +24,7 @@ const Footer = ({ToggleDarkMode}) => {
                         id="toggle"
                         className="toggle--checkbox"
                         onChange={ToggleDarkMode}
-                        checked={dark}
+                        defaultChecked={dark}
                       />
                       <label htmlFor="toggle" className="toggle--label">
                         <span className="toggle--label-background"></span>

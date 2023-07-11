@@ -10,6 +10,7 @@ import { UserContext,DarkModeContext } from "../App";
 import {Modal,Button} from 'react-bootstrap'
 import SurveyCreator from '../components/SurveyCreator';
 import { Link } from 'react-router-dom';
+import SurveyCard from '../components/SurveyCard';
 
 
 const UserScreen = () => {
@@ -18,12 +19,8 @@ const UserScreen = () => {
   const params=useParams();
   const [forbidden, setForbidden] = useState(false);
   const [showSurveyCreator, setShowSurveyCreator] = useState(true);
-  const [userInfo, setUserInfo] = useState({
-    username: '',
-    email: '',
-    company: ''
-  });
   const [showModal, setShowModal] = useState(false);
+  const [userSuervey, setUserSurvey] = useState(false);
   
   useEffect(() => {
     if(params.id!=userData.userID){
@@ -34,6 +31,17 @@ const UserScreen = () => {
   const toggleShowSurveyCreator=()=>{
     setShowSurveyCreator(!showSurveyCreator);
   }
+
+useEffect(() => {
+getSurveysByUserId()
+}, [])
+
+function getSurveysByUserId() {
+fetch(`http://localhost:8080/api/surveys?userId=${params.id}`) 
+.then(res=> res.json())
+.then(data=> setUserSurvey(data))
+.catch(err=> console.log(err))
+}
 
   return (
     <div className={`${dark?'texturized--dark':'texturized--light'}`}>
@@ -58,7 +66,10 @@ const UserScreen = () => {
           <button className="btn btn-warning rounded-4" onClick={toggleShowSurveyCreator}><i className={`fa ${showSurveyCreator?'fa-times':'fa-plus'}`} aria-hidden="true"></i> {showSurveyCreator?'Cerrar':'Nueva Encuesta'}</button>
         </div>
         <hr />
-        {showSurveyCreator&&(<SurveyCreator toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
+        {showSurveyCreator&&(<SurveyCreator getSurveysByUserId={getSurveysByUserId} toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
+        {!showSurveyCreator && <div className='d-flex flex-wrap'>{userSuervey.surveys.map(e=><SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers}/>)}</div>}
+        {!showSurveyCreator && userSuervey.total==0 && <h3>No tiene encuestas creadas</h3>}
+        
       </>
       )}
       </div>
