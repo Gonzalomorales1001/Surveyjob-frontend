@@ -12,6 +12,8 @@ import SurveyCreator from '../components/SurveyCreator';
 import { Link } from 'react-router-dom';
 import SurveyCard from '../components/SurveyCard';
 import { InfiniteLoader } from '../components/InfiniteLoader';
+import noData from '../assets/no-data.svg'
+import Error500 from '../assets/Error500.svg'
 
 
 const UserScreen = () => {
@@ -75,13 +77,25 @@ fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
         <hr />
         {showSurveyCreator&&(<SurveyCreator getSurveysByUserId={getSurveysByUserId} toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
 
-        {userSurvey?(userSurvey.total!=0
+        {userSurvey?userSurvey.total!=0
           ?(
             <div className="row row-cols-1">
               <div className='col'>{userSurvey.surveys.map(e=><SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers}/>)}</div>
             </div>
+          ):(
+            <div className='row justify-content-center align-items-center'>
+              <div className="col d-flex justify-content-center">
+                <img src={noData} className='text-center w-50' alt="Sin información" />
+              </div>
+              <div className="col text-center">
+                <h2>¡No tienes encuestas creadas!</h2>
+                <p>Puedes añadir nuevas encuestas haciendo click en el boton de "Crear nueva encuesta".
+                Además, puedes compartir el enlace para que tus encuestas sean respondidas y
+                <span className='text-warning'> ¡Aquí podras ver los resultados de tus encuestas! </span></p>
+              </div>
+            </div>
           )
-          :<h3>No tiene encuestas creadas</h3>):
+          :
           err?(
             <div className='row align-items-center justify-content-center py-4 loading-screen'>
               <img src={Error500} alt="serverless" className='col-12 col-lg-6 w-50' />
