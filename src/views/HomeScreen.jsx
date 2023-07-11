@@ -71,6 +71,14 @@ const HomeScreen = () => {
           <h2 className="text-center">
             Encuestas públicas
           </h2>
+          <div className="input-group mb-3 py-3">
+  <select className="form-select" id="inputGroupSelect01">
+    <option selected>Selecciona la categoría</option>
+    <option value="1">One</option>
+    <option value="2">Two</option>
+    <option value="3">Three</option>
+  </select>
+</div>
         </header>
         <main className='container'>
           <div className={`survey-card ${dark?'survey-card--dark':'survey-card--light'}`}>
@@ -78,9 +86,24 @@ const HomeScreen = () => {
             <small className="text-muted d-block">Categoría</small>
             <p className="survey-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem culpa similique dignissimos rem porro ab aperiam perferendis, iste architecto non.</p>
           </div>
+          <div className='container py-5'>
+          <nav aria-label="Page navigation example">
+  <ul className="pagination justify-content-center">
+    <li className="page-item disabled">
+      <a className="page-link">Previous</a>
+    </li>
+    <li className="page-item"><a className="page-link" href="#">1</a></li>
+    <li className="page-item"><a className="page-link" href="#">2</a></li>
+    <li className="page-item"><a className="page-link" href="#">3</a></li>
+    <li className="page-item">
+      <a className="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+          </div>
+
         </main>
         <footer>
-
         </footer>
       </article>
     </main>
