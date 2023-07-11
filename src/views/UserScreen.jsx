@@ -7,10 +7,11 @@ import Error403 from '../assets/Error403.svg'
 import { useParams } from 'react-router';
 import SurveysCreated from './SurveysCreated';
 import { UserContext,DarkModeContext } from "../App";
-import {Modal,Button} from 'react-bootstrap'
+import {Modal,Button, Row} from 'react-bootstrap'
 import SurveyCreator from '../components/SurveyCreator';
 import { Link } from 'react-router-dom';
 import SurveyCard from '../components/SurveyCard';
+import { InfiniteLoader } from '../components/InfiniteLoader';
 
 
 const UserScreen = () => {
@@ -18,13 +19,16 @@ const UserScreen = () => {
   const {dark}=useContext(DarkModeContext);
   const params=useParams();
   const [forbidden, setForbidden] = useState(false);
-  const [showSurveyCreator, setShowSurveyCreator] = useState(true);
+  const [showSurveyCreator, setShowSurveyCreator] = useState(false);
   const [showModal, setShowModal] = useState(false);
-  const [userSuervey, setUserSurvey] = useState(false);
+  const [userSurvey, setUserSurvey] = useState(false);
+  const [err, setErr] = useState(false);
   
   useEffect(() => {
-    if(params.id!=userData.userID){
+    if (params.id!=userData.userID) {
       setForbidden(true)
+    } else {
+      getSurveysByUserId()
     }
   }, [])
 
@@ -36,11 +40,14 @@ useEffect(() => {
 getSurveysByUserId()
 }, [])
 
-function getSurveysByUserId() {
+async function getSurveysByUserId() {
 fetch(`http://localhost:8080/api/surveys?userId=${params.id}`) 
 .then(res=> res.json())
 .then(data=> setUserSurvey(data))
-.catch(err=> console.log(err))
+.catch(err=>{
+  setErr(true);
+  console.error(err);
+})
 }
 
   return (
@@ -67,9 +74,34 @@ fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
         </div>
         <hr />
         {showSurveyCreator&&(<SurveyCreator getSurveysByUserId={getSurveysByUserId} toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
-        {!showSurveyCreator && <div className='d-flex flex-wrap'>{userSuervey.surveys.map(e=><SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers}/>)}</div>}
-        {!showSurveyCreator && userSuervey.total==0 && <h3>No tiene encuestas creadas</h3>}
-        
+
+        {userSurvey?(userSurvey.total!=0
+          ?(
+            <div className="row row-cols-1">
+              <div className='col'>{userSurvey.surveys.map(e=><SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers}/>)}</div>
+            </div>
+          )
+          :<h3>No tiene encuestas creadas</h3>):
+          err?(
+            <div className='row align-items-center justify-content-center py-4 loading-screen'>
+              <img src={Error500} alt="serverless" className='col-12 col-lg-6 w-50' />
+              <div className='col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column'>
+                <h1 className='text-center text-secondary'>¡No ha sido posible cargar la información!</h1>
+                <h3 className='text-center text-secondary'>¡Ha ocurrido un error inesperado!</h3>
+                <p className='text-center text-secondary'>Por favor, ponte en contacto con algún administrador</p>
+              </div>
+            </div>
+          ):(
+            <div className='container d-flex justify-content-center align-items-start py-5 loading-screen'>
+              <div>
+                <h1 className='text-center'>Cargando...</h1>
+                <p className='text-center mb-5'>Cargando información del usuario</p>
+                <InfiniteLoader dark={dark}/>
+              </div>
+            </div>
+          )
+        }
+
       </>
       )}
       </div>

@@ -1,19 +1,22 @@
-export default function SurveyCard ({id,title,category,questions,answers}) {
+import { useContext } from "react"
+import { DarkModeContext } from "../App";
 
+export default function SurveyCard ({id,title,category,questions,answers}) {
+  const {dark}=useContext(DarkModeContext);
     return(
     <>
-  <div className="card" style={{width:"33%",minWidth:"200px"}} >
+  <div className={`card ${dark&&'card--dark'} my-3`}>
   <div className="card-body">
     <h5 className="card-title">{title}</h5>
     <p className="card-text">{category}</p>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target={`#modal-${id}`}>
-     Launch static backdrop modal
+    <button type="button" class="btn btn-warning rounded-3" data-bs-toggle="modal" data-bs-target={`#modal-${id}`}>
+     Ver Respuestas
     </button>
   </div>
   </div>
   <div class="modal fade" id={`modal-${id}`} tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">    
-    <div className="modal-dialog modal-dialog-scrollable">
-        <div className="modal-content modal-body">
+    <div className={`modal-dialog modal-dialog-scrollable`}>
+        <div className={`modal-content modal-body ${dark&&'bg-dark'}`}>
            {
             questions.map((e,index)=> 
             <div key={e._id}>
