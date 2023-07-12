@@ -8,17 +8,18 @@ import { InfiniteLoader } from "../components/InfiniteLoader";
 const ListasUsuarios = ({dark}) => {
   const [users, setUsers] = useState([]);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
-  const limite = 3; //prueba con limite
-  const [pagina, setPagina] = useState(0);
+  // const limite = 4; //prueba con limite - este es el limite que funciona
+  const [limit, setLimit] = useState(5)
+  // const [pagina, setPagina] = useState(0);
 
   const traerUsuarios = async () => {
-    const { Users, total } = await getUsers(limite, pagina);
+    const { Users, total } = await getUsers(limit);
     setUsers(Users);
     setTotalUsuarios(total);
   };
   useEffect(() => {
     traerUsuarios();
-  }, [pagina]);
+  }, [limit]);
 
   () => setPagina((prevPagina) => prevPagina + 1);
   
@@ -39,6 +40,9 @@ const ListasUsuarios = ({dark}) => {
           </div>
         )}
       </div>
+      <button onClick={()=>setLimit(limit+5)}>Ver Más</button>
+      
+      <button onClick={()=>setLimit(limit-5)}>Ver Menos</button>
     </>
   );
 };

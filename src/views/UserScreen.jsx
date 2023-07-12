@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
-import { URL } from '../helpers/URL';
+import React, { useState, useEffect, useContext } from "react";
+import { URL } from "../helpers/URL";
 import "../css/userScreen.css";
 import userIcon from '../assets/icons8-usuario-masculino-en-círculo-64.png';
 import documentIcon from '../assets/icons8-documento-50.png';
@@ -17,9 +17,9 @@ import Error500 from '../assets/Error500.svg'
 
 
 const UserScreen = () => {
-  const {userData}=useContext(UserContext);
-  const {dark}=useContext(DarkModeContext);
-  const params=useParams();
+  const { userData } = useContext(UserContext);
+  const { dark } = useContext(DarkModeContext);
+  const params = useParams();
   const [forbidden, setForbidden] = useState(false);
   const [showSurveyCreator, setShowSurveyCreator] = useState(false);
   const [showModal, setShowModal] = useState(false);
@@ -36,6 +36,17 @@ const UserScreen = () => {
 
   const toggleShowSurveyCreator=()=>{
     setShowSurveyCreator(!showSurveyCreator);
+  };
+
+  useEffect(() => {
+    getSurveysByUserId();
+  }, []);
+
+  function getSurveysByUserId() {
+    fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setUserSurvey(data))
+      .catch((err) => console.log(err));
   }
 
 useEffect(() => {
@@ -53,21 +64,26 @@ fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
 }
 
   return (
-    <div className={`${dark?'texturized--dark':'texturized--light'}`}>
+    <div className={`${dark ? "texturized--dark" : "texturized--light"}`}>
       <div className="container">
-      {forbidden?(
-        <div className='row row-cols-1 row-cols-md-2 justify-content-center align-items-center text-center'>
-          <div className="col">
-            <img src={Error403} alt='Acceso Denegado' className='w-50' />
-          </div>
-          <div className="col">
-            <h1>Lo sentimos, pero no puedes acceder a esta página</h1>
-            <div className="alert alert-warning" role="alert">
-              Por favor, <span className='alert-link'><Link to='/login'>Inicia Sesión</Link></span> correctamente.
+        {forbidden ? (
+          <div className="row row-cols-1 row-cols-md-2 justify-content-center align-items-center text-center">
+            <div className="col">
+              <img src={Error403} alt="Acceso Denegado" className="w-50" />
             </div>
-            <small>Error 403: Forbidden</small>
+            <div className="col">
+              <h1>Lo sentimos, pero no puedes acceder a esta página</h1>
+              <div className="alert alert-warning" role="alert">
+                Por favor,
+                <span className="alert-link">
+                  <Link to="/login">Inicia Sesión</Link>
+                </span>
+                correctamente.
+              </div>
+              <small>Error 403: Forbidden</small>
+            </div>
           </div>
-        </div>
+        // </div>
       ):(
       <>
         <div className='d-flex justify-content-between align-items-center'>
@@ -77,8 +93,7 @@ fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
         <hr />
         {showSurveyCreator&&(<SurveyCreator getSurveysByUserId={getSurveysByUserId} toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
 
-        {userSurvey?userSurvey.total!=0
-          ?(
+        {userSurvey?userSurvey.total!=0?(
             <div className="row row-cols-1">
               <div className='col'>{userSurvey.surveys.map(e=><SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers}/>)}</div>
             </div>
@@ -115,11 +130,11 @@ fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
             </div>
           )
         }
-
       </>
       )}
       </div>
     </div>
-  )};
+  );
+};
 
-  export default UserScreen 
+export default UserScreen;
