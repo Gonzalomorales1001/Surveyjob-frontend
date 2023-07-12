@@ -270,15 +270,15 @@ const SurveyCreator = ({toggleShowSurveyCreator,getSurveysByUserId}) => {
             )}
             <button type='button' className={`mt-4 btn btn-sm rounded-4 ${dark?'btn-outline-warning':'btn-warning'}`} onClick={()=>setShowModal(true)}><i className="fa fa-plus me-2"></i>Añadir nueva pregunta</button>
         </section>
+        <button type='submit' value='Crear nueva encuesta' className={`rounded-4 mt-3 btn-lg w-100 btn ${dark?'btn-outline-warning':'btn-warning'}`}><i className="fa fa-user-plus me-3"></i>Crear nueva encuesta</button>
         <hr />
-        <button type='submit' value='Crear nueva encuesta' className={`rounded-4 btn-lg w-100 btn ${dark?'btn-outline-warning':'btn-warning'}`}><i className="fa fa-user-plus me-3"></i>Crear nueva encuesta</button>
         <Modal show={showModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
-          <Modal.Header>
+          <Modal.Header className={`${dark&&'bg-dark text-light'}`}>
             <Modal.Title id="contained-modal-title-vcenter">
               {showEditQuestionButton?`Editar pregunta`:`Agregar nueva pregunta`}
             </Modal.Title>
           </Modal.Header>
-          <Modal.Body>
+          <Modal.Body className={`${dark&&'bg-dark text-light'}`}>
             <div className="row row-cols-1 pb-3">
                 <div className="col">
                     <label htmlFor="content" className="my-2">Escribe tu pregunta</label>
@@ -316,7 +316,7 @@ const SurveyCreator = ({toggleShowSurveyCreator,getSurveysByUserId}) => {
                 )}
             </div>
           </Modal.Body>
-          <Modal.Footer>
+          <Modal.Footer className={`${dark&&'bg-dark text-light'}`}>
             <button className="btn btn-danger rounded-1" onClick={resetNewQuestion}>Cancelar</button>
             {showEditQuestionButton?(
                 <button className="btn btn-primary rounded-1" onClick={()=>editQuestion(questionIndex)}><i className="fa fa-pencil me-3"></i>Editar Pregunta</button>
