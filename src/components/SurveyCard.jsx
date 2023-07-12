@@ -5,7 +5,7 @@ export default function SurveyCard ({id,title,category,questions,answers}) {
   const {dark}=useContext(DarkModeContext);
     return(
     <>
-  <div className={`card ${dark&&'card--dark'} my-3`}>
+  <div className={`card ${dark&&'card--dark'} my-5`}>
   <div className="card-body">
     <h5 className="card-title">{title}</h5>
     <p className="card-text">{category}</p>
