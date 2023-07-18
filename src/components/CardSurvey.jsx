@@ -34,7 +34,7 @@ const CardSurvey = ({ survey, dark }) => {
           <div className="d-flex me-2 mt-2 ">
             <div className="row ">
               <div className="d-flex mx-2 col-md-4 ">
-                <img className="avatar" src={survey2} alt="avatar" />
+                <img className="avatar mt-4" src={survey2} alt="avatar" />
                 <div className="card-body">
                   <h5 className="card-title"> {title}</h5>
                   <p className="card-text">

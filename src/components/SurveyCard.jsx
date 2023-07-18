@@ -17,7 +17,7 @@ export default function SurveyCard({
           <p className="card-text">{category}</p>
           <button
             type="button"
-            class="btn btn-warning rounded-3"
+            className="btn btn-warning rounded-3"
             data-bs-toggle="modal"
             data-bs-target={`#modal-${id}`}
           >
@@ -26,7 +26,7 @@ export default function SurveyCard({
         </div>
       </div>
       <div
-        class="modal fade"
+        className="modal fade"
         id={`modal-${id}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"

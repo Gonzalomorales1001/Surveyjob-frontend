@@ -10,14 +10,13 @@ import Pagination from "../components/Pagination";
 // import Paginacion from "../../../../fanl rolling/Surveyjob-frontend/src/components/Paginacion";
 
 const AdminsScreen = () => {
+  // const { userData } = useContext(UserContext);
   const {dark}=useContext(DarkModeContext)
   const [users, setUsers] = useState([]);
   const [surveys, setSurveys] = useState([]);
   const [totalEncuestas, setTotalEncuestas] = useState(0);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
-  // const limite =0; //prueba con limite
   const [limit, setLimit] = useState(5)
-  // const [pagina, setPagina] = useState(0);
   const [total, setTotal] = useState("")
 
 
@@ -42,6 +41,7 @@ const AdminsScreen = () => {
   // () => setPagina((prevPagina) => prevPagina + 1);
   return (
     <>
+    <div className={`${dark ? "texturized--dark" : "texturized--light"}`}>
       <div className={` ${dark} ? "secAdmin-dark" : "secAdmin-light"}`}>
         <div className=" container-fluid w-100">
           <div className="row  py-5">
@@ -103,9 +103,10 @@ const AdminsScreen = () => {
                 </div>
             </div>
           </section>
-          <Outlet />
+          <Outlet totalEncuestas={totalEncuestas}/>
         </div>
-      </div>
+        </div>
+        </div>
     </>
   );
 };
