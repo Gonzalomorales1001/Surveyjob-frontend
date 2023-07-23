@@ -2,7 +2,6 @@ import React, { createContext, useEffect, useState, useContext } from 'react';
 import Question from '../components/Question';
 import SpeechBubble from '../components/SpeechBubble';
 import { addAnswer, getSurveyByID } from '../helpers/SurveyAPI';
-import { getUserByID } from '../helpers/UserAPI';
 import { Navigate, useParams, useNavigate } from 'react-router';
 import { InfiniteLoader } from '../components/InfiniteLoader';
 import Error500 from '../assets/Error500.svg'
@@ -18,7 +17,6 @@ const SurveyScreen = () => {
   const navigate=useNavigate()
   const {surveyID}=useParams();
   const [surveyData, setSurveyData] = useState(null);
-  const [userData, setUserData] = useState(null)
   const [err, setErr] = useState(false)
 
   const [answerArray, setAnswerArray] = useState([]);
@@ -43,21 +41,6 @@ const SurveyScreen = () => {
   useEffect(() => {
     getSurveyData();
   }, []);
-  
-  useEffect(() => {
-    if(surveyData){
-      const userID=surveyData.owner;
-      getUserByID(userID)
-      .then(r=>setUserData(r?.userFoundByID))
-      .catch(err=>{
-        setErr(true);
-        console.log('Error al obtener informacion del usuario');
-        return console.log(`detail: ${err}`);
-      });
-    }else{
-      console.log('Loading user data...');
-    }
-  }, [surveyData]);
 
   const sendAnswer=async(e)=>{
     e.preventDefault();
@@ -101,13 +84,13 @@ const SurveyScreen = () => {
   return (
     <main className={`${dark?'texturized--dark text-light':'texturized--light'}`}>
       <div className="container pt-3">
-        {userData?(
+        {surveyData?(
           <AnswerContext.Provider value={{surveyElements}}>
         <section className={`card card-margin w-100 ${dark&&'card--dark text-light'}`}>
           <div className="card-body pt-4">
               <div className="widget-49">
                 <div className="widget-49-meeting-info">
-                    <small className="text-muted mb-2">Encuesta de {userData.username}</small>
+                    <small className="text-muted mb-2">Encuesta de {surveyData.owner?.username}</small>
                     <h1 className={`widget-49-pro-title fw-light text-center ${dark&&'text-light'}`}>{surveyData.title}</h1>
                     <p className="my-2">{surveyData.description}</p>
                     <span className="widget-49-meeting-time text-muted">{surveyData.category.charAt(0).toUpperCase() + surveyData.category.slice(1).toLowerCase()}</span>

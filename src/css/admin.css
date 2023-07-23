@@ -2,14 +2,10 @@
     width: 220px;
 
 }
-.secAdmin-dark{
-    background-color: var(--SurveyJob-Black3);
-    color: var(--SurveyJob-Light1);
-};
-.secAdmin-light{
-  background-color: var(--SurveyJob-Light1);
-  color: var(--SurveyJob-Dark1);
-};
+
+.survey-table-desc{
+  max-width: 35% !important;
+}
 
 .secAdmin-dark div h5{
 background-color: sienna !important;
@@ -20,7 +16,6 @@ background-color: sienna !important;
 background-color: sienna !important;
   color:#111827 !important;
 };
-
 
 #sidebar-menu {
   /* background-color: #333333    ; */

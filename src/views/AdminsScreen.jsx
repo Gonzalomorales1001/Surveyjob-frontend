@@ -41,10 +41,9 @@ const AdminsScreen = () => {
 
   // () => setPagina((prevPagina) => prevPagina + 1);
   return (
-    <>
-      <div className={` ${dark} ? "secAdmin-dark" : "secAdmin-light"}`}>
-        <div className=" container-fluid w-100">
-          <div className="row  py-5">
+    <section className={`${dark?'texturized--dark':'texturized--light'}`}>
+        <div className="container-fluid w-100">
+          <div className="row py-5">
             <div className="col text-center ">
               <h1>
                 <span>
@@ -71,12 +70,12 @@ const AdminsScreen = () => {
                     type="button"
                     className="box d-flex rounded-2 align-items-center p-3 btn-get mb-2"
                   >
-                    <i className="uil-file fs-2 text-center bg-danger rounded-circle"></i>
+                    <i className="uil-file fs-2 text-center bg-warning rounded-circle"></i>
                     <div className="ms-3">
                       <div className="d-flex align-items-center">
                         <h3 className="mb-0">{}</h3>{" "}
                         <span className=" d-block ms-2">
-                          {totalEncuestas} Encuestas activas
+                          {totalEncuestas} Encuestas totales
                         </span>
                       </div>
                       </div>
@@ -87,9 +86,9 @@ const AdminsScreen = () => {
               <Link to="/admin/userslist">
                   <div
                     type="button"
-                    className="box d-flex rounded-2 align-items-center p-3  btn-get mb-2"
+                    className="box d-flex rounded-2 align-items-center p-3 btn-get mb-2"
                   >
-                    <i className="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
+                    <i className="uil-users-alt fs-2 text-center bg-primary rounded-circle"></i>
                     <div className="ms-3">
                       <div className="d-flex align-items-center">
                         <h3 className="mb-0">{}</h3>{" "}
@@ -105,8 +104,7 @@ const AdminsScreen = () => {
           </section>
           <Outlet />
         </div>
-      </div>
-    </>
+    </section>
   );
 };
 
