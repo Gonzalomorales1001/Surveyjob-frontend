@@ -272,7 +272,7 @@ const SurveyCreator = ({toggleShowSurveyCreator,getSurveysByUserId}) => {
         </section>
         <button type='submit' value='Crear nueva encuesta' className={`rounded-4 mt-3 btn-lg w-100 btn ${dark?'btn-outline-warning':'btn-warning'}`}><i className="fa fa-user-plus me-3"></i>Crear nueva encuesta</button>
         <hr />
-        <Modal show={showModal} size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
+        <Modal show={showModal} className='black-overlay bdf-blur' size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
           <Modal.Header className={`${dark&&'bg-dark text-light'}`}>
             <Modal.Title id="contained-modal-title-vcenter">
               {showEditQuestionButton?`Editar pregunta`:`Agregar nueva pregunta`}

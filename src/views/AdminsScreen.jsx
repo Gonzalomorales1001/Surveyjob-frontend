@@ -68,7 +68,7 @@ const AdminsScreen = () => {
                 <Link to="/admin/surveylist">
                   <div
                     type="button"
-                    className="box d-flex rounded-2 align-items-center p-3 btn-get mb-2"
+                    className="box d-flex rounded-1 align-items-center p-3 btn-get mb-2"
                   >
                     <i className="uil-file fs-2 text-center bg-warning rounded-circle"></i>
                     <div className="ms-3">

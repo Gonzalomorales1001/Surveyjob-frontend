@@ -1,48 +1,32 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
+import { DarkModeContext } from "../App";
 
-const Pagination = (totalEncuestas, totalUsuarios) => {
-  // const chunk = (array, size) => {
-  //   const chunks = [];
-  //   for (let i = 0; i < array.length; i += size) {
-  //     chunks.push(array.slice(i, i + size));
-  //   }
-  //   return chunks;
-  // };
+const Pagination = ({total,elementsPerPage,page,setPage}) => {
+  const {dark} = useContext(DarkModeContext);
+  const pages = [];
 
-  // const createItem = () => {
-  //   const gameChunks = chunk(games, 5);
+  const countPages = Math.ceil(total/elementsPerPage);
 
-  //   return gameChunks.map((chunk, index) => (
-  //     <Box key={index} display="flex" justifyContent='center' height='360px'>
-  //       {chunk.map((game) => (
-  //         <GameCard key={game.id} game={game}/>
-  //       ))}
-  //     </Box>
-  //   ));
-  // };
-
+  for (let index = 0; index < countPages; index++) {
+    pages.push(index + 1)
+  }
+  
+  
   return (
-    <>
-      <nav aria-label="Page navigation example">
-        <ul className="pagination">
-          <li className="page-item">
-            <a className="page-link" href="#" aria-label="Previous">
-              <span aria-hidden="true">&laquo;</span>
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#">
-              1
-            </a>
-          </li>
-          <li className="page-item">
-            <a className="page-link" href="#" aria-label="Next">
-              <span aria-hidden="true">&raquo;</span>
-            </a>
-          </li>
-        </ul>
-      </nav>
-    </>
+    <nav aria-label="Pages">
+      <ul className="pagination justify-content-center">
+        <li className={`page-item ${page==1&&'disabled'}`}>
+          <button disabled={page==1} className={`page-link ${dark&&'page-link--dark'}`} onClick={()=>setPage(page-1)}>&laquo;</button>
+        </li>
+          {pages.map((numberPage,index)=>{
+            return <li className={`page-item ${page==numberPage&&'active'}`} key={'page-'+index+1}><button className={`page-link ${dark&&'page-link--dark'}`} onClick={()=>setPage(numberPage)}>{numberPage}</button></li>
+            })
+          }
+        <li className={`page-item ${page==countPages&&'disabled'}`}>
+          <button disabled={page==countPages} className={`page-link ${dark&&'page-link--dark'}`} onClick={()=>setPage(page+1)}>&raquo;</button>
+        </li>
+      </ul>
+    </nav>
   );
 };
 

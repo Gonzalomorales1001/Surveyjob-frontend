@@ -9,11 +9,9 @@ export const getSurveyByID = async (surveyID) => {
 };
 
 //ver si es necesario usar /surveys/ todos los metodos
-export const getSurveys = async (limite = 1, pagina = 0) => {
+export const getSurveys = async (since = 0, limit = 5, all) => {
   try {
-    const resp = await fetch(
-      URL + "/surveys?limit=" + limite + "&since=" + pagina
-    );
+    const resp = await fetch(`${URL}/surveys?since=${since}&limit=${limit}${all?'&all=true':''}`)
     const data = await resp.json();
     return data;
   } catch (error) {
