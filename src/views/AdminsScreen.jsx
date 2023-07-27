@@ -11,6 +11,7 @@ import Card from '@mui/material/Card';
 import { Avatar, CardActionArea, CardHeader, ThemeProvider, createTheme } from '@mui/material';
 import Error500 from '../assets/Error500.svg';
 import { InfiniteLoader } from "../components/InfiniteLoader";
+import CategoryAdministrator from "../components/CategoryAdministrator";
 // import Paginacion from "../../../../fanl rolling/Surveyjob-frontend/src/components/Paginacion";
 
 const AdminsScreen = () => {
@@ -25,7 +26,7 @@ const AdminsScreen = () => {
 
   const traerCategorías = async () => {
     try {
-      const resp = await getCategories();
+      const resp = await getCategories(0, 0);
       setCategories(resp.Categories);
       setTotalCategorias(resp.total);
     } catch (error) {
@@ -69,6 +70,11 @@ const AdminsScreen = () => {
           <div className="black-overlay py-4">
             <div className="container">
               <h1>Panel de Administración</h1>
+            </div>
+          </div>
+          <div className="container">
+            <div className={`card ${dark && 'card--dark'} p-3 m-lg-5 m-md-3`}>
+              <CategoryAdministrator />
             </div>
           </div>
           <div className="black-overlay py-5">
