@@ -4,6 +4,7 @@ import { getCategories } from '../helpers/CategoryAPI';
 import { Modal, Button } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { addSurvey } from '../helpers/SurveyAPI';
+import { Chip } from '@mui/material';
 
 const SurveyCreator = ({toggleShowSurveyCreator,getSurveysByUserId}) => {
     const {dark}=useContext(DarkModeContext);
@@ -309,7 +310,7 @@ const SurveyCreator = ({toggleShowSurveyCreator,getSurveysByUserId}) => {
                     </div>
                     <div className="col d-flex justify-content-center align-items-center px-3 flex-wrap">
                         {newQuestion.options.map((option,index)=>(
-                            <button className='btn btn-warning rounded-pill m-1' key={'option-'+index} onClick={()=>deleteOption(index)}><i className="fa fa-times"></i> {option}</button>
+                            <Chip label={option} className='m-2' color='warning' variant="outlined" key={'option-'+index} onClick={()=>deleteOption(index)} onDelete={()=>deleteOption(index)} />
                         ))}
                     </div>
                     </>

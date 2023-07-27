@@ -2,10 +2,13 @@ import { URL } from "./URL";
 const token = JSON.parse(localStorage.getItem("x-token")); //importar / traer datos de token de local storage
 
 export const getSurveyByID = async (surveyID) => {
-  const response = await fetch(`${URL}/surveys/${surveyID}`);
-  const data = await response.json();
-  console.log(data);
-  return data;
+  try {
+    const response = await fetch(`${URL}/surveys/${surveyID}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Hubo un error al hacer la petición');
+  }
 };
 
 //ver si es necesario usar /surveys/ todos los metodos
@@ -76,7 +79,7 @@ export const deleteSurvey = async (surveyID) => {
   try {
     const token = JSON.parse(localStorage.getItem("x-token"));
 
-    const resp = await fetch(URL + "/surveys/" + surveyID, {
+    const resp = await fetch(`${URL}/surveys/${surveyID}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",

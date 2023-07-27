@@ -24,11 +24,11 @@
 }
 
 .survey-card--dark{
-    background-color:hsla(0,0%,0%,1);
+    background-color:hsla(48,0%,0%,1);
     background-image:
-    radial-gradient(at 9% 89%, hsla(44,100%,24%,1) 0px, transparent 50%),
-    radial-gradient(at 100% 100%, hsla(26,100%,24%,0.49) 0px, transparent 50%),
-    radial-gradient(at 46% 32%, hsla(0,100%,21%,0.56) 0px, transparent 50%),
-    radial-gradient(at 0% 0%, hsla(36,100%,17%,0.71) 0px, transparent 50%),
-    radial-gradient(at 34% 4%, hsla(39,0%,0%,1) 0px, transparent 50%);
+    radial-gradient(at 71% 14%, hsla(0,0%,0%,1) 0px, transparent 50%),
+    radial-gradient(at 92% 53%, hsla(0,100%,10%,1) 0px, transparent 50%),
+    radial-gradient(at 0% 67%, hsla(36,100%,11%,1) 0px, transparent 50%),
+    radial-gradient(at 10% 5%, hsla(33,100%,15%,1) 0px, transparent 50%),
+    radial-gradient(at 32% 88%, hsla(18,100%,13%,1) 0px, transparent 50%);
 }
