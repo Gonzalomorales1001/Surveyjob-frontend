@@ -20,8 +20,6 @@ const ListasEncuestas = () => {
   const [page, setPage] = useState(1);
   const [paginationEnabled, setPaginationEnabled] = useState(true);
 
-  const [key, setKey] = useState(null);
-
   const limit = 5;
 
   const traerEncuestas = async () => {
@@ -80,7 +78,7 @@ const ListasEncuestas = () => {
             <>
               <div className="container">
                 <div className={`form-floating mb-3 ${!dark && 'text-light'}`}>
-                  <input type="text" className={`form-control question__text--dark`} onChange={(e) => filterSurveys(e.target.value)} onKeyDown={(e) => setKey(e.key)} name="search-survey" id="search-survey" placeholder="Buscar encuesta" />
+                  <input type="text" className={`form-control question__text--dark`} onChange={(e) => filterSurveys(e.target.value)} name="search-survey" id="search-survey" placeholder="Buscar encuesta" />
                   <label htmlFor="search-survey">Buscar encuesta</label>
                 </div>
               </div>

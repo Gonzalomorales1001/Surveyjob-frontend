@@ -17,7 +17,7 @@ export default function SurveyCard({
           <p className="card-text">{category}</p>
           <button
             type="button"
-            class="btn btn-warning rounded-3"
+            className="btn btn-warning rounded-3"
             data-bs-toggle="modal"
             data-bs-target={`#modal-${id}`}
           >
@@ -61,13 +61,13 @@ export default function SurveyCard({
                           }
                         });
                         return (
-                          <p>
+                          <p key={'index-' + indice}>
                             {i + 1}- {respActualizada}
                           </p>
                         );
                       }
                       return (
-                        <p>
+                        <p key={'index-' + indice}>
                           {i + 1}- {respuesta}
                         </p>
                       );
@@ -81,7 +81,7 @@ export default function SurveyCard({
         <div
           className="modal fade"
           id={`modal-${id}`}
-          tabindex="-1"
+          tabIndex="-1"
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
