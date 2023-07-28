@@ -25,7 +25,7 @@ const ListasEncuestas = () => {
   const traerEncuestas = async () => {
     setSurveys();
     setPaginationEnabled(true);
-    const since = (page - 1) * 5;
+    const since = (page - 1) * limit;
     const { surveys, total } = await getSurveys(since, limit);
     setSurveys(surveys);
     setTotal(total);

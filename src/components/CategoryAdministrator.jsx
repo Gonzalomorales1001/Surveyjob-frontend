@@ -92,9 +92,10 @@ const CategoryAdministrator = () => {
                 const resp = await deleteCategory(id);
                 Swal.fire({
                     title: resp.msg,
-                    icon: 'question'
+                    icon: 'info'
                 }
                 )
+                loadCategories();
             }
         })
     }

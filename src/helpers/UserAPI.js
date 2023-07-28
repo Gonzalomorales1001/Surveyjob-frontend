@@ -7,7 +7,7 @@ export const getUserByID = async (userID) => {
   return data;
 };
 
-export const getUsers = async (limite = 5, pagina = 0) => {
+export const getUsers = async (pagina, limite) => {
   try {
     const resp = await fetch(
       URL + "/users?limit=" + limite + "&since=" + pagina

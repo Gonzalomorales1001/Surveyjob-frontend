@@ -61,13 +61,13 @@ export default function SurveyCard({
                           }
                         });
                         return (
-                          <p key={'index-' + indice}>
+                          <p>
                             {i + 1}- {respActualizada}
                           </p>
                         );
                       }
                       return (
-                        <p key={'index-' + indice}>
+                        <p>
                           {i + 1}- {respuesta}
                         </p>
                       );
