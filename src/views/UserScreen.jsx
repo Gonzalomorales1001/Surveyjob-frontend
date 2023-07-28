@@ -39,10 +39,6 @@ const UserScreen = () => {
     setShowSurveyCreator(!showSurveyCreator);
   };
 
-  useEffect(() => {
-    getSurveysByUserId();
-  }, []);
-
   function getSurveysByUserId() {
     fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
       .then((res) => res.json())
@@ -96,7 +92,7 @@ const UserScreen = () => {
 
             {userSurvey ? userSurvey.total != 0 ? (
               <div className="row row-cols-1">
-                <div className='col'>{userSurvey.surveys.map(e => <SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers} />)}</div>
+                <div className='col'>{userSurvey.surveys.map(e => <SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers} getSurveysByUserId={getSurveysByUserId} />)}</div>
               </div>
             ) : (
               <div className='row row-cols-1 row-cols-lg-2 justify-content-center align-items-center'>

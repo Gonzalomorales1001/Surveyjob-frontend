@@ -1,5 +1,7 @@
 import { useContext } from "react";
 import { DarkModeContext } from "../App";
+import { deleteSurvey } from "../helpers/SurveyAPI";
+import Swal from "sweetalert2";
 
 export default function SurveyCard({
   id,
@@ -7,7 +9,30 @@ export default function SurveyCard({
   category,
   questions,
   answers,
+  getSurveysByUserId
 }) {
+
+  const toggleSurveyStatus = async (id) => {
+    Swal.fire({
+      title: 'Eliminar encuesta',
+      text: "¿Estás seguro que quieres eliminar esta encuesta?",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#666',
+      confirmButtonText: '<i class="fa fa-trash" aria-hidden="true"></i> Eliminar encuesta',
+      cancelButtonText: 'Cancelar'
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        const resp = await deleteSurvey(id);
+        Swal.fire({
+          icon: 'info',
+          title: resp?.msg
+        });
+        getSurveysByUserId();
+      }
+    });
+  }
   const { dark } = useContext(DarkModeContext);
   return (
     <>
@@ -17,11 +42,14 @@ export default function SurveyCard({
           <p className="card-text">{category}</p>
           <button
             type="button"
-            className="btn btn-warning rounded-3"
+            className="btn btn-warning rounded-3 me-3"
             data-bs-toggle="modal"
             data-bs-target={`#modal-${id}`}
           >
             Ver Respuestas
+          </button>
+          <button className="btn btn-danger" onClick={() => toggleSurveyStatus(id)}>
+            <i className="fa fa-trash"></i><span>Eliminar esta encuesta</span>
           </button>
         </div>
       </div>
