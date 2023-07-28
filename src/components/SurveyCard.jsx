@@ -26,7 +26,7 @@ export default function SurveyCard({
         </div>
       </div>
       <div
-        class="modal fade"
+        className="modal fade"
         id={`modal-${id}`}
         tabindex="-1"
         aria-labelledby="exampleModalLabel"
