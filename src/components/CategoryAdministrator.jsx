@@ -6,7 +6,7 @@ import Swal from 'sweetalert2';
 import { getCategories, newCategory, putCategory, deleteCategory } from '../helpers/CategoryAPI';
 
 const CategoryAdministrator = () => {
-    const dark = useContext(DarkModeContext);
+    const { dark } = useContext(DarkModeContext);
 
     const [categories, setCategories] = useState([]);
 
@@ -102,7 +102,7 @@ const CategoryAdministrator = () => {
     return (
         <>
             <h4 className="my-3">Todas las categorías</h4>
-            <table className={`table ${dark && 'text-light'}`}>
+            <table className={`table ${dark ? 'text-light' : 'text-dark'}`}>
                 <thead>
                     <tr>
                         <th scope="col" className='d-none d-md-table-cell'>#</th>

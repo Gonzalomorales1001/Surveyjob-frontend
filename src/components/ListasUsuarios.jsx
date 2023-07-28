@@ -2,10 +2,10 @@ import React, { useEffect, useState } from "react";
 import "../css/Card.css";
 import { getUsers, deleteUser } from "../helpers/UserAPI";
 import "../css/admin.css";
-import Card from "../components/Card";
-import { InfiniteLoader } from "../components/InfiniteLoader";
+import Card from "./Card";
+import { InfiniteLoader } from "./InfiniteLoader";
 
-const ListasUsuarios = ({dark}) => {
+const ListasUsuarios = ({ dark }) => {
   const [users, setUsers] = useState([]);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
   // const limite = 4; //prueba con limite - este es el limite que funciona
@@ -22,7 +22,7 @@ const ListasUsuarios = ({dark}) => {
   }, [limit]);
 
   () => setPagina((prevPagina) => prevPagina + 1);
-  
+
   const { username, email, userID, status } = users; //datos a usar de los usuarios
   return (
     <>
@@ -34,15 +34,15 @@ const ListasUsuarios = ({dark}) => {
           ))
         ) : (
           <div className="d-flex justify-content-center">
-            <InfiniteLoader dark={dark}/>
-              <span className="visually-hidden">Loading...</span>
-            
+            <InfiniteLoader dark={dark} />
+            <span className="visually-hidden">Loading...</span>
+
           </div>
         )}
       </div>
-      <button onClick={()=>setLimit(limit+5)}>Ver Más</button>
-      
-      <button onClick={()=>setLimit(limit-5)}>Ver Menos</button>
+      <button onClick={() => setLimit(limit + 5)}>Ver Más</button>
+
+      <button onClick={() => setLimit(limit - 5)}>Ver Menos</button>
     </>
   );
 };

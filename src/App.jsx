@@ -8,16 +8,10 @@ import HomeScreen from './views/HomeScreen';
 import PageNotFoundScreen from './views/PageNotFoundScreen';
 import Footer from './components/Footer';
 import LoginScreen from './views/LoginScreen';
-import AdminsScreen from './views/AdminsScreen';
-import UserScreen from './views/UserScreen';
 import SurveyScreen from './views/SurveyScreen';
 import RoutesApp from './routes/RoutesApp';
 import ProtectedRoutes from './routes/ProtectedRoutes';
 import ContactScreen from './views/ContactScreen';
-import ListasUsuarios from './views/ListasUsuarios';
-import ListasEncuestas from './views/ListaEncuestas';
-import AdminOnlyRoutes from './routes/AdminOnlyRoutes';
-import AdminRoutes from './routes/AdminRoutes';
 import ChangePasswordScreen from './views/ChangePasswordScreen';
 import { ThemeProvider, createTheme } from '@mui/material';
 

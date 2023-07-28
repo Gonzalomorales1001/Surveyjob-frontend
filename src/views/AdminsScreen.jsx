@@ -12,8 +12,8 @@ import { Avatar, CardActionArea, CardHeader, ThemeProvider, createTheme } from '
 import Error500 from '../assets/Error500.svg';
 import { InfiniteLoader } from "../components/InfiniteLoader";
 import CategoryAdministrator from "../components/CategoryAdministrator";
-import ListasEncuestas from "./ListaEncuestas";
-import ListasUsuarios from "./ListasUsuarios";
+import ListasEncuestas from "../components/ListaEncuestas";
+import ListasUsuarios from "../components/ListasUsuarios";
 // import Paginacion from "../../../../fanl rolling/Surveyjob-frontend/src/components/Paginacion";
 
 const AdminsScreen = () => {
@@ -23,7 +23,6 @@ const AdminsScreen = () => {
   const [categories, setCategories] = useState();
   const [totalEncuestas, setTotalEncuestas] = useState(0);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
-  const [totalCategorias, setTotalCategorias] = useState(0);
   const [show, setShow] = useState({
     surveysAdministrator: false,
     usersAdministrator: false,
@@ -34,7 +33,6 @@ const AdminsScreen = () => {
     try {
       const resp = await getCategories(0, 0);
       setCategories(resp.Categories);
-      setTotalCategorias(resp.total);
     } catch (error) {
       console.error(error);
       setErr(true);
