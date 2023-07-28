@@ -18,6 +18,8 @@ import { ThemeProvider, createTheme } from '@mui/material';
 export const UserContext = createContext(null);
 export const DarkModeContext = createContext(null);
 
+export const SURVEYJOB_USERID = "64468dc0a3dbeb94c1620475";
+
 export const capitalize = (word) => {
   const capitalizedWord = word.charAt(0).toUpperCase() + word.substring(1).toLowerCase();
   return capitalizedWord;

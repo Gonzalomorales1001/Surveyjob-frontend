@@ -1,6 +1,7 @@
 import { URL } from "./URL";
-// const token = window.localStorage.getItem("x-token")
+
 const token = JSON.parse(localStorage.getItem("x-token"));
+
 export const getUserByID = async (userID) => {
   const response = await fetch(`${URL}/users/${userID}`);
   const data = await response.json();
@@ -38,7 +39,7 @@ export const register = async (datos) => {
 //ver si hace falta usar /users para actualizar datos y borrar
 export const updateUser = async (id, datos) => {
   try {
-    const resp = await fetch(URL + "/" + id, {
+    const resp = await fetch(URL + "/users/" + id, {
       method: "PUT",
       body: JSON.stringify(datos),
       headers: {

@@ -76,6 +76,7 @@ export default function SurveyCard({
                 </div>
               </div>
             ))}
+            <button className="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>
         <div
