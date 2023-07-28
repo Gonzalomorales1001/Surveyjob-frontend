@@ -3,7 +3,7 @@ import { UserContext, DarkModeContext } from "../App";
 import { useContext } from 'react';
 import { Button } from '@mui/material';
 import Swal from 'sweetalert2';
-import { deleteCategory, getCategories, putCategory } from '../helpers/CategoryAPI';
+import { getCategories, newCategory, putCategory, deleteCategory } from '../helpers/CategoryAPI';
 
 const CategoryAdministrator = () => {
     const dark = useContext(DarkModeContext);
@@ -20,7 +20,33 @@ const CategoryAdministrator = () => {
     }
 
     const createCategory = async () => {
+        const { value: text } = await Swal.fire({
+            title: 'Nueva Categoría',
+            input: 'text',
+            inputAttributes: {
+                'aria-label': 'Escribe aquí el nombre de la nueva categoría',
+                'required': true
+            },
+            inputValidator: (value) => {
+                if (!value) {
+                    return 'El campo no puede estar vacío'
+                }
+            },
+            confirmButtonText: '<i class="fa fa-plus me-2"></i> Crear categoría',
+            confirmButtonColor: '#f0a500',
+            showCancelButton: true,
+            cancelButtonText: 'Cancelar'
+        });
 
+        if (text) {
+            const resp = await newCategory(text.toUpperCase());
+            console.log(resp)
+            Swal.fire({
+                icon: 'info',
+                title: resp.msg
+            });
+            loadCategories();
+        }
     }
 
     const editCategory = async (id) => {
@@ -92,15 +118,19 @@ const CategoryAdministrator = () => {
                             <th scope="row" className='d-none d-md-table-cell'>{index + 1}</th>
                             <td>{category.category}</td>
                             <td className='d-none d-md-table-cell'>{category?.user.username}</td>
-                            <td><Button variant="outlined" color="warning" className='p-2' onClick={() => editCategory(category.catID)}><i className="fa fa-pencil"></i></Button></td>
-                            <td><Button variant="contained" color="error" className='p-2' onClick={() => removeCategory(category.catID)}><i className="fa fa-trash-o"></i></Button></td>
+                            <td><Button variant="outlined" color="warning" onClick={() => editCategory(category.catID)}><i className="fa fa-pencil"></i></Button></td>
+                            <td><Button variant="contained" color="error" onClick={() => removeCategory(category.catID)}><i className="fa fa-trash-o"></i></Button></td>
                         </tr>
                     )
                     )}
                 </tbody>
             </table>
-            <div className="text-end">
-                <button className="btn btn-warning rounded-3" onClick={createCategory}><i className="fa fa-plus me-2"></i>Nueva Categoría</button>
+            <div className="container">
+                <div className="row justify-content-end">
+                    <div className="col-12 col-lg-3">
+                        <Button className="w-100" variant='contained' color='warning' onClick={createCategory}><i className="fa fa-plus me-2"></i>Nueva Categoría</Button>
+                    </div>
+                </div>
             </div>
         </>
     )

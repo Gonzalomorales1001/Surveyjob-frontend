@@ -12,6 +12,8 @@ import { Avatar, CardActionArea, CardHeader, ThemeProvider, createTheme } from '
 import Error500 from '../assets/Error500.svg';
 import { InfiniteLoader } from "../components/InfiniteLoader";
 import CategoryAdministrator from "../components/CategoryAdministrator";
+import ListasEncuestas from "./ListaEncuestas";
+import ListasUsuarios from "./ListasUsuarios";
 // import Paginacion from "../../../../fanl rolling/Surveyjob-frontend/src/components/Paginacion";
 
 const AdminsScreen = () => {
@@ -22,6 +24,10 @@ const AdminsScreen = () => {
   const [totalEncuestas, setTotalEncuestas] = useState(0);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
   const [totalCategorias, setTotalCategorias] = useState(0);
+  const [show, setShow] = useState({
+    surveysAdministrator: false,
+    usersAdministrator: false,
+  })
   const [err, setErr] = useState(false);
 
   const traerCategorías = async () => {
@@ -66,44 +72,41 @@ const AdminsScreen = () => {
   return (
     <section className={`${dark ? 'texturized--dark text-light' : 'texturized--light'} pt-1 pb-3`}>
       {surveys && users && categories ? (
-        <div>
-          <div className="black-overlay py-4">
-            <div className="container">
-              <h1>Panel de Administración</h1>
-            </div>
-          </div>
-          <div className="container">
-            <div className={`card ${dark && 'card--dark'} p-3 m-lg-5 m-md-3`}>
-              <CategoryAdministrator />
-            </div>
-          </div>
+        <>
           <div className="black-overlay py-5">
             <div className="container">
+              <h1>Panel de Administración</h1>
               <div className="row row-cols-1 row-cols-md-2 d-flex align-items-center justify-content-center my-3">
                 {/* <div className="col-md-1 "></div> */}
                 <div className="col">
-                  <Link to="/admin/surveylist" className="text-decoration-none">
-                    <Card className='rounded-4 mb-2'>
-                      <CardActionArea>
-                        <CardHeader title="Administrar Encuestas" subheader={`${totalEncuestas} Encuestas totales`} />
-                      </CardActionArea>
-                    </Card>
-                  </Link>
+                  <Card className='rounded-4 mb-2' onClick={() => setShow({ surveysAdministrator: true, usersAdministrator: false })}>
+                    <CardActionArea>
+                      <CardHeader title="Administrar Encuestas" subheader={`${totalEncuestas} Encuestas totales`} />
+                    </CardActionArea>
+                  </Card>
                 </div>
                 <div className="col">
-                  <Link to="/admin/userslist" className="text-decoration-none">
-                    <Card className='rounded-4 mb-2'>
-                      <CardActionArea>
-                        <CardHeader title="Administrar Usuarios" subheader={`${totalUsuarios} Usuarios`} />
-                      </CardActionArea>
-                    </Card>
-                  </Link>
+                  <Card className='rounded-4 mb-2' onClick={() => setShow({ surveysAdministrator: false, usersAdministrator: true })}>
+                    <CardActionArea>
+                      <CardHeader title="Administrar Usuarios" subheader={`${totalUsuarios} Usuarios`} />
+                    </CardActionArea>
+                  </Card>
                 </div>
               </div>
-              <Outlet />
+              {show.surveysAdministrator && (
+                <ListasEncuestas />
+              )}
+              {show.usersAdministrator && (
+                <ListasUsuarios />
+              )}
             </div>
           </div>
-        </div>
+          <article className="container">
+            <div className={`card ${dark && 'card--dark'} p-3 m-lg-5 m-md-3`}>
+              <CategoryAdministrator />
+            </div>
+          </article>
+        </>
       ) : err ? (
         <div className="container">
           <div className='row align-items-center justify-content-center py-4 loading-screen'>

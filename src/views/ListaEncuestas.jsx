@@ -10,6 +10,7 @@ import Pagination from "../components/Pagination";
 import Swal from "sweetalert2";
 import { capitalize } from "../App";
 import { searchSurvey } from "../helpers/searchAPI";
+import { Button } from "@mui/material";
 
 
 const ListasEncuestas = () => {
@@ -102,9 +103,9 @@ const ListasEncuestas = () => {
                       <td className="d-none d-md-table-cell">{capitalize(survey.category)}</td>
                       <td className="d-none d-lg-table-cell survey-table-desc">{survey.description}</td>
                       <td>
-                        <button className="btn btn-danger" onClick={() => toggleSurveyStatus(survey.surveyID)}><i className="fa fa-trash"></i></button>
+                        <Button variant='outlined' color='error' className='fs-5' onClick={() => toggleSurveyStatus(survey.surveyID)}><i className="fa fa-trash"></i></Button>
                       </td>
-                      <td><Link to={`/survey/${survey.surveyID}`} target='_blank' className="btn btn-warning"><span className="text-nowrap">Ver Encuesta</span></Link></td>
+                      <td><Link to={`/survey/${survey.surveyID}`} target='_blank'><Button variant='outlined' color='warning'><span className="text-nowrap">Ver Encuesta</span></Button></Link></td>
                     </tr>
                   ))}
                 </tbody>
