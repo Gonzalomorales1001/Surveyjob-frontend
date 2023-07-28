@@ -36,108 +36,106 @@ const UserScreen = () => {
   }, [])
 
   const toggleShowSurveyCreator = () => {
-    const toggleShowSurveyCreator = () => {
-      setShowSurveyCreator(!showSurveyCreator);
-    };
+    setShowSurveyCreator(!showSurveyCreator);
+  };
 
-    useEffect(() => {
-      getSurveysByUserId();
-    }, []);
+  useEffect(() => {
+    getSurveysByUserId();
+  }, []);
 
-    function getSurveysByUserId() {
-      fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
-        .then((res) => res.json())
-        .then((data) => setUserSurvey(data))
-        .catch((err) => console.log(err));
-    }
+  function getSurveysByUserId() {
+    fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
+      .then((res) => res.json())
+      .then((data) => setUserSurvey(data))
+      .catch((err) => console.log(err));
+  }
 
-    useEffect(() => {
-      getSurveysByUserId()
-    }, [])
+  useEffect(() => {
+    getSurveysByUserId()
+  }, [])
 
-    async function getSurveysByUserId() {
-      fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
-        .then(res => res.json())
-        .then(data => setUserSurvey(data))
-        .catch(err => {
-          setErr(true);
-          console.error(err);
-        })
-    }
+  async function getSurveysByUserId() {
+    fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
+      .then(res => res.json())
+      .then(data => setUserSurvey(data))
+      .catch(err => {
+        setErr(true);
+        console.error(err);
+      })
+  }
 
-    return (
-      <div className={`${dark ? "texturized--dark" : "texturized--light"}`}>
-        <div className="container">
-          {forbidden ? (
-            <div className="row row-cols-1 row-cols-md-2 justify-content-center align-items-center text-center">
-              <div className="col">
-                <img src={Error403} alt="Acceso Denegado" className="w-50" />
-              </div>
-              <div className="col">
-                <h1>Lo sentimos, pero no puedes acceder a esta página</h1>
-                <div className="alert alert-warning" role="alert">
-                  Por favor,
-                  <span className="alert-link">
-                    <Link to="/login">Inicia Sesión</Link>
-                  </span>
-                  correctamente.
-                </div>
-                <small>Error 403: Forbidden</small>
-              </div>
+  return (
+    <div className={`${dark ? "texturized--dark" : "texturized--light"}`}>
+      <div className="container">
+        {forbidden ? (
+          <div className="row row-cols-1 row-cols-md-2 justify-content-center align-items-center text-center">
+            <div className="col">
+              <img src={Error403} alt="Acceso Denegado" className="w-50" />
             </div>
-            // </div>
-          ) : (
-            <>
-              <div className='d-flex justify-content-between align-items-center'>
-                <h1>Mis encuestas</h1>
-                <button className="btn btn-warning rounded-4" onClick={toggleShowSurveyCreator}><i className={`fa ${showSurveyCreator ? 'fa-times' : 'fa-plus'}`} aria-hidden="true"></i> {showSurveyCreator ? 'Cerrar' : 'Nueva Encuesta'}</button>
+            <div className="col">
+              <h1>Lo sentimos, pero no puedes acceder a esta página</h1>
+              <div className="alert alert-warning" role="alert">
+                Por favor,
+                <span className="alert-link">
+                  <Link to="/login">Inicia Sesión</Link>
+                </span>
+                correctamente.
               </div>
-              <hr />
-              {showSurveyCreator && (<SurveyCreator getSurveysByUserId={getSurveysByUserId} toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
+              <small>Error 403: Forbidden</small>
+            </div>
+          </div>
+          // </div>
+        ) : (
+          <>
+            <div className='d-flex justify-content-between align-items-center'>
+              <h1>Mis encuestas</h1>
+              <button className="btn btn-warning rounded-4" onClick={toggleShowSurveyCreator}><i className={`fa ${showSurveyCreator ? 'fa-times' : 'fa-plus'}`} aria-hidden="true"></i> {showSurveyCreator ? 'Cerrar' : 'Nueva Encuesta'}</button>
+            </div>
+            <hr />
+            {showSurveyCreator && (<SurveyCreator getSurveysByUserId={getSurveysByUserId} toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
 
-              {userSurvey ? userSurvey.total != 0 ? (
-                <div className="row row-cols-1">
-                  <div className='col'>{userSurvey.surveys.map(e => <SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers} />)}</div>
+            {userSurvey ? userSurvey.total != 0 ? (
+              <div className="row row-cols-1">
+                <div className='col'>{userSurvey.surveys.map(e => <SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers} />)}</div>
+              </div>
+            ) : (
+              <div className='row row-cols-1 row-cols-lg-2 justify-content-center align-items-center'>
+                <div className="col d-flex justify-content-center">
+                  <img src={noData} className='text-center w-50' alt="Sin información" />
+                </div>
+                <div className="col text-center">
+                  <h2>¡No tienes encuestas creadas!</h2>
+                  <p>Puedes añadir nuevas encuestas haciendo click en el boton de "Crear nueva encuesta".
+                    Además, puedes compartir el enlace para que tus encuestas sean respondidas y
+                    <span className='text-warning'> ¡Aquí podras ver los resultados de tus encuestas! </span></p>
+                </div>
+              </div>
+            )
+              :
+              err ? (
+                <div className='row align-items-center justify-content-center py-4 loading-screen'>
+                  <img src={Error500} alt="serverless" className='col-12 col-lg-6 w-50' />
+                  <div className='col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column'>
+                    <h1 className='text-center text-secondary'>¡No ha sido posible cargar la información!</h1>
+                    <h3 className='text-center text-secondary'>¡Ha ocurrido un error inesperado!</h3>
+                    <p className='text-center text-secondary'>Por favor, ponte en contacto con algún administrador</p>
+                  </div>
                 </div>
               ) : (
-                <div className='row row-cols-1 row-cols-lg-2 justify-content-center align-items-center'>
-                  <div className="col d-flex justify-content-center">
-                    <img src={noData} className='text-center w-50' alt="Sin información" />
-                  </div>
-                  <div className="col text-center">
-                    <h2>¡No tienes encuestas creadas!</h2>
-                    <p>Puedes añadir nuevas encuestas haciendo click en el boton de "Crear nueva encuesta".
-                      Además, puedes compartir el enlace para que tus encuestas sean respondidas y
-                      <span className='text-warning'> ¡Aquí podras ver los resultados de tus encuestas! </span></p>
+                <div className='container d-flex justify-content-center align-items-start py-5 loading-screen'>
+                  <div>
+                    <h1 className='text-center'>Cargando...</h1>
+                    <p className='text-center mb-5'>Cargando información del usuario</p>
+                    <InfiniteLoader dark={dark} />
                   </div>
                 </div>
               )
-                :
-                err ? (
-                  <div className='row align-items-center justify-content-center py-4 loading-screen'>
-                    <img src={Error500} alt="serverless" className='col-12 col-lg-6 w-50' />
-                    <div className='col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column'>
-                      <h1 className='text-center text-secondary'>¡No ha sido posible cargar la información!</h1>
-                      <h3 className='text-center text-secondary'>¡Ha ocurrido un error inesperado!</h3>
-                      <p className='text-center text-secondary'>Por favor, ponte en contacto con algún administrador</p>
-                    </div>
-                  </div>
-                ) : (
-                  <div className='container d-flex justify-content-center align-items-start py-5 loading-screen'>
-                    <div>
-                      <h1 className='text-center'>Cargando...</h1>
-                      <p className='text-center mb-5'>Cargando información del usuario</p>
-                      <InfiniteLoader dark={dark} />
-                    </div>
-                  </div>
-                )
-              }
-            </>
-          )}
-        </div>
+            }
+          </>
+        )}
       </div>
-    );
-  };
-}
+    </div>
+  );
+};
 
 export default UserScreen;
