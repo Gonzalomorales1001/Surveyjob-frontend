@@ -102,8 +102,8 @@ const CategoryAdministrator = () => {
 
     return (
         <>
-            <h4 className="my-3">Todas las categorías</h4>
-            <table className={`table ${dark ? 'text-light' : 'text-dark'}`}>
+            <h4 className={`my-3 ${dark && 'text-light'}`}>Todas las categorías</h4>
+            <table className={`table table-borderless ${dark ? 'text-light' : 'text-dark'}`}>
                 <thead>
                     <tr>
                         <th scope="col" className='d-none d-md-table-cell'>#</th>

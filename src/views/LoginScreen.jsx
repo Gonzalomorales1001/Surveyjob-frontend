@@ -2,7 +2,6 @@ import React, { useContext, useState } from "react";
 import { Navigate, useNavigate } from "react-router";
 import Job from "../assets/job.png";
 import "../css/login.css"; //ver si hay que agregar export default
-import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { login, requestNewPassword } from '../helpers/AuthAPI'
 import { register } from '../helpers/UserAPI'

@@ -79,14 +79,14 @@ const AdminsScreen = () => {
                 <div className="col">
                   <Card className='rounded-4 mb-2' onClick={() => setShow({ surveysAdministrator: true, usersAdministrator: false })}>
                     <CardActionArea>
-                      <CardHeader title="Administrar Encuestas" subheader={`${totalEncuestas} Encuestas totales`} />
+                      <CardHeader title="Encuestas" subheader={`${totalEncuestas} Encuestas totales`} />
                     </CardActionArea>
                   </Card>
                 </div>
                 <div className="col">
                   <Card className='rounded-4 mb-2' onClick={() => setShow({ surveysAdministrator: false, usersAdministrator: true })}>
                     <CardActionArea>
-                      <CardHeader title="Administrar Usuarios" subheader={`${totalUsuarios} Usuarios`} />
+                      <CardHeader title="Usuarios" subheader={`${totalUsuarios} Usuarios`} />
                     </CardActionArea>
                   </Card>
                 </div>

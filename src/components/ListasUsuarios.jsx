@@ -9,6 +9,7 @@ import { Avatar, Button, CardActions, CardContent, CardHeader, CardMedia } from 
 import Pagination from "./Pagination";
 import Swal from "sweetalert2";
 import { SURVEYJOB_USERID } from "../App";
+import { searchUser } from "../helpers/searchAPI";
 
 const ListasUsuarios = () => {
   const { dark } = useContext(DarkModeContext);
@@ -20,6 +21,7 @@ const ListasUsuarios = () => {
   const limit = 6;
 
   const traerUsuarios = async () => {
+    setPaginationEnabled(true);
     setUsers();
     const since = (page - 1) * limit;
     const { Users, total } = await getUsers(since, limit);
@@ -71,6 +73,18 @@ const ListasUsuarios = () => {
     })
   }
 
+  const filterUsers = async (term) => {
+    if (term.length == 0) {
+      setPaginationEnabled(true);
+      setPage(1);
+      return traerUsuarios();
+    }
+    const usersResult = await searchUser(term);
+    setUsers(usersResult?.results);
+    setTotal(usersResult?.total);
+    setPaginationEnabled(false);
+  }
+
   useEffect(() => {
     traerUsuarios();
   }, [page]);
@@ -80,6 +94,12 @@ const ListasUsuarios = () => {
       <h4>Administrar Usuarios</h4>
       {users ? (
         <>
+          <div className="container">
+            <div className={`form-floating mb-3 ${!dark && 'text-light'}`}>
+              <input type="text" className={`form-control question__text--dark`} onChange={(e) => filterUsers(e.target.value)} name="search-user" id="search-user" placeholder="Buscar Usuario" />
+              <label htmlFor="search-user">Buscar Usuario</label>
+            </div>
+          </div>
           <div className="row row-cols-1 row-cols-md-2 row-cols-lg-3 w-100 justify-content-center">
             {users.map((user, index) => (
               <div className="col" key={'user-' + index}>

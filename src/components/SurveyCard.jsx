@@ -2,10 +2,13 @@ import { useContext } from "react";
 import { DarkModeContext } from "../App";
 import { deleteSurvey } from "../helpers/SurveyAPI";
 import Swal from "sweetalert2";
+import { Button, Card, CardContent, CardHeader, CardActions } from "@mui/material";
+import { capitalize } from "../App";
 
 export default function SurveyCard({
   id,
   title,
+  description,
   category,
   questions,
   answers,
@@ -33,30 +36,40 @@ export default function SurveyCard({
       }
     });
   }
+
+
+  const shareSurvey = (id) => {
+    navigator.clipboard.writeText(`https://surveyjob.netlify.app/survey/${id}`);
+  }
   const { dark } = useContext(DarkModeContext);
   return (
     <>
-      <div className={`card ${dark && "card--dark"} my-5`}>
-        <div className="card-body">
-          <h5 className="card-title">{title}</h5>
-          <p className="card-text">{category}</p>
-          <button
-            type="button"
-            className="btn btn-warning rounded-3 me-3"
-            data-bs-toggle="modal"
-            data-bs-target={`#modal-${id}`}
-          >
-            Ver Respuestas
-          </button>
-          <button className="btn btn-danger" onClick={() => toggleSurveyStatus(id)}>
-            <i className="fa fa-trash"></i><span>Eliminar esta encuesta</span>
-          </button>
-        </div>
-      </div>
+      <Card className={`my-2 card ${dark && 'card--dark'}`}>
+        <CardHeader title={title} subheader={capitalize(category)} />
+        <CardContent>
+          <p>{description}</p>
+        </CardContent>
+        <CardActions>
+          <div className="container">
+            <div className="row row-cols-1 row-cols-md-3">
+              <div className="col">
+                <Button className="rounded-3 w-100 my-2" color="error" variant="contained" size="small" onClick={() => toggleSurveyStatus(id)}><i className="fa fa-trash-o me-2"></i>Eliminar encuesta</Button>
+              </div>
+              <div className="col">
+                <Button className="rounded-3 w-100 my-2" color="warning" variant="outlined" size="small" data-bs-toggle="modal" data-bs-target={`#modal-${id}`}>Ver respuestas</Button>
+              </div>
+              <div className="col">
+                <Button className="rounded-3 w-100 my-2" variant="outlined" color="info" size="small" data-bs-toggle="modal" data-bs-target="#shareModal" onClick={() => shareSurvey(id)}><i className="fa fa-clipboard me-2"></i>Copiar Link</Button>
+              </div>
+            </div>
+
+          </div>
+        </CardActions>
+      </Card>
       <div
         className="modal fade"
         id={`modal-${id}`}
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="exampleModalLabel"
         aria-hidden="true"
       >
@@ -107,57 +120,25 @@ export default function SurveyCard({
             <button className="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
           </div>
         </div>
-        <div
-          className="modal fade"
-          id={`modal-${id}`}
-          tabIndex="-1"
-          aria-labelledby="exampleModalLabel"
-          aria-hidden="true"
-        >
-          <div className="modal-dialog modal-dialog-scrollable">
-            <div className="modal-content modal-body">
-              {questions.map((e, index) => (
-                <div key={e._id}>
-                  <h3>{e.content}</h3>
-                  <div>
-                    {answers.map((a, i) => {
-                      if (e._id == a.content[index].questionID) {
-                        var respuesta = a.content[index].answer;
-                        if (typeof respuesta == "object") {
-                          var respActualizada = "";
-                          if (respuesta.length == 1) {
-                            return (
-                              <p>
-                                {i + 1}- {respuesta[0]}
-                              </p>
-                            );
-                          }
-                          respuesta.map((answer, indice) => {
-                            if (indice == 0) {
-                              return (respActualizada = answer);
-                            }
-                            if (indice + 1 == respuesta.length) {
-                              respActualizada = `${respActualizada} y ${answer}`;
-                            } else {
-                              respActualizada = `${respActualizada}, ${answer}`;
-                            }
-                          });
-                          return (
-                            <p>
-                              {i + 1}- {respActualizada}
-                            </p>
-                          );
-                        }
-                        return (
-                          <p>
-                            {i + 1}- {respuesta}
-                          </p>
-                        );
-                      }
-                    })}
-                  </div>
+      </div>
+      <div className="modal fade black-overlay bdf-blur" id="shareModal" tabIndex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
+        <div className="modal-dialog">
+          <div className={`modal-content ${dark && 'bg-dark'}`}>
+            <div className="modal-header">
+              <h1 className="modal-title fs-5" id="shareModalLabel">Compartir</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div className="modal-body">
+              <div className="container">
+                <div className="row">
+                  <div className="col"></div>
+                  <div className="col"></div>
+                  <div className="col"></div>
                 </div>
-              ))}
+              </div>
+            </div>
+            <div className="modal-footer">
+              <button className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
             </div>
           </div>
         </div>

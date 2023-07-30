@@ -14,6 +14,7 @@ import SurveyCard from '../components/SurveyCard';
 import { InfiniteLoader } from '../components/InfiniteLoader';
 import noData from '../assets/no-data.svg'
 import Error500 from '../assets/Error500.svg'
+import { Chip, Divider } from "@mui/material";
 
 
 const UserScreen = () => {
@@ -84,15 +85,16 @@ const UserScreen = () => {
         ) : (
           <>
             <div className='d-flex justify-content-between align-items-center'>
-              <h1>Mis encuestas</h1>
+              <h1>Mi Perfil</h1>
               <button className="btn btn-warning rounded-4" onClick={toggleShowSurveyCreator}><i className={`fa ${showSurveyCreator ? 'fa-times' : 'fa-plus'}`} aria-hidden="true"></i> {showSurveyCreator ? 'Cerrar' : 'Nueva Encuesta'}</button>
             </div>
-            <hr />
             {showSurveyCreator && (<SurveyCreator getSurveysByUserId={getSurveysByUserId} toggleShowSurveyCreator={toggleShowSurveyCreator} />)}
-
+            <Divider className="my-3">
+              <Chip label="Mis encuestas" />
+            </Divider>
             {userSurvey ? userSurvey.total != 0 ? (
               <div className="row row-cols-1">
-                <div className='col'>{userSurvey.surveys.map(e => <SurveyCard key={e.surveyID} id={e.surveyID} title={e.title} category={e.category} questions={e.questions} answers={e.answers} getSurveysByUserId={getSurveysByUserId} />)}</div>
+                {userSurvey.surveys.map(e => <div className="col"><SurveyCard className="h-100" key={e.surveyID} id={e.surveyID} title={e.title} description={e.description} category={e.category} questions={e.questions} answers={e.answers} getSurveysByUserId={getSurveysByUserId} /></div>)}
               </div>
             ) : (
               <div className='row row-cols-1 row-cols-lg-2 justify-content-center align-items-center'>

@@ -23,8 +23,8 @@ const ListasEncuestas = () => {
   const limit = 5;
 
   const traerEncuestas = async () => {
-    setSurveys();
     setPaginationEnabled(true);
+    setSurveys();
     const since = (page - 1) * limit;
     const { surveys, total } = await getSurveys(since, limit);
     setSurveys(surveys);
@@ -55,8 +55,8 @@ const ListasEncuestas = () => {
 
   const filterSurveys = async (term) => {
     if (term.length == 0) {
-      setPage(1);
       setPaginationEnabled(true);
+      setPage(1);
       return traerEncuestas();
     }
     const surveysResult = await searchSurvey(term);
