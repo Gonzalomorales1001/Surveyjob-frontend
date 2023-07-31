@@ -9,7 +9,7 @@ import HS2L from '../assets/CarruselHS/HS2L.jpg'
 import HS3L from '../assets/CarruselHS/HS3L.jpg'
 import LOGO_light from '../assets/DarkLetterLogo.png'
 import LOGO_dark from '../assets/LightLetterLogo.png'
-import SurveySVG from '../assets/survey.svg'
+import SurveySVG from '../assets/Survey.svg';
 import "../css/home.css";
 import { Carousel } from 'react-bootstrap';
 import Error500 from '../assets/Error500.svg'
