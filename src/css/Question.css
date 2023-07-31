@@ -302,7 +302,7 @@
 .question__text--dark{
   background-color: #09090980 !important;
   color:#FFF !important;
-  border: none !important;
+  border: 0.5px solid #444 !important;
 }
 
 .question__check{
