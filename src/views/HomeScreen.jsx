@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from 'react'
 import SpeechBubble from '../components/SpeechBubble'
-import { UserContext, DarkModeContext } from "../App";
+import { UserContext, DarkModeContext, capitalize } from "../App";
 import HS1D from '../assets/CarruselHS/HS1D.jpg'
 import HS2D from '../assets/CarruselHS/HS2D.jpg'
 import HS3D from '../assets/CarruselHS/HS3D.jpg'
@@ -17,6 +17,9 @@ import { InfiniteLoader } from '../components/InfiniteLoader';
 import { getSurveys } from '../helpers/SurveyAPI';
 import { getCategories } from '../helpers/CategoryAPI';
 import Pagination from '../components/Pagination';
+import { searchByCategory } from '../helpers/searchAPI';
+import { Link } from 'react-router-dom';
+import { Button, Card, CardActions, CardContent, CardHeader } from '@mui/material';
 
 
 const HomeScreen = () => {
@@ -40,6 +43,7 @@ const HomeScreen = () => {
         if (r.errors) { return setErr(true) }
         console.log(r)
         setPublicSurveys(r.surveys);
+        console.log(r.surveys)
         setTotal(r.total);
       }).catch((err) => {
         setErr(true);
@@ -50,6 +54,16 @@ const HomeScreen = () => {
   const loadCategories = async () => {
     const resp = await getCategories();
     setCategories(resp.Categories);
+  }
+
+  const filterByCategory = async (value) => {
+    if (value == 0) {
+      return loadPublicSurveys();
+    }
+    const filter = await searchByCategory(value);
+    setPaginationEnabled(false);
+    setPublicSurveys(filter.results);
+    setTotal(filter.total);
   }
 
   useEffect(() => {
@@ -116,26 +130,37 @@ const HomeScreen = () => {
             <h2 className="text-center">
               Encuestas públicas
             </h2>
+            <label htmlFor="select-category">Buscar por categoría</label>
             <div className="input-group mb-3 py-3">
-              <select className="form-select" id="inputGroupSelect01">
-                <option defaultValue={0}>Selecciona la categoría</option>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
+              <select className={`form-select ${dark && 'question__text--dark'}`} id="select-category" onChange={(e) => filterByCategory(e.target.value)}>
+                <option value={0}>Todas las encuestas</option>
+                {categories.map((category, index) => (
+                  <option key={'category-' + index} value={category.category}>{capitalize(category.category)}</option>
+                ))}
               </select>
             </div>
           </header>
           <main>
             {publicSurveys.map((survey, index) => (
-              <div className={`card mt-3 ${dark && 'card--dark'}`} key={'public-survey-' + index}>
-                <h2 className='text-center'>{survey.title}</h2>
-                <small className="text-muted d-block">{survey.category}</small>
-                <p className="survey-desc">{survey.description}</p>
-              </div>
+              <Card className={`my-2 card ${dark && 'card--dark'}`} key={'public-survey-' + index}>
+                <CardHeader title={survey.title} subheader={capitalize(survey.category)} />
+                <CardContent>
+                  <p>{survey.description}</p>
+                </CardContent>
+                <CardActions>
+                  <Link to={`/survey/${survey.surveyID}`} target='__blank' className='text-decoration-none color-black w-100'>
+                    <Button variant='contained' color='warning' size='small' className='rounded-3 w-100 my-2' >
+                      Responder
+                    </Button>
+                  </Link>
+                </CardActions>
+              </Card>
             ))}
           </main>
-          <footer>
-            <Pagination total={total} page={page} setPage={setPage} elementsPerPage={limit} />
+          <footer className='mt-4'>
+            {paginationEnabled && (
+              <Pagination total={total} page={page} setPage={setPage} elementsPerPage={limit} />
+            )}
           </footer>
         </article>
       ) : err ? (
