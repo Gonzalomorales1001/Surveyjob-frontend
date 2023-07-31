@@ -41,9 +41,7 @@ const HomeScreen = () => {
     await getSurveys(since, limit, true)
       .then((r) => {
         if (r.errors) { return setErr(true) }
-        console.log(r)
         setPublicSurveys(r.surveys);
-        console.log(r.surveys)
         setTotal(r.total);
       }).catch((err) => {
         setErr(true);
@@ -124,7 +122,7 @@ const HomeScreen = () => {
           </div>
         </div>
       </div>
-      {publicSurveys ? (
+      {publicSurveys && categories ? (
         <article className="container">
           <header>
             <h2 className="text-center">

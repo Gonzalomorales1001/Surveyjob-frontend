@@ -40,19 +40,12 @@ const UserScreen = () => {
     setShowSurveyCreator(!showSurveyCreator);
   };
 
-  function getSurveysByUserId() {
-    fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
-      .then((res) => res.json())
-      .then((data) => setUserSurvey(data))
-      .catch((err) => console.log(err));
-  }
-
   useEffect(() => {
     getSurveysByUserId()
   }, [])
 
   async function getSurveysByUserId() {
-    fetch(`http://localhost:8080/api/surveys?userId=${params.id}`)
+    fetch(`${URL}/surveys?userId=${params.id}`)
       .then(res => res.json())
       .then(data => setUserSurvey(data))
       .catch(err => {
