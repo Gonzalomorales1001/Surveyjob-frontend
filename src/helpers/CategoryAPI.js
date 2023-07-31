@@ -1,7 +1,7 @@
 import { URL } from "./URL";
 const token = JSON.parse(localStorage.getItem('x-token'));
 
-export const getCategories=async(since,limit)=>{
+export const getCategories=async(since=0,limit=0)=>{
     const response=await fetch(`${URL}/categories?since=${since}&limit=${limit}`);
     const data=response.json();
     return data;

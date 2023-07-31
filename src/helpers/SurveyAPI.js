@@ -10,11 +10,10 @@ export const getSurveyByID = async (surveyID) => {
     throw new Error('Hubo un error al hacer la petición');
   }
 };
-
 //ver si es necesario usar /surveys/ todos los metodos
-export const getSurveys = async (since = 0, limit = 5, all) => {
+export const getSurveys = async (since = 0, limit = 5, isPublic, all) => {
   try {
-    const resp = await fetch(`${URL}/surveys?since=${since}&limit=${limit}${all?'&all=true':''}`)
+    const resp = await fetch(`${URL}/surveys?since=${since}&limit=${limit}${isPublic?'&public=true':''}${all?'&all=true':''}`)
     const data = await resp.json();
     return data;
   } catch (error) {

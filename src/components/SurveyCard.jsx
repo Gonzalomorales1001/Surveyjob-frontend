@@ -66,13 +66,13 @@ export default function SurveyCard({
           <div className="container">
             <div className="row row-cols-1 row-cols-md-3">
               <div className="col">
-                <Button className="rounded-3 w-100 my-2" color="error" variant="outlined" size="small" onClick={() => toggleSurveyStatus(id)}><i className="fa fa-trash-o me-2"></i>Eliminar encuesta</Button>
+                <Button className="rounded-3 w-100 my-2" variant="outlined" color="info" size="small" /*data-bs-toggle="modal" data-bs-target="#shareModal"*/ onClick={() => shareSurvey(id)}><i className="fa fa-clipboard me-2"></i>Copiar Link</Button>
               </div>
               <div className="col">
                 <Button className="rounded-3 w-100 my-2" color="warning" variant="contained" size="small" data-bs-toggle="modal" data-bs-target={`#modal-${id}`}>Ver respuestas</Button>
               </div>
               <div className="col">
-                <Button className="rounded-3 w-100 my-2" variant="outlined" color="info" size="small" /*data-bs-toggle="modal" data-bs-target="#shareModal"*/ onClick={() => shareSurvey(id)}><i className="fa fa-clipboard me-2"></i>Copiar Link</Button>
+                <Button className="rounded-3 w-100 my-2" color="error" variant="outlined" size="small" onClick={() => toggleSurveyStatus(id)}><i className="fa fa-trash-o me-2"></i>Eliminar encuesta</Button>
               </div>
             </div>
 

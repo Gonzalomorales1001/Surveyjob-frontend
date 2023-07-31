@@ -4,7 +4,7 @@ import { DarkModeContext, UserContext } from '../App';
 import "../css/Card.css";
 import { getSurveys, deleteSurvey } from "../helpers/SurveyAPI";
 import "../css/admin.css";
-import CardSurvey from "./CardSurvey";
+// import CardSurvey from "./CardSurvey";
 import { InfiniteLoader } from "./InfiniteLoader";
 import Pagination from "./Pagination";
 import Swal from "sweetalert2";

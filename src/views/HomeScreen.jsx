@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import SpeechBubble from '../components/SpeechBubble'
 import { UserContext, DarkModeContext } from "../App";
 import HS1D from '../assets/CarruselHS/HS1D.jpg'
@@ -12,10 +12,54 @@ import LOGO_dark from '../assets/LightLetterLogo.png'
 import survey from '../assets/survey.svg'
 import "../css/home.css";
 import { Carousel } from 'react-bootstrap';
+import Error500 from '../assets/Error500.svg'
+import { InfiniteLoader } from '../components/InfiniteLoader';
+import { getSurveys } from '../helpers/SurveyAPI';
+import { getCategories } from '../helpers/CategoryAPI';
+import Pagination from '../components/Pagination';
 
 
 const HomeScreen = () => {
   const { dark } = useContext(DarkModeContext)
+
+  const [publicSurveys, setPublicSurveys] = useState(null);
+  const [total, setTotal] = useState(null);
+  const [categories, setCategories] = useState(false);
+  const [page, setPage] = useState(1);
+  const [paginationEnabled, setPaginationEnabled] = useState(true);
+  const [err, setErr] = useState(false);
+
+  const limit = 5;
+
+  const loadPublicSurveys = async () => {
+    setPaginationEnabled(true);
+    setPublicSurveys();
+    const since = (page - 1) * limit;
+    await getSurveys(since, limit, true)
+      .then((r) => {
+        if (r.errors) { return setErr(true) }
+        console.log(r)
+        setPublicSurveys(r.surveys);
+        setTotal(r.total);
+      }).catch((err) => {
+        setErr(true);
+        console.log(err);
+      });
+  }
+
+  const loadCategories = async () => {
+    const resp = await getCategories();
+    setCategories(resp.Categories);
+  }
+
+  useEffect(() => {
+    loadCategories();
+  }, [])
+
+  useEffect(() => {
+    loadPublicSurveys();
+  }, [page]);
+
 
   return (
     <main className={`${dark ? 'texturized--dark text-light' : 'texturized--light'} pb-3`}>
@@ -66,46 +110,53 @@ const HomeScreen = () => {
           </div>
         </div>
       </div>
-      <article>
-        <header>
-          <h2 className="text-center">
-            Encuestas públicas
-          </h2>
-          <div className="input-group mb-3 py-3">
-            <select className="form-select" id="inputGroupSelect01">
-              <option defaultValue={0}>Selecciona la categoría</option>
-              <option value="1">One</option>
-              <option value="2">Two</option>
-              <option value="3">Three</option>
-            </select>
+      {publicSurveys ? (
+        <article className="container">
+          <header>
+            <h2 className="text-center">
+              Encuestas públicas
+            </h2>
+            <div className="input-group mb-3 py-3">
+              <select className="form-select" id="inputGroupSelect01">
+                <option defaultValue={0}>Selecciona la categoría</option>
+                <option value="1">One</option>
+                <option value="2">Two</option>
+                <option value="3">Three</option>
+              </select>
+            </div>
+          </header>
+          <main>
+            {publicSurveys.map((survey, index) => (
+              <div className={`card mt-3 ${dark && 'card--dark'}`} key={'public-survey-' + index}>
+                <h2 className='text-center'>{survey.title}</h2>
+                <small className="text-muted d-block">{survey.category}</small>
+                <p className="survey-desc">{survey.description}</p>
+              </div>
+            ))}
+          </main>
+          <footer>
+            <Pagination total={total} page={page} setPage={setPage} elementsPerPage={limit} />
+          </footer>
+        </article>
+      ) : err ? (
+        <div className="container">
+          <div className='row align-items-center justify-content-center py-4 loading-screen'>
+            <img src={Error500} alt="serverless" className='col-12 col-lg-6 w-50' />
+            <div className='col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column'>
+              <h1 className='text-center text-secondary'>No ha sido posible cargar la información!</h1>
+              <h3 className='text-center text-secondary'>¡Lo sentimos! No se ha podido cargar la información de las encuestas.</h3>
+              <p className='text-center text-secondary'>Por favor, ponte en contacto con algún administrador</p>
+            </div>
           </div>
-        </header>
-        <main className='container'>
-          <div className={`survey-card ${dark ? 'survey-card--dark' : 'survey-card--light'}`}>
-            <h2 className='text-center'>Titulo de la encuesta</h2>
-            <small className="text-muted d-block">Categoría</small>
-            <p className="survey-desc">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem culpa similique dignissimos rem porro ab aperiam perferendis, iste architecto non.</p>
+        </div>
+      ) : (
+        <div className='container d-flex justify-content-center align-items-start py-5 loading-screen'>
+          <div>
+            <h1 className='text-center'>Cargando...</h1>
+            <InfiniteLoader dark={dark} />
           </div>
-          <div className='container py-5'>
-            <nav aria-label="Page navigation example">
-              <ul className="pagination justify-content-center">
-                <li className="page-item disabled">
-                  <a className="page-link">Previous</a>
-                </li>
-                <li className="page-item"><a className="page-link" href="#">1</a></li>
-                <li className="page-item"><a className="page-link" href="#">2</a></li>
-                <li className="page-item"><a className="page-link" href="#">3</a></li>
-                <li className="page-item">
-                  <a className="page-link" href="#">Next</a>
-                </li>
-              </ul>
-            </nav>
-          </div>
-
-        </main>
-        <footer>
-        </footer>
-      </article>
+        </div>
+      )}
     </main>
   )
 }
