@@ -1,71 +1,73 @@
 import { URL } from "./URL";
-// const token = window.localStorage.getItem("x-token")
-const token = JSON.parse(localStorage.getItem('x-token'));
+
+const token = JSON.parse(localStorage.getItem("x-token"));
+
 export const getUserByID = async (userID) => {
-const response = await fetch(`${URL}/users/${userID}`);
-const data = await response.json();
-return data;
+  const response = await fetch(`${URL}/users/${userID}`);
+  const data = await response.json();
+  return data;
 };
 
-export const getUsers = async (limite = 4, pagina = 0) => {
-try {
-    const resp = await fetch(URL + "/users?limit=" + limite + "&since=" + pagina
+export const getUsers = async (pagina, limite) => {
+  try {
+    const resp = await fetch(
+      URL + "/users?limit=" + limite + "&since=" + pagina
     );
     const data = await resp.json();
     return data;
-} catch (error) {
+  } catch (error) {
     throw new Error("No se pudo obtener Informacion");
-}
+  }
 };
 
 export const register = async (datos) => {
-try {
+  try {
     const resp = await fetch(`${URL}/users`, {
-    method: "POST",
-    body: JSON.stringify(datos),
-    headers: {
+      method: "POST",
+      body: JSON.stringify(datos),
+      headers: {
         "Content-type": "application/json; charset=UTF-8",
-    },
+      },
     });
     const data = await resp.json();
     return data;
-} catch (error) {
+  } catch (error) {
     console.log(error);
     return "No se conecto con el backend";
-}
+  }
 };
 //ver si hace falta usar /users para actualizar datos y borrar
 export const updateUser = async (id, datos) => {
-try {
-    const resp = await fetch(URL + "/" + id, {
-    method: "PUT",
-    body: JSON.stringify(datos),
-    headers: {
+  try {
+    const resp = await fetch(URL + "/users/" + id, {
+      method: "PUT",
+      body: JSON.stringify(datos),
+      headers: {
         "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
-    },
+      },
     });
     const data = await resp.json();
     return data;
-} catch (error) {
+  } catch (error) {
     console.log(error);
     return "No se conecto con el backend";
-}
+  }
 };
 
 export const deleteUser = async (id) => {
-try {
+  try {
     const resp = await fetch(URL + "/users/" + id, {
-    method: "DELETE",
-    headers: {
+      method: "DELETE",
+      headers: {
         "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
-    },
+      },
     });
     const data = await resp.json();
     return data;
-} catch (error) {
+  } catch (error) {
     console.log(error);
     return "No se conecto con el backend";
-}
+  }
 };

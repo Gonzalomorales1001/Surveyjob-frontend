@@ -1,19 +1,19 @@
 import { URL } from "./URL";
-const token = window.localStorage.getItem("x-token") //importar / traer datos de token de local storage
+const token = JSON.parse(localStorage.getItem("x-token")); //importar / traer datos de token de local storage
 
 export const getSurveyByID = async (surveyID) => {
-  const response = await fetch(`${URL}/surveys/${surveyID}`);
-  const data = await response.json();
-  console.log(data)
-  return data;
-};
-
-//ver si es necesario usar /surveys/ todos los metodos
-export const getSurveys = async (limite = 1, pagina = 0) => {
   try {
-    const resp = await fetch(
-      URL + "/surveys?limit" + limite + "&since" + pagina
-    );
+    const response = await fetch(`${URL}/surveys/${surveyID}`);
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    throw new Error('Hubo un error al hacer la petición');
+  }
+};
+//ver si es necesario usar /surveys/ todos los metodos
+export const getSurveys = async (since = 0, limit = 5, isPublic, all) => {
+  try {
+    const resp = await fetch(`${URL}/surveys?since=${since}&limit=${limit}${isPublic?'&public=true':''}${all?'&all=true':''}`)
     const data = await resp.json();
     return data;
   } catch (error) {
@@ -21,11 +21,11 @@ export const getSurveys = async (limite = 1, pagina = 0) => {
   }
 };
 
-export const addSurvey = async (datos) => {
+export const addSurvey = async (survey, token) => {
   try {
-    const resp = await fetch(URL, {
+    const resp = await fetch(`${URL}/surveys`, {
       method: "POST",
-      body: JSON.stringify(datos),
+      body: JSON.stringify(survey),
       headers: {
         "Content-type": "application/json; charset=UTF-8",
         "x-token": token,
@@ -75,20 +75,18 @@ export const addAnswer = async (surveyID, content) => {
 };
 
 export const deleteSurvey = async (surveyID) => {
-  console.log(surveyID);
   try {
-    const token = JSON.parse(localStorage.getItem('x-token'));
-    console.log(token)
-    const resp = await fetch(URL + "/surveys/" + surveyID, {
+    const token = JSON.parse(localStorage.getItem("x-token"));
+
+    const resp = await fetch(`${URL}/surveys/${surveyID}`, {
       method: "DELETE",
       headers: {
         "Content-type": "application/json; charset=UTF-8",
-        "x-token":`${token}`,
+        "x-token": `${token}`,
       },
     });
-    return resp;
-    // const data = await resp.json();
-    // return data;
+    const data = await resp.json();
+    return data;
   } catch (error) {
     console.log(error);
     return "No se pudo eliminar encuesta";

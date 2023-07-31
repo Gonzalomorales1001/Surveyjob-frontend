@@ -1,114 +1,133 @@
 import React, { useContext, useEffect, useState } from "react";
 import { getSurveys } from "../helpers/SurveyAPI";
 import { getUsers } from "../helpers/UserAPI";
-import Job from "../assets/job.png";
+import { getCategories } from "../helpers/CategoryAPI";
 import "../css/admin.css";
 import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import { UserContext, DarkModeContext } from "../App";
-// import Pagination from "../components/Pagination";
+import Pagination from "../components/Pagination";
+import Card from '@mui/material/Card';
+import { Avatar, CardActionArea, CardHeader, ThemeProvider, createTheme } from '@mui/material';
+import Error500 from '../assets/Error500.svg';
+import { InfiniteLoader } from "../components/InfiniteLoader";
+import CategoryAdministrator from "../components/CategoryAdministrator";
+import ListasEncuestas from "../components/ListaEncuestas";
+import ListasUsuarios from "../components/ListasUsuarios";
 // import Paginacion from "../../../../fanl rolling/Surveyjob-frontend/src/components/Paginacion";
 
 const AdminsScreen = () => {
-  const {dark}=useContext(DarkModeContext)
-  const [users, setUsers] = useState([]);
-  const [surveys, setSurveys] = useState([]);
+  const { dark } = useContext(DarkModeContext)
+  const [users, setUsers] = useState();
+  const [surveys, setSurveys] = useState();
+  const [categories, setCategories] = useState();
   const [totalEncuestas, setTotalEncuestas] = useState(0);
   const [totalUsuarios, setTotalUsuarios] = useState(0);
-  const limite =0; //prueba con limite
-  const [pagina, setPagina] = useState(0);
+  const [show, setShow] = useState({
+    surveysAdministrator: false,
+    usersAdministrator: false,
+  })
+  const [err, setErr] = useState(false);
 
-  const traerUsuarios = async () => {
-    const { Users, total } = await getUsers(limite, pagina);
-    setUsers(Users);
-    setTotalUsuarios(total);
-  };
-  useEffect(() => {
-    traerUsuarios();
-  }, [pagina]);
+  const traerCategorías = async () => {
+    try {
+      const resp = await getCategories(0, 0);
+      setCategories(resp.Categories);
+    } catch (error) {
+      console.error(error);
+      setErr(true);
+    }
+  }
 
   const traerEncuestas = async () => {
-    const { surveys, total } = await getSurveys(limite, pagina);
-    setSurveys(surveys);
-    setTotalEncuestas(total);
+    try {
+      const { surveys, total } = await getSurveys(0, 5);
+      setSurveys(surveys);
+      setTotalEncuestas(total);
+    } catch (error) {
+      console.error(error);
+      setErr(true);
+    }
   };
-  useEffect(() => {
-    traerEncuestas();
-  }, [pagina]);
 
-  () => setPagina((prevPagina) => prevPagina + 1);
+  const traerUsuarios = async () => {
+    try {
+      const { Users, total } = await getUsers(0, 5);
+      setUsers(Users);
+      setTotalUsuarios(total);
+    } catch (error) {
+      console.error(error);
+      setErr(true);
+    }
+  };
+
+  useEffect(() => {
+    traerCategorías();
+    traerEncuestas();
+    traerUsuarios();
+  }, []);
+
   return (
-    <>
-      <div className={` ${dark ? "secAdmin-dark" : "secAdmin-light"}`}>
-        <div className=" container-fluid w-100">
-          <div className="row  py-5">
-            <div className="col text-center ">
-              <h1>
-                <span>
-                  <i className="fa fa-cogs" aria-hidden="true"></i>{" "}
-                </span>
-                Bienvenido al tablero administrador
-              </h1>
-            </div>
-          </div>
-          {/* hacer un ternario para que aparezca este mensaje o lo que pido encuestas ousuario */}
-          <div className="mb-5 d-flex justify-content-center">
-            {" "}
-            <h1 className="fw-200">
-              Survey Job <img src={Job} width="35px" alt="Job letter" /> La
-              gestión en tus manos
-            </h1>
-          </div>
-          <section className="statistics mt-4 mb-4 mx-4">
-            <div className="row d-flex align-items-center justify-content-center">
-              {/* <div className="col-md-1 "></div> */}
-              <div className="col-lg-4">
-                <Link to="/admin/surveylist">
-                  <div
-                    type="button"
-                    className="box d-flex rounded-2 align-items-center p-3 btn-get mb-2"
-                  >
-                    <i className="uil-file fs-2 text-center bg-danger rounded-circle"></i>
-                    <div className="ms-3">
-                      <div className="d-flex align-items-center">
-                        <h3 className="mb-0">{}</h3>{" "}
-                        <span className=" d-block ms-2">
-                          {totalEncuestas} Encuestas activas
-                        </span>
-                      </div>
-                      </div>
-                  </div>
-                </Link>
-              </div>
-                <div className="col-lg-4">
-              <Link to="/admin/userslist">
-                  <div
-                    type="button"
-                    className="box d-flex rounded-2 align-items-center p-3  btn-get mb-2"
-                  >
-                    <i className="uil-users-alt fs-2 text-center bg-success rounded-circle"></i>
-                    <div className="ms-3">
-                      <div className="d-flex align-items-center">
-                        <h3 className="mb-0">{}</h3>{" "}
-                        <span className="d-block ms-2">
-                          {totalUsuarios} Usuarios activos
-                        </span>
-                      </div>
-                      </div>
-                  </div>
-              </Link>
+    <section className={`${dark ? 'texturized--dark text-light' : 'texturized--light'} pt-1 pb-3`}>
+      {surveys && users && categories ? (
+        <>
+          <div className="black-overlay py-5">
+            <div className="container">
+              <h1>Panel de Administración</h1>
+              <div className="row row-cols-1 row-cols-md-2 d-flex align-items-center justify-content-center my-3">
+                {/* <div className="col-md-1 "></div> */}
+                <div className="col">
+                  <Card className='rounded-4 mb-2' onClick={() => setShow({ surveysAdministrator: true, usersAdministrator: false })}>
+                    <CardActionArea>
+                      <CardHeader title="Encuestas" subheader={`${totalEncuestas} Encuestas totales`} />
+                    </CardActionArea>
+                  </Card>
                 </div>
+                <div className="col">
+                  <Card className='rounded-4 mb-2' onClick={() => setShow({ surveysAdministrator: false, usersAdministrator: true })}>
+                    <CardActionArea>
+                      <CardHeader title="Usuarios" subheader={`${totalUsuarios} Usuarios`} />
+                    </CardActionArea>
+                  </Card>
+                </div>
+              </div>
+              {show.surveysAdministrator && (
+                <ListasEncuestas />
+              )}
+              {show.usersAdministrator && (
+                <ListasUsuarios />
+              )}
             </div>
-          </section>
-          <Outlet />
+          </div>
+          <article className="container">
+            <div className={`card ${dark && 'card--dark'} p-3 m-lg-5 m-md-3`}>
+              <CategoryAdministrator />
+            </div>
+          </article>
+        </>
+      ) : err ? (
+        <div className="container">
+          <div className='row align-items-center justify-content-center py-4 loading-screen'>
+            <img src={Error500} alt="serverless" className='col-12 col-lg-6 w-50' />
+            <div className='col-12 col-lg-6 d-flex justify-content-center align-items-center flex-column'>
+              <h1 className='text-center text-secondary'>No ha sido posible cargar la información!</h1>
+              <h3 className='text-center text-secondary'>Ha ocurrido un error!</h3>
+              <p className='text-center text-secondary'>Error 500: Internal Server Error</p>
+            </div>
+          </div>
         </div>
-        {/* <Paginacion/> */}
-        {/* <Pagination 
-        // totalEncuestas={totalEncuestas}
-        // totalUsuarios={totalUsuarios}
-         /> */}
-      </div>
-    </>
+      ) : (
+        <div className="container">
+          <div className='container d-flex justify-content-center align-items-start py-5 loading-screen'>
+            <div>
+              <h1 className='text-center'>Cargando...</h1>
+              <p className='text-center mb-5'>Cargando herramientas de administración</p>
+              <InfiniteLoader dark={dark} />
+            </div>
+          </div>
+        </div>
+      )}
+    </section>
   );
 };
 
