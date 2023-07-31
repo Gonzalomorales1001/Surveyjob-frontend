@@ -39,7 +39,20 @@ export default function SurveyCard({
 
 
   const shareSurvey = (id) => {
-    navigator.clipboard.writeText(`https://surveyjob.netlify.app/survey/${id}`);
+    const URL = `https://surveyjob.netlify.app/survey/${id}`
+    if (navigator.share) {
+      navigator.share({
+        title: title,
+        text: '¡Ayudame contestando mi encuesta de SurveyJob!',
+        url: URL
+      }).then().catch((e) => console.error(e))
+    } else {
+      navigator.clipboard.writeText(URL);
+      Swal.fire({
+        title: 'Link copiado al portapeles',
+        icon: 'success'
+      });
+    }
   }
   const { dark } = useContext(DarkModeContext);
   return (
@@ -53,13 +66,13 @@ export default function SurveyCard({
           <div className="container">
             <div className="row row-cols-1 row-cols-md-3">
               <div className="col">
-                <Button className="rounded-3 w-100 my-2" color="error" variant="contained" size="small" onClick={() => toggleSurveyStatus(id)}><i className="fa fa-trash-o me-2"></i>Eliminar encuesta</Button>
+                <Button className="rounded-3 w-100 my-2" color="error" variant="outlined" size="small" onClick={() => toggleSurveyStatus(id)}><i className="fa fa-trash-o me-2"></i>Eliminar encuesta</Button>
               </div>
               <div className="col">
-                <Button className="rounded-3 w-100 my-2" color="warning" variant="outlined" size="small" data-bs-toggle="modal" data-bs-target={`#modal-${id}`}>Ver respuestas</Button>
+                <Button className="rounded-3 w-100 my-2" color="warning" variant="contained" size="small" data-bs-toggle="modal" data-bs-target={`#modal-${id}`}>Ver respuestas</Button>
               </div>
               <div className="col">
-                <Button className="rounded-3 w-100 my-2" variant="outlined" color="info" size="small" data-bs-toggle="modal" data-bs-target="#shareModal" onClick={() => shareSurvey(id)}><i className="fa fa-clipboard me-2"></i>Copiar Link</Button>
+                <Button className="rounded-3 w-100 my-2" variant="outlined" color="info" size="small" /*data-bs-toggle="modal" data-bs-target="#shareModal"*/ onClick={() => shareSurvey(id)}><i className="fa fa-clipboard me-2"></i>Copiar Link</Button>
               </div>
             </div>
 
@@ -118,28 +131,6 @@ export default function SurveyCard({
               </div>
             ))}
             <button className="btn btn-warning" data-bs-dismiss="modal">Cerrar</button>
-          </div>
-        </div>
-      </div>
-      <div className="modal fade black-overlay bdf-blur" id="shareModal" tabIndex="-1" aria-labelledby="shareModalLabel" aria-hidden="true">
-        <div className="modal-dialog">
-          <div className={`modal-content ${dark && 'bg-dark'}`}>
-            <div className="modal-header">
-              <h1 className="modal-title fs-5" id="shareModalLabel">Compartir</h1>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div className="modal-body">
-              <div className="container">
-                <div className="row">
-                  <div className="col"></div>
-                  <div className="col"></div>
-                  <div className="col"></div>
-                </div>
-              </div>
-            </div>
-            <div className="modal-footer">
-              <button className="btn btn-secondary" data-bs-dismiss="modal" aria-label="Close">Cerrar</button>
-            </div>
           </div>
         </div>
       </div>
