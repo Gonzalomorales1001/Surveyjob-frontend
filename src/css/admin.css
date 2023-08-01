@@ -117,6 +117,7 @@ background-color: sienna !important;
 
 .table>:not(caption)>*>* {
   padding: .5rem;
+  color:#6B7280 !important;
   background-color: transparent !important;
   border-bottom-width: var(--bs-border-width);
 }
