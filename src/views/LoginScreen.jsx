@@ -12,6 +12,7 @@ const LoginScreen = () => {
   const { saveUserData } = useContext(UserContext)
   const { dark } = useContext(DarkModeContext)
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
 
   const [loginData, setLoginData] = useState({
     loginEmail: '',
@@ -85,6 +86,7 @@ const LoginScreen = () => {
   })
 
   const loginUser = async (loginRequestData) => {
+    setLoading(true);
     const loginResp = await login(loginRequestData)
     if (loginResp?.token) {
       localStorage.setItem('x-token', JSON.stringify(loginResp.token))
@@ -95,6 +97,7 @@ const LoginScreen = () => {
       })
       navigate(`/user/${loginResp.user.userID}`)
     } else {
+      setLoading(false);
       Swal.fire({
         icon: 'error',
         title: loginResp.msg,
@@ -124,6 +127,7 @@ const LoginScreen = () => {
       email: registerData.registerEmail,
       password: registerData.registerPassword,
     }
+    setLoading(true);
     const registerResp = await register(registerRequestData)
 
     if (registerResp?.newUser) {
@@ -135,6 +139,7 @@ const LoginScreen = () => {
       loginUser(loginRequestData)
     } else {
       console.log(registerResp)
+      setLoading(false);
       Swal.fire({
         icon: 'error',
         text: registerResp.errors[0].msg
@@ -179,7 +184,12 @@ const LoginScreen = () => {
                   <div>
                     <button onClick={viewPassword} className="btn btn-link text-decoration-none btn-sm"><i className={`fa fa-eye${visiblePassword ? '-slash' : ''}`}></i> {`${visiblePassword ? 'Ocultar ' : 'Mostrar '}`}Contraseña</button>
                   </div>
-                  <button className="mt-3 login__btn" type="submit">Iniciar sesión</button>
+                  <button {...loading && 'disabled'} className="mt-3 login__btn" type="submit">Iniciar sesión</button>
+                  {loading && (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  )}
                   {/* <input type="submit" value="Iniciar Sesion" className="mt-3 login__btn" /> */}
                   <button className={`fs-xs ${!dark && 'text-light'} text-decoration-none btn btn-link`} onClick={forgottenPassword}> <small>Olvide mi contraseña</small> </button>
                 </div>
@@ -240,7 +250,16 @@ const LoginScreen = () => {
                   </div>
                   <small className="login__password__small">Tu contraseña debe tener almenos 1 mayúscula, 1 minúscula, 1 número y almenos 1 símbolo.</small>
                 </div>
-                <button className={`mt-3 login__btn`} type="submit">Registrate</button>
+                <div className="d-flex justify-content-center align-items-center">
+                  <button {...loading && 'disabled'} className={`mt-3 login__btn`} type="submit">
+                    Registrate
+                  </button>
+                  {loading && (
+                    <div className="spinner-border" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  )}
+                </div>
               </form>
             </div>
           </div>

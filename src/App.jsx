@@ -75,7 +75,7 @@ function App() {
                 <Route path="/contact" element={<ContactScreen />} />
                 <Route path="/survey/:surveyID" element={<SurveyScreen />} />
                 <Route path='/reset-password/:id' element={<ChangePasswordScreen />} />
-                <Route path='*' element={<PageNotFoundScreen />} />
+                <Route path='/error' element={<PageNotFoundScreen />} />
               </Routes>
               <Footer dark={dark} ToggleDarkMode={ToggleDarkMode} />
             </ThemeProvider>

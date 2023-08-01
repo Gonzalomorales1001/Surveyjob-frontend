@@ -146,7 +146,7 @@ const HomeScreen = () => {
                   <p>{survey.description}</p>
                 </CardContent>
                 <CardActions>
-                  <Link to={`/survey/${survey.surveyID}`} target='__blank' className='text-decoration-none color-black w-100'>
+                  <Link to={`/survey/${survey.surveyID}`} className='text-decoration-none color-black w-100'>
                     <Button variant='contained' color='warning' size='small' className='rounded-3 w-100 my-2' >
                       Responder
                     </Button>

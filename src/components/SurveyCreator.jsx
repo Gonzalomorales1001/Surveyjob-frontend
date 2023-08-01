@@ -29,6 +29,7 @@ const SurveyCreator = ({ toggleShowSurveyCreator, getSurveysByUserId }) => {
     const [option, setOption] = useState('');
     const [showAnswerOptions, setShowAnswerOptions] = useState(false);
     const [showEditQuestionButton, setShowEditQuestionButton] = useState(false);
+    const [loading, setLoading] = useState(false);
 
     useEffect(() => {
         getCategories(0, 0).then(r => {
@@ -188,8 +189,8 @@ const SurveyCreator = ({ toggleShowSurveyCreator, getSurveysByUserId }) => {
         }
 
         const token = JSON.parse(localStorage.getItem('x-token'));
-
-        const addSurveyResponse = await addSurvey(newSurvey, token)
+        setLoading(true);
+        const addSurveyResponse = await addSurvey(newSurvey, token);
 
         if (addSurveyResponse.newSurvey) {
             Swal.fire({
@@ -199,6 +200,7 @@ const SurveyCreator = ({ toggleShowSurveyCreator, getSurveysByUserId }) => {
             getSurveysByUserId()
             return toggleShowSurveyCreator();
         } else {
+            setLoading(false);
             console.log(addSurveyResponse);
             Swal.fire({
                 icon: 'error',
@@ -273,6 +275,13 @@ const SurveyCreator = ({ toggleShowSurveyCreator, getSurveysByUserId }) => {
                     <button type='button' className={`mt-4 btn btn-sm rounded-4 ${dark ? 'btn-outline-warning' : 'btn-warning'}`} onClick={() => setShowModal(true)}><i className="fa fa-plus me-2"></i>Añadir nueva pregunta</button>
                 </section>
                 <button type='submit' value='Crear nueva encuesta' className={`rounded-4 mt-3 btn-lg w-100 btn ${dark ? 'btn-outline-warning' : 'btn-warning'}`}><i className="fa fa-user-plus me-3"></i>Crear nueva encuesta</button>
+                {loading && (
+                    <div className="d-flex justify-content-center align-items-center">
+                        <div className="spinner-border" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
+                    </div>
+                )}
                 <Modal show={showModal} className='black-overlay bdf-blur' size="lg" aria-labelledby="contained-modal-title-vcenter" centered>
                     <Modal.Header className={`${dark && 'bg-dark text-light'}`}>
                         <Modal.Title id="contained-modal-title-vcenter">
