@@ -219,8 +219,8 @@ const SurveyCreator = ({ toggleShowSurveyCreator, getSurveysByUserId }) => {
                 <div className="row row-cols-1 row-cols-md-2 pb-3">
                     <div className="col">
                         <label htmlFor="title" className="mb-2">Título de la encuesta</label>
-                        <input type="text" name='title' onChange={(e) => setNewSurvey({ ...newSurvey, title: e.target.value })} value={newSurvey.title} className={`form-control question__text--dark ${!dark && 'text-light'}`} />
-                        <small className="text-muted">El título debe tener almenos 5 caracteres.</small>
+                        <input type="text" minLength="5" maxLength="50" name='title' onChange={(e) => setNewSurvey({ ...newSurvey, title: e.target.value })} value={newSurvey.title} className={`form-control question__text--dark ${!dark && 'text-light'}`} />
+                        <small className="text-muted">El título debe tener almenos 5 caracteres y un máximo de 50.</small>
                     </div>
                     <div className="col">
                         <label htmlFor="category" className="mb-2">Selecciona una categoría</label>

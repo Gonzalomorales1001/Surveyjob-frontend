@@ -2,7 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import "../css/Card.css";
 import { DarkModeContext } from "../App";
 import { getUsers, updateUser, deleteUser } from "../helpers/UserAPI";
-import "../css/admin.css";
 import { InfiniteLoader } from "./InfiniteLoader";
 import Card from '@mui/material/Card';
 import { Avatar, Button, CardActions, CardContent, CardHeader, CardMedia } from "@mui/material";

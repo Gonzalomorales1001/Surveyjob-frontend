@@ -2,8 +2,6 @@ import React, { useContext, useEffect, useState } from "react";
 import { getSurveys } from "../helpers/SurveyAPI";
 import { getUsers } from "../helpers/UserAPI";
 import { getCategories } from "../helpers/CategoryAPI";
-import "../css/admin.css";
-import { Outlet } from "react-router";
 import { Link } from "react-router-dom";
 import { UserContext, DarkModeContext } from "../App";
 import Pagination from "../components/Pagination";
