@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { DarkModeContext, UserContext } from '../App';
 import "../css/Card.css";
 import { getSurveys, deleteSurvey } from "../helpers/SurveyAPI";
-import "../css/admin.css";
 // import CardSurvey from "./CardSurvey";
 import { InfiniteLoader } from "./InfiniteLoader";
 import Pagination from "./Pagination";
@@ -96,7 +95,7 @@ const ListasEncuestas = () => {
                 <tbody>
                   {surveys.map((survey, index) => (
                     <tr key={'survey-' + index} className={`${!survey.status && 'text-muted'} border-none`}>
-                      <td scope="row">{survey.title}</td>
+                      <td scope="row" className="text-break">{survey.title}</td>
                       <td className="d-none d-md-table-cell">{survey.owner?.username}</td>
                       <td className="d-none d-md-table-cell">{capitalize(survey.category)}</td>
                       <td className="d-none d-lg-table-cell survey-table-desc">{survey.description}</td>
