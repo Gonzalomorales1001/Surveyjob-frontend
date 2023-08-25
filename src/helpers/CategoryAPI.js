@@ -9,6 +9,7 @@ export const getCategories=async(since=0,limit=0)=>{
 
 export const newCategory = async(content)=>{
     try {
+        const token = JSON.parse(localStorage.getItem('x-token'));
         const response=await fetch(`${URL}/categories`,{
             method: 'POST',
             body: JSON.stringify({category:content}),
@@ -26,6 +27,7 @@ export const newCategory = async(content)=>{
 
 export const putCategory=async(id,content)=>{
     try {
+        const token = JSON.parse(localStorage.getItem('x-token'));
         const response=await fetch(`${URL}/categories/${id}`,{
             method: 'PUT',
             body: JSON.stringify({category:content}),
@@ -43,6 +45,7 @@ export const putCategory=async(id,content)=>{
 
 export const deleteCategory=async(id)=>{
     try {
+        const token = JSON.parse(localStorage.getItem('x-token'));
         const response = await fetch(`${URL}/categories/${id}`,{
             method: 'DELETE',
             headers: {
