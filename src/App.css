@@ -191,10 +191,12 @@ textarea{
     
 
 
-/* .table>:not(caption)>*>*{
+.table>:not(caption)>*>*{
     background-color: transparent !important;
     color: initial !important;
-} */
+}
+
+
 /* Bootstrap Breakpoints */
 
 /*Small (sm)*/
