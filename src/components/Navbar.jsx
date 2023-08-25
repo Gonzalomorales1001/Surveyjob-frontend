@@ -1,25 +1,25 @@
 import React, { useContext } from "react";
 import { NavLink, Link } from "react-router-dom";
-import { UserContext,DarkModeContext } from "../App";
+import { UserContext, DarkModeContext } from "../App";
 import "../css/navbar.css";
 import DarkModeSurveyJobLogo from "../assets/LightLetterLogo.png";
 import LightModeSurveyJobLogo from "../assets/DarkLetterLogo.png";
 
-const Navbar = ({ToggleDarkMode}) => {
+const Navbar = ({ ToggleDarkMode }) => {
 
-  const {userData,saveUserData}=useContext(UserContext)
-  const {dark}=useContext(DarkModeContext)
+  const { userData, saveUserData } = useContext(UserContext)
+  const { dark } = useContext(DarkModeContext)
 
-  const logout=()=>{
+  const logout = () => {
     saveUserData(null)
     localStorage.removeItem('userData')
+    localStorage.removeItem('x-token');
   }
   return (
     <header>
       <nav
-        className={`navbar-expand w-100 bg-body-tertiary sticky-top ${
-          dark ? "texturized--dark" : "texturized--light"
-        }`}
+        className={`navbar-expand w-100 bg-body-tertiary sticky-top ${dark ? "texturized--dark" : "texturized--light"
+          }`}
       >
         <div className="navbar__overlay">
           <div className="nav__logo">
@@ -56,38 +56,38 @@ const Navbar = ({ToggleDarkMode}) => {
             </button>
             <div className="collapse navbar-collapse" id="navbarNav">
               <ul className="navbar-nav m-auto d-flex justify-content-center align-items-center">
-              {userData?.admin&&(
-                <li className="nav-item">
-                  <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'} text-danger`} to="/admin">
-                    <i className="fa fa-cogs" aria-hidden="true"></i>
-                    <span className="d-none d-md-inline ms-2">Admin</span>
-                  </NavLink>
-                </li>
+                {userData?.admin && (
+                  <li className="nav-item">
+                    <NavLink className={`nav-link ${dark ? 'nav-link--dark' : 'nav-link--light'} text-danger`} to="/admin">
+                      <i className="fa fa-cogs" aria-hidden="true"></i>
+                      <span className="d-none d-md-inline ms-2">Admin</span>
+                    </NavLink>
+                  </li>
                 )}
                 <li className="nav-item">
-                  <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} aria-current="page" to="/">
+                  <NavLink className={`nav-link ${dark ? 'nav-link--dark' : 'nav-link--light'}`} aria-current="page" to="/">
                     <i className="fa fa-home" aria-hidden="true"></i>
                     <span className="d-none d-md-inline ms-2">Inicio</span>
                   </NavLink>
                 </li>
-                {userData?.username?(
+                {userData?.username ? (
                   <>
-                  <li className="nav-item">
-                    <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} aria-current="page" to={`/user/${userData.userID}`}>
-                      <i className="fa fa-user" aria-hidden="true"></i>
-                      <span className="d-none d-md-inline ms-2">Mi Perfil</span>
-                    </NavLink>
-                  </li>
-                  <li className="nav-item">
-                    <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} aria-current="page" to="/login" onClick={logout}>
-                      <i className="fa fa-sign-out" aria-hidden="true"></i>
-                      <span className="d-none d-md-inline ms-2">Cerrar Sesión</span>
-                    </NavLink>
-                  </li>
+                    <li className="nav-item">
+                      <NavLink className={`nav-link ${dark ? 'nav-link--dark' : 'nav-link--light'}`} aria-current="page" to={`/user/${userData.userID}`}>
+                        <i className="fa fa-user" aria-hidden="true"></i>
+                        <span className="d-none d-md-inline ms-2">Mi Perfil</span>
+                      </NavLink>
+                    </li>
+                    <li className="nav-item">
+                      <NavLink className={`nav-link ${dark ? 'nav-link--dark' : 'nav-link--light'}`} aria-current="page" to="/login" onClick={logout}>
+                        <i className="fa fa-sign-out" aria-hidden="true"></i>
+                        <span className="d-none d-md-inline ms-2">Cerrar Sesión</span>
+                      </NavLink>
+                    </li>
                   </>
-                ):(
+                ) : (
                   <li className="nav-item">
-                    <NavLink className={`nav-link ${dark?'nav-link--dark':'nav-link--light'}`} to="/login">
+                    <NavLink className={`nav-link ${dark ? 'nav-link--dark' : 'nav-link--light'}`} to="/login">
                       <i className="fa fa-sign-in" aria-hidden="true"></i>
                       <span className="d-none d-md-inline ms-2">Iniciar Sesión</span>
                     </NavLink>
