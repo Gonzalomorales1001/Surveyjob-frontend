@@ -116,7 +116,7 @@ const ListasUsuarios = () => {
                   <CardContent>
                     {user.userID != SURVEYJOB_USERID ? (
                       <div className="form-check form-switch">
-                        <input className="form-check-input form-check-input-warning" onChange={() => toggleAdmin(user.userID, { ...user, admin: !user.admin })} defaultChecked={user.admin} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
+                        <input className="form-check-input form-check-input-warning" onClick={() => toggleAdmin(user.userID, { ...user, admin: !user.admin })} checked={user.admin} type="checkbox" role="switch" id="flexSwitchCheckDefault" />
                         <label className="form-check-label" htmlFor="flexSwitchCheckDefault">Permisos de Administrador</label>
                       </div>
                     ) : (

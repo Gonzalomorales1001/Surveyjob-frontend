@@ -15,6 +15,18 @@ export default function SurveyCard({
   getSurveysByUserId
 }) {
 
+  const Toast = Swal.mixin({
+    toast: true,
+    position: 'top-end',
+    showConfirmButton: false,
+    timer: 3000,
+    timerProgressBar: false,
+    didOpen: (toast) => {
+      toast.addEventListener('mouseenter', Swal.stopTimer)
+      toast.addEventListener('mouseleave', Swal.resumeTimer)
+    }
+  })
+
   const toggleSurveyStatus = async (id) => {
     Swal.fire({
       title: 'Eliminar encuesta',
@@ -48,10 +60,10 @@ export default function SurveyCard({
       }).then().catch((e) => console.error(e))
     } else {
       navigator.clipboard.writeText(URL);
-      Swal.fire({
-        title: 'Link copiado al portapeles',
-        icon: 'success'
-      });
+      Toast.fire({
+        icon: 'success',
+        title: `¡Link copiado al portapapeles!`,
+      })
     }
   }
   const { dark } = useContext(DarkModeContext);
