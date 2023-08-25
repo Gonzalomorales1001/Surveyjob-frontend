@@ -220,12 +220,12 @@ const SurveyCreator = ({ toggleShowSurveyCreator, getSurveysByUserId }) => {
                     <div className="col">
                         <label htmlFor="title" className="mb-2">Título de la encuesta</label>
                         <input type="text" minLength="5" maxLength="50" name='title' onChange={(e) => setNewSurvey({ ...newSurvey, title: e.target.value })} value={newSurvey.title} className={`form-control question__text--dark ${!dark && 'text-light'}`} />
-                        <small className="text-muted">El título debe tener almenos 5 caracteres y un máximo de 50.</small>
+                        <small className="text-secondary">El título debe tener almenos 5 caracteres y un máximo de 50.</small>
                     </div>
                     <div className="col">
                         <label htmlFor="category" className="mb-2">Selecciona una categoría</label>
                         <select defaultValue='' aria-label="Default select example" name='category' onChange={(e) => setNewSurvey({ ...newSurvey, category: e.target.value.toUpperCase() })} className={`form-select question__text--dark ${!dark && 'text-light'}`}>
-                            <option value="" className="py-3 text-muted">Elige una categoría</option>
+                            <option value="" className="py-3 text-secondary">Elige una categoría</option>
                             {categories.map((category, index) => {
                                 return (<option className='py-3' key={'category-' + index}>{category}</option>)
                             })}
@@ -269,7 +269,7 @@ const SurveyCreator = ({ toggleShowSurveyCreator, getSurveysByUserId }) => {
                         </table>
                     ) : (
                         <div className={`card ${dark && 'card--dark'}`}>
-                            <h4 className='my-3'>Esta encuesta aún no tiene preguntas</h4>
+                            <h4 className='my-3 text-secondary'>Esta encuesta aún no tiene preguntas</h4>
                         </div>
                     )}
                     <button type='button' className={`mt-4 btn btn-sm rounded-4 ${dark ? 'btn-outline-warning' : 'btn-warning'}`} onClick={() => setShowModal(true)}><i className="fa fa-plus me-2"></i>Añadir nueva pregunta</button>

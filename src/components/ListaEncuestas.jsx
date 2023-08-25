@@ -71,7 +71,7 @@ const ListasEncuestas = () => {
   return (
     <>
       <div className={`container d-flex justify-content-center align-items-center`}>
-        <section className={`card ${dark ? 'card--dark survey-card--dark' : 'survey-card--light'} p-4 d-flex justify-content-center align-items-center`}>
+        <section className={`card ${dark ? 'card--dark survey-card--dark text-light' : 'survey-card--light'} p-4 d-flex justify-content-center align-items-center`}>
           <h3 className="text-center">Administrador de Encuestas</h3>
           {surveys ? (
             <>
