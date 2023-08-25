@@ -39,6 +39,7 @@ export const register = async (datos) => {
 //ver si hace falta usar /users para actualizar datos y borrar
 export const updateUser = async (id, datos) => {
   try {
+    const token = JSON.parse(localStorage.getItem('x-token'));
     const resp = await fetch(URL + "/users/" + id, {
       method: "PUT",
       body: JSON.stringify(datos),
@@ -57,6 +58,7 @@ export const updateUser = async (id, datos) => {
 
 export const deleteUser = async (id) => {
   try {
+    const token = JSON.parse(localStorage.getItem('x-token'));
     const resp = await fetch(URL + "/users/" + id, {
       method: "DELETE",
       headers: {
