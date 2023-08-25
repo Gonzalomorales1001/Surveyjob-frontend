@@ -40,7 +40,6 @@ const CategoryAdministrator = () => {
 
         if (text) {
             const resp = await newCategory(text.toUpperCase());
-            console.log(resp)
             Swal.fire({
                 icon: 'info',
                 title: resp.msg
